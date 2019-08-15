@@ -64,7 +64,7 @@ void _onAdd(){
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 375,height: 812)..init(context);
+    ScreenUtil.instance = ScreenUtil(width: 750,height: 1624)..init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: Builder(builder: (BuildContext context) {
