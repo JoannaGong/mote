@@ -186,8 +186,8 @@ class RecommendShoot extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: ScreenUtil().setWidth(120),
-        height: ScreenUtil().setHeight(120),
+        width: ScreenUtil().setWidth(130),
+        height: ScreenUtil().setHeight(130),
         margin: EdgeInsets.only(left: ScreenUtil().setWidth(15)),
         child: Column(
           children: <Widget>[
@@ -202,7 +202,7 @@ class RecommendShoot extends StatelessWidget {
                     border: Border.all(width: 1, color: Color(0xFFFF7E80)),
                     borderRadius: BorderRadius.circular(100)),
                 child: CircleAvatar(
-                  radius: ScreenUtil().setWidth(40),
+                  radius: ScreenUtil().setWidth(45),
                   backgroundImage: AssetImage('assets/images/2.png'),
                   backgroundColor: Colors.white,
                 )),
@@ -310,8 +310,8 @@ class RecommendModel extends StatelessWidget {
                     height: ScreenUtil().setWidth(218),
                     fit: BoxFit.fill,
                   ),
-                  Container(
-                      height: 33,
+                  Expanded(
+                    child: Container(
                       padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -336,6 +336,7 @@ class RecommendModel extends StatelessWidget {
                         ],
                       ),
                     ),
+                  )
                 ],
               ),
             )));
@@ -344,7 +345,7 @@ class RecommendModel extends StatelessWidget {
   //列表
   Widget _modelList() {
     return Container(
-      height: 155,
+      height: 150,
       margin: EdgeInsets.only(
           left: ScreenUtil().setWidth(15), top: ScreenUtil().setHeight(20)),
       child: ListView(
@@ -670,8 +671,8 @@ class RecommendOfficial extends StatelessWidget {
 
   Widget _tip() {
     return Container(
-      width: ScreenUtil().setWidth(80),
-      height: ScreenUtil().setHeight(36),
+      width: 40,
+      height: 18,
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
