@@ -200,7 +200,6 @@ class RecommendShoot extends StatelessWidget {
       onTap: () {},
       child: Container(
         width: ScreenUtil().setWidth(130),
-        height: ScreenUtil().setHeight(130),
         margin: EdgeInsets.only(left: ScreenUtil().setWidth(15)),
         child: Column(
           children: <Widget>[
@@ -494,7 +493,7 @@ class RecommendProduction extends StatelessWidget {
             ),
             Positioned(
               left: ScreenUtil().setWidth(20),
-              bottom: 20,
+              bottom: 10,
               child: Text(
                 "潮牌写真",
                 style: TextStyle(color: Colors.white),
