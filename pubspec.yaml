@@ -29,6 +29,7 @@ dependencies:
   flutter_screenutil: ^0.5.3 #屏幕适配
   flutter_easyrefresh: ^2.0.0 #上拉加载
   provide: ^1.0.2 #状态
+  fluro: "^1.5.1" #路由
 
 dev_dependencies:
   flutter_test:

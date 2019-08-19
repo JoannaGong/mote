@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
+import '../../routers/application.dart';
+import '../../provide/home.dart';
 import './serch_text.dart';
 import './swiper.dart';
 
@@ -20,6 +23,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
     'assets/images/ic_home_photo.png'
   ];
   List ponList = [1, 2, 3, 4, 5, 6];
+  String id ='80a28efdb16b4fa29884095ef1399a7e';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +64,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
       ),
     );
   }
+
+  void _getBackInfo(BuildContext context) async{
+    await Provide.value<HomeProvide>(context).getGoodsInfo(id);
+  }
 }
 
 //顶部导航栏
@@ -69,7 +77,9 @@ class TopNavigator extends StatelessWidget {
 
   Widget _gridViewItemUI(BuildContext context, item) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Application.router.navigateTo(context, "/detail");
+      },
       child: Column(
         children: <Widget>[
           Container(
