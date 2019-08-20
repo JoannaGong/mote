@@ -12,7 +12,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -23,50 +24,49 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
     'assets/images/ic_home_photo.png'
   ];
   List ponList = [1, 2, 3, 4, 5, 6];
-  String id ='80a28efdb16b4fa29884095ef1399a7e';
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
-        brightness: Brightness.light,
-        title: Search(),
-        automaticallyImplyLeading: false,
-      ),
-      body: Container(
-        child: SingleChildScrollView(
-            child: Center(
-          child: Column(
-            children: <Widget>[
-              SwiperDiy(), //轮播图
-              TopNavigator(
-                navigatorList: list,
-              ), //导航栏
-              Container(
-                width: ScreenUtil().setWidth(686),
-                height: ScreenUtil().setHeight(1),
-                color: Color(0xFFE2E2E2),
-              ),
-              RecommendShoot(), //推荐摄影
-              RecommendModel(), //推荐模特
-              Line(), //横线
-              RecommendProduction(
-                productionList: ponList,
-              ), //作品推荐
-              RecommendOfficial(
-                productionList: ponList,
-              ) //官方推荐
-            ],
-          ),
-        )),
-      ),
-    );
-  }
-
-  void _getBackInfo(BuildContext context) async{
-    await Provide.value<HomeProvide>(context).getGoodsInfo(id);
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          brightness: Brightness.light,
+          title: Search(),
+          automaticallyImplyLeading: false,
+        ),
+        body: Container(
+          child: SingleChildScrollView(
+              child: Center(
+            child: Column(
+              children: <Widget>[
+                SwiperDiy(), //轮播图
+                TopNavigator(
+                  navigatorList: list,
+                ), //导航栏
+                Container(
+                  width: ScreenUtil().setWidth(686),
+                  height: ScreenUtil().setHeight(1),
+                  color: Color(0xFFE2E2E2),
+                ),
+                RecommendShoot(), //推荐摄影
+                RecommendModel(), //推荐模特
+                Line(), //横线
+                RecommendProduction(
+                  productionList: ponList,
+                ), //作品推荐
+                RecommendOfficial(
+                  productionList: ponList,
+                ) //官方推荐
+              ],
+            ),
+          )),
+        ));
   }
 }
 
@@ -78,7 +78,8 @@ class TopNavigator extends StatelessWidget {
   Widget _gridViewItemUI(BuildContext context, item) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, "/detail");
+        // Application.router.navigateTo(context, "/detail");
+        // print(Provide.value<HomeProvide>(context).bannerData.data.bannerList[0].iconUrl);
       },
       child: Column(
         children: <Widget>[
@@ -167,7 +168,7 @@ class RecommendShoot extends StatelessWidget {
   //头像
   Widget _headPortrait() {
     return Container(
-      height: ScreenUtil().setHeight(200),
+      height: 100,
       padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), 0, 0),
       // child: ListView.builder(
       //   scrollDirection: Axis.horizontal,
