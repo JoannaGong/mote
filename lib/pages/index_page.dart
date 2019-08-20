@@ -51,7 +51,7 @@ class _IndexPageState extends State<IndexPage> {
   BottomNavigationBarItem _bottomBarItem(String title, String iconName,) {
     return BottomNavigationBarItem(
       icon: _image(iconName),
-      title: Text(title),
+      title: Text(title, style: TextStyle(color: Colors.black)),
       activeIcon: _image('${iconName}_selected'),
       backgroundColor: Colors.white,
     );
