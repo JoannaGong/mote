@@ -121,26 +121,51 @@ class RecommendShoot extends StatelessWidget {
   const RecommendShoot({Key key}) : super(key: key);
 
   //标题栏
-  Widget _title() {
+  Widget _title(BuildContext context, isShoot) {
     return Container(
       height: ScreenUtil().setHeight(60),
       padding: EdgeInsets.fromLTRB(
           ScreenUtil().setHeight(20), 0, ScreenUtil().setHeight(20), 0),
       child: Row(
         children: <Widget>[
-          Text(
-            '推荐摄影',
-            style: TextStyle(
-                fontSize: ScreenUtil().setSp(36), fontWeight: FontWeight.w500),
-          ),
+          Text('推荐',
+              style: TextStyle(
+                  fontSize: ScreenUtil().setSp(36),
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black)),
           Padding(
             padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
-            child: Text(
-              '化妆',
-              style: TextStyle(
-                  fontSize: ScreenUtil().setSp(30), color: Color(0xFF999999)),
+            child: GestureDetector(
+              onTap: () {
+                Provide.value<HomeProvide>(context).changeShoot(true);
+              },
+              child: Text(
+                '摄影',
+                style: TextStyle(
+                    fontSize: isShoot
+                        ? ScreenUtil().setSp(36)
+                        : ScreenUtil().setSp(30),
+                    fontWeight: isShoot ? FontWeight.w500 : FontWeight.w300,
+                    color: isShoot ? Colors.black : Color(0xFF999999)),
+              ),
             ),
           ),
+          Padding(
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              child: GestureDetector(
+                onTap: () {
+                  Provide.value<HomeProvide>(context).changeShoot(false);
+                },
+                child: Text(
+                  '化妆',
+                  style: TextStyle(
+                      fontSize: isShoot
+                          ? ScreenUtil().setSp(30)
+                          : ScreenUtil().setSp(36),
+                      fontWeight: isShoot ? FontWeight.w300 : FontWeight.w500,
+                      color: isShoot ? Color(0xFF999999) : Colors.black),
+                ),
+              )),
           Expanded(
             child: Align(
               child: GestureDetector(
@@ -231,11 +256,16 @@ class RecommendShoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 30.0),
-      child: Column(
-        children: <Widget>[_title(), _headPortrait()],
-      ),
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var isShoot = Provide.value<HomeProvide>(context).isShoot;
+        return Container(
+          margin: EdgeInsets.only(top: 30.0),
+          child: Column(
+            children: <Widget>[_title(context, isShoot), _headPortrait()],
+          ),
+        );
+      },
     );
   }
 }
@@ -246,35 +276,65 @@ class RecommendModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
-      child: Column(
-        children: <Widget>[_title(), _modelList()],
-      ),
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var isModel = Provide.value<HomeProvide>(context).isModel;
+        return Container(
+          margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
+          child: Column(
+            children: <Widget>[_title(context, isModel), _modelList()],
+          ),
+        );
+      },
     );
   }
 
   //标题栏
-  Widget _title() {
+  Widget _title(BuildContext context, isModel) {
     return Container(
       height: ScreenUtil().setHeight(60),
       padding: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(20), 0, ScreenUtil().setWidth(20), 0),
       child: Row(
         children: <Widget>[
-          Text(
-            '推荐模特',
-            style: TextStyle(
-                fontSize: ScreenUtil().setSp(36), fontWeight: FontWeight.w500),
-          ),
+          Text('推荐',
+              style: TextStyle(
+                  fontSize: ScreenUtil().setSp(36),
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black)),
           Padding(
             padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
-            child: Text(
-              '经纪',
-              style: TextStyle(
-                  fontSize: ScreenUtil().setSp(30), color: Color(0xFF999999)),
+            child: GestureDetector(
+              onTap: () {
+                Provide.value<HomeProvide>(context).changeModel(true);
+              },
+              child: Text(
+                '模特',
+                style: TextStyle(
+                    fontSize: isModel
+                        ? ScreenUtil().setSp(36)
+                        : ScreenUtil().setSp(30),
+                    fontWeight: isModel ? FontWeight.w500 : FontWeight.w300,
+                    color: isModel ? Colors.black : Color(0xFF999999)),
+              ),
             ),
           ),
+          Padding(
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+              child: GestureDetector(
+                onTap: () {
+                  Provide.value<HomeProvide>(context).changeModel(false);
+                },
+                child: Text(
+                  '经纪',
+                  style: TextStyle(
+                      fontSize: isModel
+                          ? ScreenUtil().setSp(30)
+                          : ScreenUtil().setSp(36),
+                      fontWeight: isModel ? FontWeight.w300 : FontWeight.w500,
+                      color: isModel ? Color(0xFF999999) : Colors.black),
+                ),
+              )),
           Expanded(
             child: Align(
               child: GestureDetector(
