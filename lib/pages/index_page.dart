@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/login/login_page.dart';
 import './home/home_page.dart';
 import './model/model_page.dart';
 import './issue/issue_page.dart';
@@ -68,6 +69,9 @@ class _IndexPageState extends State<IndexPage> {
   _bottomBarItemClick(int index) {
     setState(() {
       currentIndex = index;
+      if(index == 4){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+      }
     });
   }
 
