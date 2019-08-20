@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import '../../routers/application.dart';
 import '../../provide/home.dart';
-import './serch_text.dart';
+import '../common/serch_text.dart';
 import './swiper.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage>
           backgroundColor: Colors.white,
           elevation: 0,
           brightness: Brightness.light,
-          title: Search(),
+          title: Search(text: '您要找什么',router: '/detail',),
           automaticallyImplyLeading: false,
         ),
         body: Container(
@@ -79,7 +79,6 @@ class TopNavigator extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Application.router.navigateTo(context, "/detail");
-        // print(Provide.value<HomeProvide>(context).bannerData.data.bannerList[0].iconUrl);
       },
       child: Column(
         children: <Widget>[
