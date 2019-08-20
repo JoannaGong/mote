@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage>
           backgroundColor: Colors.white,
           elevation: 0,
           brightness: Brightness.light,
-          title: Search(text: '您要找什么',router: '/detail',),
+          title: Search(text: '您要找什么',router: '/searchDetail',),
           automaticallyImplyLeading: false,
         ),
         body: Container(
