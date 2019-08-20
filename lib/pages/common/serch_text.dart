@@ -1,3 +1,4 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../routers/application.dart';
@@ -39,7 +40,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, widget.router);
+        Application.router.navigateTo(context, widget.router,transition: TransitionType.inFromRight);
       },
       child: Container(
           //修饰黑色背景与圆角
