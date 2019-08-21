@@ -1,14 +1,14 @@
 class ModelListModel {
   int code;
   String msg;
-  Data data;
+  ModelData data;
 
   ModelListModel({this.code, this.msg, this.data});
 
   ModelListModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new ModelData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,12 +22,12 @@ class ModelListModel {
   }
 }
 
-class Data {
+class ModelData {
   PageInfo pageInfo;
 
-  Data({this.pageInfo});
+  ModelData({this.pageInfo});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  ModelData.fromJson(Map<String, dynamic> json) {
     pageInfo = json['pageInfo'] != null
         ? new PageInfo.fromJson(json['pageInfo'])
         : null;
@@ -94,9 +94,9 @@ class PageInfo {
     endRow = json['endRow'];
     total = json['total'];
     pages = json['pages'];
-    if (json['Modellist'] != null) {
+    if (json['list'] != null) {
       list = new List<ModelList>();
-      json['Modellist'].forEach((v) {
+      json['list'].forEach((v) {
         list.add(new ModelList.fromJson(v));
       });
     }
@@ -124,7 +124,7 @@ class PageInfo {
     data['total'] = this.total;
     data['pages'] = this.pages;
     if (this.list != null) {
-      data['Modellist'] = this.list.map((v) => v.toJson()).toList();
+      data['list'] = this.list.map((v) => v.toJson()).toList();
     }
     data['prePage'] = this.prePage;
     data['nextPage'] = this.nextPage;
@@ -145,18 +145,18 @@ class PageInfo {
 class ModelList {
   String id;
   int roleName;
-  String permissionsId;
+  Null permissionsId;
   String userName;
   String name;
   String headUrl;
-  String professional;
-  String email;
-  String phone;
+  Null professional;
+  Null email;
+  Null phone;
   Null password;
   Null token;
   Null freshToken;
   int canLogin;
-  String areaId;
+  Null areaId;
   int wechatAuthFlag;
   Null wechatAccessToken;
   Null wechatRefreshToken;
@@ -175,10 +175,10 @@ class ModelList {
   Null waistCircumference;
   Null theChest;
   Null hipCircumference;
-  String eyesColor;
-  String hairColor;
-  String skinColor;
-  int walletBalance;
+  Null eyesColor;
+  Null hairColor;
+  Null skinColor;
+  double walletBalance;
   int certificationType;
   int certificationSonType;
   Null certificationName;
@@ -192,7 +192,7 @@ class ModelList {
   int certificationCheckStatus;
   Null certificationCheckOption;
   Null certificationCheckUserId;
-  String createdUser;
+  Null createdUser;
   String createdTime;
   Null updatedUser;
   Null updatedTime;
@@ -444,3 +444,4 @@ class ModelList {
     return data;
   }
 }
+

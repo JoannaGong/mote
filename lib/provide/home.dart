@@ -58,7 +58,7 @@ class HomeProvide with ChangeNotifier {
     await requestGet('getmodelList',formData: formData).then((val) {
       // var responseData= json.decode(val.toString());
       cameramanData = ModelListModel.fromJson(val);
-      print(val);
+      // print(val);
       notifyListeners();
     });
   }

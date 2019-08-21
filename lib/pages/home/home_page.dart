@@ -102,6 +102,23 @@ class _HomePageState extends State<HomePage>
 class RecommendShoot extends StatelessWidget {
   const RecommendShoot({Key key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var isShoot = Provide.value<HomeProvide>(context).isShoot;
+        var cameramanData = Provide.value<HomeProvide>(context).cameramanData.data.pageInfo.list;
+        
+        return Container(
+          margin: EdgeInsets.only(top: 30.0),
+          child: Column(
+            children: <Widget>[_title(context, isShoot), _headPortrait(cameramanData)],
+          ),
+        );
+      },
+    );
+  }
+
   //标题栏
   Widget _title(BuildContext context, isShoot) {
     return Container(
@@ -173,37 +190,22 @@ class RecommendShoot extends StatelessWidget {
   }
 
   //头像
-  Widget _headPortrait() {
+  Widget _headPortrait(item) {
     return Container(
       height: 100,
       padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), 0, 0),
-      // child: ListView.builder(
-      //   scrollDirection: Axis.horizontal,
-      //   itemCount: 5,
-      //   itemBuilder: (context,index){
-      //     return _item(1);
-      //   },
-      // ),
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-          _item(1),
-        ],
+        itemCount: item.length,
+        itemBuilder: (context,index){
+          return _item(item[index]);
+        },
       ),
     );
   }
 
   //内容
-  Widget _item(index) {
+  Widget _item(data) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -223,11 +225,11 @@ class RecommendShoot extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100)),
                 child: CircleAvatar(
                   radius: ScreenUtil().setWidth(45),
-                  backgroundImage: AssetImage('assets/images/2.png'),
+                  backgroundImage: NetworkImage(data.headUrl),
                   backgroundColor: Colors.white,
                 )),
             Text(
-              '杨小琳',
+              data.userName,
               style: TextStyle(fontSize: ScreenUtil().setSp(20)),
             )
           ],
@@ -236,20 +238,6 @@ class RecommendShoot extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Provide<HomeProvide>(
-      builder: (context, child, val) {
-        var isShoot = Provide.value<HomeProvide>(context).isShoot;
-        return Container(
-          margin: EdgeInsets.only(top: 30.0),
-          child: Column(
-            children: <Widget>[_title(context, isShoot), _headPortrait()],
-          ),
-        );
-      },
-    );
-  }
 }
 
 //推荐模特
