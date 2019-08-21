@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage>
   Future _getHomeInfo(BuildContext context) async {
     await Provide.value<HomeProvide>(context).getBannerList();
     await Provide.value<HomeProvide>(context).getNavigatorList(2);
+    await Provide.value<HomeProvide>(context).getShootlList(0);
     return '完成加载';
   }
 }
