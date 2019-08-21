@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../common/serch_text.dart';
+import '../common/search/serch_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ModelPage extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import '../../routers/application.dart';
 import '../../provide/home.dart';
-import '../common/serch_text.dart';
+import '../common/search/serch_text.dart';
 import './swiper.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,18 +53,14 @@ class _HomePageState extends State<HomePage>
               if (snapsshot.hasData) {
                 return Container(
                   child: EasyRefresh(
-                    header: BallPulseHeader(
-                      color: Color(0xFFFF5658)
-                    ),
-                    onRefresh: () async{
+                    header: BallPulseHeader(color: Color(0xFFFF5658)),
+                    onRefresh: () async {
                       print(111);
                     },
                     child: ListView(
                       children: <Widget>[
                         SwiperDiy(), //轮播图
-                        TopNavigator(
-                          navigatorList: list,
-                        ), //导航栏
+                        TopNavigator(), //导航栏
                         Container(
                           width: ScreenUtil().setWidth(686),
                           height: ScreenUtil().setHeight(1),
@@ -93,28 +89,38 @@ class _HomePageState extends State<HomePage>
 
   Future _getHomeInfo(BuildContext context) async {
     await Provide.value<HomeProvide>(context).getBannerList();
+    await Provide.value<HomeProvide>(context).getNavigatorList();
     return '完成加载';
   }
 }
 
 //顶部导航栏
 class TopNavigator extends StatelessWidget {
-  final List navigatorList;
-  const TopNavigator({Key key, this.navigatorList}) : super(key: key);
+  const TopNavigator({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: ScreenUtil().setHeight(180),
-        padding: EdgeInsets.all(ScreenUtil().setHeight(4)),
-        margin: EdgeInsets.only(top: 10.0),
-        child: GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 4,
-            padding: EdgeInsets.all(4.0),
-            children: navigatorList.map((item) {
-              return _gridViewItemUI(context, item);
-            }).toList()));
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var navigatorList = Provide.value<HomeProvide>(context)
+            .navigatorData
+            .data
+            .homeModuleList;
+        return Container(
+            height: ScreenUtil().setHeight(180),
+            padding: EdgeInsets.all(ScreenUtil().setHeight(4)),
+            margin: EdgeInsets.only(top: 10.0),
+            child: GridView.count(
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: 4,
+                padding: EdgeInsets.all(4.0),
+                children: navigatorList.map((item) {
+                  // print(item.name);
+                  // return Container();
+                  return _gridViewItemUI(context, item);
+                }).toList()));
+      },
+    );
   }
 
   Widget _gridViewItemUI(BuildContext context, item) {
@@ -127,13 +133,13 @@ class TopNavigator extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(bottom: 5.0),
             child: Image.asset(
-              item,
+              item.iconUrl,
               width: ScreenUtil().setWidth(108),
               height: ScreenUtil().setHeight(108),
             ),
           ),
           Text(
-            '模特',
+            item.name,
             style: TextStyle(fontSize: ScreenUtil().setSp(24)),
           )
         ],

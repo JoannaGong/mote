@@ -28,7 +28,6 @@ class HomeProvide with ChangeNotifier {
   getBannerList() async {
     await requestGet('bannerForAjax').then((val) {
       bannerData = BannerModel.fromJson(val);
-      // print(val);
       notifyListeners();
     });
   }
@@ -37,7 +36,6 @@ class HomeProvide with ChangeNotifier {
   getNavigatorList() async {
     await requestGet('homeModuleForAjax').then((val) {
       navigatorData = NavigatorModel.fromJson(val);
-      print(val);
       notifyListeners();
     });
   }
