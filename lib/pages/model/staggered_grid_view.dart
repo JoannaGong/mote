@@ -21,17 +21,17 @@ class _StaggeredGridState extends State<StaggeredGrid>
 
   var posts = [];
 
-  @override
-  void initState() {
-    _loadData();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        _loadData(loadMore: true);
-      }
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _loadData();
+  //   _scrollController.addListener(() {
+  //     if (_scrollController.position.pixels ==
+  //         _scrollController.position.maxScrollExtent) {
+  //       _loadData(loadMore: true);
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
@@ -52,12 +52,15 @@ class _StaggeredGridState extends State<StaggeredGrid>
           crossAxisCount: 4,
           itemCount: 19,
           primary: false,
-          itemBuilder: (BuildContext context, int index) => _ModelItem(
-            index:index,
-            item:modelItems[index]
-          ),
-          staggeredTileBuilder: (int index) =>
-              new StaggeredTile.fit(2),
+          itemBuilder: (BuildContext context, int index) => new Container(
+              color: Colors.green,
+              child: new Center(
+                child: new CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: new Text('$index'),
+                ),
+              )),
+          staggeredTileBuilder: (int index) => new StaggeredTile.count(2, index.isEven ? 2 : 1),
           mainAxisSpacing: 4.0,
           crossAxisSpacing: 4.0,
         ),
@@ -75,10 +78,8 @@ class _StaggeredGridState extends State<StaggeredGrid>
       pageIndex = 1;
     }
 
-    Provide.value<ModelProvide>(context).getmodelList(
-        {'pageNum': pageIndex, 'roleName': 2}).then((ModelListModel model) {
-      print(model);
-    });
+    Provide.value<ModelProvide>(context)
+        .getmodelList({'pageNum': pageIndex, 'roleName': 2});
   }
 }
 

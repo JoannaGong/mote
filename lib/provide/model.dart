@@ -12,7 +12,7 @@ class ModelProvide with ChangeNotifier {
     FormData formData = FormData.from(params);
     await requestGet('getmodelList', formData: formData).then((val) {
       modeListData = ModelListModel.fromJson(val);
-      // print(val);
+      print(val);
       notifyListeners();
     });
   }

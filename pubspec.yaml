@@ -30,6 +30,7 @@ dependencies:
   flutter_easyrefresh: ^2.0.0 #上拉加载
   provide: ^1.0.2 #状态
   fluro: "^1.5.1" #路由
+  flutter_staggered_grid_view: ^0.3.0 #瀑布流
 
 dev_dependencies:
   flutter_test:
