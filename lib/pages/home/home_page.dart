@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage>
 
   Future _getHomeInfo(BuildContext context) async {
     await Provide.value<HomeProvide>(context).getBannerList();
-    await Provide.value<HomeProvide>(context).getNavigatorList();
+    await Provide.value<HomeProvide>(context).getNavigatorList(2);
     return '完成加载';
   }
 }
@@ -115,8 +115,6 @@ class TopNavigator extends StatelessWidget {
                 crossAxisCount: 4,
                 padding: EdgeInsets.all(4.0),
                 children: navigatorList.map((item) {
-                  // print(item.name);
-                  // return Container();
                   return _gridViewItemUI(context, item);
                 }).toList()));
       },
@@ -132,7 +130,7 @@ class TopNavigator extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(bottom: 5.0),
-            child: Image.asset(
+            child: Image.network(
               item.iconUrl,
               width: ScreenUtil().setWidth(108),
               height: ScreenUtil().setHeight(108),

@@ -33,8 +33,9 @@ class HomeProvide with ChangeNotifier {
   }
 
   //获取navigator列表
-  getNavigatorList() async {
-    await requestGet('homeModuleForAjax').then((val) {
+  getNavigatorList(int roleName) async {
+    var formData = { 'roleName':roleName };
+    await requestGet('homeModuleForAjax',formData: formData).then((val) {
       navigatorData = NavigatorModel.fromJson(val);
       notifyListeners();
     });
