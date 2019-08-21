@@ -19,27 +19,27 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-      // appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), title: Text(''),),
+      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0,),
       body: Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 31, 0, 60),
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 60),
               child: Text(
                 '欢迎来到艺拍APP',
-                style: TextStyle(fontSize: ScreenUtil().setSp(48.0)),
+                style: TextStyle(fontSize: ScreenUtil().setSp(48.0), fontWeight: FontWeight.w500),
               ),
             ),
             Text('快捷登录/注册',
-                style: TextStyle(fontSize: ScreenUtil().setSp(34.0))),
+                style: TextStyle(fontSize: ScreenUtil().setSp(34.0), fontWeight: FontWeight.w500)),
             TextFormField(
               decoration: InputDecoration(
-                  labelText: '请输入手机号',
-                  labelStyle: TextStyle(
-                      fontSize: ScreenUtil().setSp(32.0),
-                      color: Color(0xFF999999))),
+                labelText: '请输入手机号',
+                labelStyle: TextStyle(
+                    fontSize: ScreenUtil().setSp(32.0),
+                    color: Color(0xFF999999))),
               validator: (String value) {
                 var phoneReg = RegExp(
                     r"^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}\$");
@@ -49,63 +49,83 @@ class _LoginPageState extends State<LoginPage> {
               },
               onSaved: (String value) => phone = value,
             ),
-            TextFormField(
-              onSaved: (String value) => validate = value,
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return '请输入验证码';
-                }
-              },
-              decoration: InputDecoration(
-                  labelText: '请输入验证码',
-                  labelStyle: TextStyle(
-                      fontSize: ScreenUtil().setSp(32.0),
-                      color: Color(0xFF999999)),
-                  suffixIcon: RaisedButton(
-                    child: Text('获取验证码',
-                        style: TextStyle(color: Color(0xFF999999))),
-                    shape: StadiumBorder(
-                        side: BorderSide(
-                            color: Color(0xFFE2E2E2),
-                            width: ScreenUtil().setWidth(2))),
-                    color: Color(0xFFFFFFFF),
-                    onPressed: () {
-                      validPhoneNum();
-                    },
-                  )),
+            Row(children: <Widget>[
+              Container(
+                width: ScreenUtil().setWidth(400),
+                child: TextFormField(
+                  onSaved: (String value) => validate = value,
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return '请输入验证码';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    labelText: '请输入验证码',
+                    labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32.0),color: Color(0xFF999999))
+              ))),
+              Container(
+                width: ScreenUtil().setWidth(200),
+                margin: EdgeInsets.fromLTRB(16, 12, 0, 0),
+                child: RaisedButton(
+                  child: Text('获取验证码',style: TextStyle(color: Color(0xFF999999))),
+                  elevation: 0,
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 11),
+                  shape: StadiumBorder(side: BorderSide(color: Color(0xFFE2E2E2),width: ScreenUtil().setWidth(2))),
+                  color: Color(0xFFFFFFFF),
+                  onPressed: () {
+                    validPhoneNum();
+              }))
+            ]),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 30, 0, 100),
+              padding: EdgeInsets.fromLTRB(5, 5, 0, 0),
+              child: RaisedButton(
+                shape: StadiumBorder(),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                color: Color(0xFFFF5658),
+                splashColor: Color(0xFFFF5658),
+                child: Text('登录', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white),),
+                onPressed: () {},
+            )),
+            Align(child:
+              Text('其他登录方式', style: TextStyle(fontSize: ScreenUtil().setSp(26), color: Color(0xFF999999))),
+              alignment: Alignment.center,
             ),
-            Padding(
-              padding: EdgeInsets.only(top:25),
-              child: Text(
-                '如果未注册，请直接点击注册按钮，进行注册',
-                style: TextStyle(fontSize: ScreenUtil().setSp(30.0)),
-              ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+              child:Row(children: <Widget>[
+                Expanded(child: Container(
+                  child:IconButton(
+                    icon: Image.asset('assets/images/zhifubao.png'),
+                    iconSize: ScreenUtil().setSp(72),
+                    onPressed: (){},
+                ))),
+                Expanded(child: Container(child: 
+                  IconButton(
+                    icon: Image.asset('assets/images/weibo.png'),
+                    iconSize: ScreenUtil().setSp(72),
+                    onPressed: (){},
+                ))),
+                Expanded(child: Container(child: 
+                  IconButton(
+                    icon: Image.asset('assets/images/QQ.png'),
+                    iconSize: ScreenUtil().setSp(72),
+                    onPressed: (){},
+                ))),
+                Expanded(child: Container(child: 
+                  IconButton(
+                    icon: Image.asset('assets/images/wechat.png'),
+                    iconSize: ScreenUtil().setSp(72),
+                    onPressed: (){},
+                )))
+            ])),
+            Align(child:
+              Text.rich(TextSpan(children: [
+                TextSpan(text: '登录代表您已同意', style: TextStyle(color: Color(0xFF999999))),
+                TextSpan(text: '《软件许可及使用协议》', style: TextStyle(color: Colors.blue))
+              ])),
+              alignment: Alignment.center,
             ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(5, 5, 20, 0),
-                    child: RaisedButton(
-                      color: Color(0xFFFF9E9F),
-                      child: Text('登录', style: TextStyle(fontSize: ScreenUtil().setSp(34)),),
-                      onPressed: () {},
-                  )),
-                  flex: 1,
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(20, 5, 5, 0),
-                    child: RaisedButton(
-                      // textTheme: ,
-                      color: Color(0xFFFF9E9F),
-                      child: Text('注册', style: TextStyle(fontSize: ScreenUtil().setSp(34)),),
-                      onPressed: () {},
-                  )),
-                  flex: 1,
-                )
-              ],
-            )
           ],
         ),
       ),
