@@ -36,8 +36,8 @@ class HomeProvide with ChangeNotifier {
 
   //获取navigator列表
   getNavigatorList(int roleName) async {
-    var formData = { 'roleName':roleName };
-    await requestGet('homeModuleForAjax',formData: formData).then((val) {
+    var formData = {'roleName': roleName};
+    await requestGet('homeModuleForAjax', formData: formData).then((val) {
       navigatorData = NavigatorModel.fromJson(val);
       notifyListeners();
     });
@@ -45,20 +45,38 @@ class HomeProvide with ChangeNotifier {
 
   //获取摄影师、化妆师
   getShootlList(int queryCertificationSonType) async {
-    var formData = { 
-      'queryCertificationSonType':queryCertificationSonType,
-      'roleName':5,
-      'recommendedFlag':1,
-      'pageNum':1,
-      'pageCount':10,
-      'buttonCount':5,
-      'sortBy':'created_time',
-      'orderBy':'desc'
-     };
-    await requestGet('getmodelList',formData: formData).then((val) {
+    var formData = {
+      'queryCertificationSonType': queryCertificationSonType,
+      'roleName': 5,
+      'recommendedFlag': 1,
+      'pageNum': 1,
+      'pageCount': 10,
+      'buttonCount': 5,
+      'sortBy': 'created_time',
+      'orderBy': 'desc'
+    };
+    await requestGet('getmodelList', formData: formData).then((val) {
       // var responseData= json.decode(val.toString());
       cameramanData = ModelListModel.fromJson(val);
       // print(val);
+      notifyListeners();
+    });
+  }
+
+  //获取模特、经纪人
+  getModelList(int roleName) async {
+    var formData = {
+      'roleName': roleName,
+      'recommendedFlag': 1,
+      'pageNum': 1,
+      'pageCount': 10,
+      'buttonCount': 5,
+      'sortBy': 'created_time',
+      'orderBy': 'desc'
+    };
+    await requestGet('getmodelList', formData: formData).then((val) {
+      // var responseData= json.decode(val.toString());
+      cameramanData = ModelListModel.fromJson(val);
       notifyListeners();
     });
   }

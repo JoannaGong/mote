@@ -137,6 +137,7 @@ class RecommendShoot extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Provide.value<HomeProvide>(context).changeShoot(true);
+                Provide.value<HomeProvide>(context).getShootlList(0);
               },
               child: Text(
                 '摄影',
@@ -154,6 +155,7 @@ class RecommendShoot extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Provide.value<HomeProvide>(context).changeShoot(false);
+                  Provide.value<HomeProvide>(context).getShootlList(1);
                 },
                 child: Text(
                   '化妆',
@@ -229,7 +231,7 @@ class RecommendShoot extends StatelessWidget {
                   backgroundColor: Colors.white,
                 )),
             Text(
-              data.userName,
+              data.name,
               style: TextStyle(fontSize: ScreenUtil().setSp(20)),
             )
           ],
