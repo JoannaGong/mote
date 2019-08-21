@@ -149,6 +149,7 @@ class ModelList {
   String userName;
   String name;
   String headUrl;
+  String coverUrl;
   String professional;
   String email;
   String phone;
@@ -223,6 +224,7 @@ class ModelList {
       this.userName,
       this.name,
       this.headUrl,
+      this.coverUrl,
       this.professional,
       this.email,
       this.phone,
@@ -297,6 +299,7 @@ class ModelList {
     userName = json['userName'];
     name = json['name'];
     headUrl = json['headUrl'];
+    coverUrl = json['coverUrl'];
     professional = json['professional'];
     email = json['email'];
     phone = json['phone'];
@@ -374,6 +377,7 @@ class ModelList {
     data['userName'] = this.userName;
     data['name'] = this.name;
     data['headUrl'] = this.headUrl;
+    data['coverUrl'] = this.coverUrl;
     data['professional'] = this.professional;
     data['email'] = this.email;
     data['phone'] = this.phone;

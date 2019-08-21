@@ -9,7 +9,8 @@ import '../model_data/model/modeListModel.dart';
 class HomeProvide with ChangeNotifier {
   BannerModel bannerData = null; //banner
   NavigatorModel navigatorData = null; //navigator
-  ModelListModel cameramanData = null;
+  ModelListModel cameramanData = null; //摄影师
+  ModelListModel modelData = null;  //模特
 
   bool isShoot = true; //是否摄影
   bool isModel = true; //是否模特
@@ -75,8 +76,7 @@ class HomeProvide with ChangeNotifier {
       'orderBy': 'desc'
     };
     await requestGet('getmodelList', formData: formData).then((val) {
-      // var responseData= json.decode(val.toString());
-      cameramanData = ModelListModel.fromJson(val);
+      modelData = ModelListModel.fromJson(val);
       notifyListeners();
     });
   }
