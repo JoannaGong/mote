@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+
 import '../../routers/application.dart';
 import '../../provide/home.dart';
 import '../common/serch_text.dart';
@@ -37,36 +40,60 @@ class _HomePageState extends State<HomePage>
           backgroundColor: Colors.white,
           elevation: 0,
           brightness: Brightness.light,
-          title: Search(text: '您要找什么',router: '/searchDetail',),
+          title: Search(
+            text: '您要找什么',
+            router: '/searchDetail',
+          ),
           automaticallyImplyLeading: false,
         ),
         body: Container(
-          child: SingleChildScrollView(
-              child: Center(
-            child: Column(
-              children: <Widget>[
-                SwiperDiy(), //轮播图
-                TopNavigator(
-                  navigatorList: list,
-                ), //导航栏
-                Container(
-                  width: ScreenUtil().setWidth(686),
-                  height: ScreenUtil().setHeight(1),
-                  color: Color(0xFFE2E2E2),
-                ),
-                RecommendShoot(), //推荐摄影
-                RecommendModel(), //推荐模特
-                Line(), //横线
-                RecommendProduction(
-                  productionList: ponList,
-                ), //作品推荐
-                RecommendOfficial(
-                  productionList: ponList,
-                ) //官方推荐
-              ],
-            ),
-          )),
+          child: FutureBuilder(
+            future: _getHomeInfo(context),
+            builder: (context, snapsshot) {
+              if (snapsshot.hasData) {
+                return Container(
+                  child: EasyRefresh(
+                    header: BallPulseHeader(
+                      color: Color(0xFFFF5658)
+                    ),
+                    onRefresh: () async{
+                      print(111);
+                    },
+                    child: ListView(
+                      children: <Widget>[
+                        SwiperDiy(), //轮播图
+                        TopNavigator(
+                          navigatorList: list,
+                        ), //导航栏
+                        Container(
+                          width: ScreenUtil().setWidth(686),
+                          height: ScreenUtil().setHeight(1),
+                          color: Color(0xFFE2E2E2),
+                        ),
+                        RecommendShoot(), //推荐摄影
+                        RecommendModel(), //推荐模特
+                        Line(), //横线
+                        RecommendProduction(
+                          productionList: ponList,
+                        ), //作品推荐
+                        RecommendOfficial(
+                          productionList: ponList,
+                        ) //官方推荐
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ));
+  }
+
+  Future _getHomeInfo(BuildContext context) async {
+    await Provide.value<HomeProvide>(context).getBannerList();
+    return '完成加载';
   }
 }
 
@@ -74,6 +101,21 @@ class _HomePageState extends State<HomePage>
 class TopNavigator extends StatelessWidget {
   final List navigatorList;
   const TopNavigator({Key key, this.navigatorList}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: ScreenUtil().setHeight(180),
+        padding: EdgeInsets.all(ScreenUtil().setHeight(4)),
+        margin: EdgeInsets.only(top: 10.0),
+        child: GridView.count(
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 4,
+            padding: EdgeInsets.all(4.0),
+            children: navigatorList.map((item) {
+              return _gridViewItemUI(context, item);
+            }).toList()));
+  }
 
   Widget _gridViewItemUI(BuildContext context, item) {
     return GestureDetector(
@@ -97,21 +139,6 @@ class TopNavigator extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: ScreenUtil().setHeight(180),
-        padding: EdgeInsets.all(ScreenUtil().setHeight(4)),
-        margin: EdgeInsets.only(top: 10.0),
-        child: GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 4,
-            padding: EdgeInsets.all(4.0),
-            children: navigatorList.map((item) {
-              return _gridViewItemUI(context, item);
-            }).toList()));
   }
 }
 
