@@ -5,23 +5,38 @@ import '../../provide/home.dart';
 
 //官方推荐
 class RecommendOfficial extends StatelessWidget {
-  final List productionList;
-  const RecommendOfficial({Key key, this.productionList}) : super(key: key);
+  const RecommendOfficial({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(
-          0, ScreenUtil().setHeight(20), 0, ScreenUtil().setWidth(20)),
-      child: Column(
-        children: <Widget>[
-          _title(),
-          Container(
-            padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
-            child: _item(),
-          )
-        ],
-      ),
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var officialList = Provide.value<HomeProvide>(context).officialData.data.pageInfo.list;
+        return Container(
+          margin: EdgeInsets.fromLTRB(
+              0, ScreenUtil().setHeight(20), 0, ScreenUtil().setWidth(20)),
+          child: Column(
+            children: <Widget>[
+              _title(),
+              Container(
+                padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
+                // child: ListView.builder(
+                //   itemCount: officialData.length,
+                //   itemBuilder: (context, index){
+                //     return _item(context, officialData[index]);
+                //   },
+                // )
+                child: Wrap(
+                  spacing: 1,
+                  children:officialList.map((data) {
+                      return _item(context, data);
+                    }).toList(),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -63,7 +78,7 @@ class RecommendOfficial extends StatelessWidget {
   }
 
   //列表
-  Widget _item() {
+  Widget _item(BuildContext context, data) {
     return Container(
       padding: EdgeInsets.all(3.0),
       decoration: BoxDecoration(
@@ -83,25 +98,28 @@ class RecommendOfficial extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
-          children: <Widget>[_itemTitle(), _itemContent()],
+          children: <Widget>[
+            _itemTitle(context, data),
+            _itemContent(context, data)
+          ],
         ),
       ),
     );
   }
 
-  Widget _itemTitle() {
+  Widget _itemTitle(BuildContext context, item) {
     return Container(
       child: Row(
         children: <Widget>[
           CircleAvatar(
             radius: ScreenUtil().setWidth(30),
-            backgroundImage: AssetImage('assets/images/2.png'),
+            backgroundImage: NetworkImage(item.user.headUrl),
             backgroundColor: Colors.white,
           ),
           Container(
             margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
             child: Text(
-              '范冰冰',
+              item.user.name,
               style: TextStyle(
                   fontSize: ScreenUtil().setSp(28),
                   fontWeight: FontWeight.w500),
@@ -125,13 +143,14 @@ class RecommendOfficial extends StatelessWidget {
     );
   }
 
-  Widget _itemContent() {
+  Widget _itemContent(BuildContext context, item) {
+    
     return Container(
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(20.0)),
       child: Column(
         children: <Widget>[
           Align(
-            child: Text('Mrswang夏季新品服饰写真集'),
+            child: Text(item.name),
             alignment: Alignment.centerLeft,
           ),
           Container(
@@ -142,8 +161,8 @@ class RecommendOfficial extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Wrap(
                   spacing: 3,
-                  children: productionList.map((item) {
-                    return _gridViewItemUI(item);
+                  children: (item.worksDetailsList as List).map((val) {
+                    return _gridViewItemUI(val);
                   }).toList()),
             ),
           ),
@@ -155,20 +174,18 @@ class RecommendOfficial extends StatelessWidget {
     );
   }
 
-  Widget _gridViewItemUI(item) {
+  Widget _gridViewItemUI(val) {
     return Container(
       margin: EdgeInsets.only(top: 1.5, bottom: 1.5),
       child: GestureDetector(
-        onTap: () {
-          print(item);
-        },
+        onTap: () {},
         child: Stack(
           children: <Widget>[
             Container(
               width: ScreenUtil().setWidth(200),
               height: ScreenUtil().setWidth(200),
-              child: Image.asset(
-                'assets/images/2.png',
+              child: Image.network(
+                val.resourceUrl,
                 fit: BoxFit.fill,
               ),
             ),

@@ -12,10 +12,11 @@ class RecommendProduction extends StatelessWidget {
     return Provide<HomeProvide>(
       builder: (context, child, val) {
         var productionList = Provide.value<HomeProvide>(context).productionData.data.pageInfo.list;
+        var productionPageInfo = Provide.value<HomeProvide>(context).productionData.data.pageInfo;
         return Container(
           child: Column(
             children: <Widget>[
-              _title(),
+              _title(context, productionPageInfo),
               Container(
                 height: 250,
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(15)),
@@ -33,7 +34,7 @@ class RecommendProduction extends StatelessWidget {
   }
 
   //标题栏
-  Widget _title() {
+  Widget _title(BuildContext context, data) {
     return Container(
       height: ScreenUtil().setHeight(60),
       padding: EdgeInsets.fromLTRB(
@@ -54,7 +55,15 @@ class RecommendProduction extends StatelessWidget {
             size: ScreenUtil().setSp(36),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              if(data.endRow != data.total){
+                Provide.value<HomeProvide>(context).addPage();
+              }else{
+                 Provide.value<HomeProvide>(context).pageNum = 1;
+              }
+              
+              Provide.value<HomeProvide>(context).getProductionList();
+            },
             child: Text(
               '换一换',
               style: TextStyle(
@@ -88,7 +97,7 @@ class RecommendProduction extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       child: GestureDetector(
         onTap: () {
-          print(item);
+          
         },
         child: Stack(
           children: <Widget>[

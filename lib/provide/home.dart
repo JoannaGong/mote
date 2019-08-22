@@ -13,6 +13,7 @@ class HomeProvide with ChangeNotifier {
   ModelListModel cameramanData = null; //摄影师
   ModelListModel modelData = null;  //模特
   ProductionModel productionData = null;  //作品推荐
+  ProductionModel officialData = null;  //官方推荐
 
   bool isShoot = true; //是否摄影
   bool isModel = true; //是否模特
@@ -104,5 +105,22 @@ class HomeProvide with ChangeNotifier {
   //换一换
   addPage(){
     pageNum++;
+  }
+
+    //获取作品推荐
+  getOfficialList() async {
+    var formData = {
+      'queryRecommendedFlug': 1,
+      'violationsFlag': 0,
+      'pageNum': 1,
+      'pageCount': 2,
+      'buttonCount': 5,
+      'sortBy': 'created_time',
+      'orderBy': 'desc'
+    };
+    await requestGet('getProductionList', formData: formData).then((val) {
+      officialData = ProductionModel.fromJson(val);
+      notifyListeners();
+    });
   }
 }
