@@ -106,11 +106,14 @@ class _HomePageState extends State<HomePage>
     });
   }
 
-  void _refresh(BuildContext context) async{
-      await Provide.value<HomeProvide>(context).getBannerList(); //获取banner
-      await Provide.value<HomeProvide>(context).getNavigatorList(2); //获取顶部导航
-      await Provide.value<HomeProvide>(context).getShootlList(0); //获取摄影师、化妆师
-      await Provide.value<HomeProvide>(context).getModelList(2); //获取模特、经纪人
+  void _refresh(BuildContext context) async {
+    var isShoot = Provide.value<HomeProvide>(context).isShoot ? 0 : 1;
+    var isModel = Provide.value<HomeProvide>(context).isModel ? 2 : 3;
+
+    await Provide.value<HomeProvide>(context).getBannerList(); //获取banner
+    await Provide.value<HomeProvide>(context).getNavigatorList(2); //获取顶部导航
+    await Provide.value<HomeProvide>(context).getShootlList(isShoot); //获取摄影师、化妆师
+    await Provide.value<HomeProvide>(context).getModelList(isModel); //获取模特、经纪人
   }
 }
 
