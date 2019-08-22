@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ModelDetail extends StatefulWidget {
-  @override
-  _ModelDetailState createState() => _ModelDetailState();
-}
-
-class _ModelDetailState extends State<ModelDetail> {
+class ModelDetail extends StatelessWidget {
+  final String id;
+  ModelDetail({this.id});
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      child: Text('$id'),
     );
   }
 }

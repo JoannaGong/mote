@@ -4,6 +4,7 @@ import 'package:mote/model_data/model/modeListModel.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
+import 'package:mote/routers/application.dart';
 import 'package:provide/provide.dart';
 import '../../provide/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +55,8 @@ class _StaggeredGridState extends State<StaggeredGrid>
                             TileCard(
                                 headUrl: '${cardItem[index].headUrl}',
                                 name: '${cardItem[index].name}',
-                                coverUrl: '${cardItem[index].coverUrl}'),
+                                coverUrl: '${cardItem[index].coverUrl}',
+                                id: '${cardItem[index].id}'),
                         staggeredTileBuilder: (int index) =>
                             new StaggeredTile.fit(2),
                         mainAxisSpacing: 4.0,
@@ -107,20 +109,22 @@ class _StaggeredGridState extends State<StaggeredGrid>
   }
 }
 
-Future<Null> _handleRefresh() async {
-  return null;
-}
 
 class TileCard extends StatelessWidget {
   final String headUrl;
   final String name;
   final String coverUrl;
+  final String id;
 
-  TileCard({this.headUrl, this.name, this.coverUrl});
+  TileCard({this.headUrl, this.name, this.coverUrl, this.id});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: () {
+        Application.router.navigateTo(context,"/modelDetail?id=$id");
+      },
+      child:     Card(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0))),
       child: Column(
@@ -162,6 +166,8 @@ class TileCard extends StatelessWidget {
           )
         ],
       ),
+    ),
     );
+
   }
 }
