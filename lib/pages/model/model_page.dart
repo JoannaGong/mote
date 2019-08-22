@@ -19,7 +19,7 @@ class _ModelState extends State<StatefulWidget> {
           brightness: Brightness.light,
           title: Search(
             text: '外模',
-            router: '/detail',
+            router: '/searchDetail',
           ),
           automaticallyImplyLeading: false,
         ),

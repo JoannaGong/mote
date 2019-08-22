@@ -8,6 +8,7 @@ import 'package:mote/routers/application.dart';
 import 'package:provide/provide.dart';
 import '../../provide/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:async/src/async_memoizer.dart';
 
 class StaggeredGrid extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class StaggeredGrid extends StatefulWidget {
 class _StaggeredGridState extends State<StaggeredGrid>
     with AutomaticKeepAliveClientMixin {
   ScrollController _scrollController = new ScrollController();
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
 
   List<ModelList> modelItems;
   int pageIndex = 1;
@@ -36,7 +38,7 @@ class _StaggeredGridState extends State<StaggeredGrid>
               return Container(
                 child: EasyRefresh(
                   header: BallPulseHeader(color: Color(0xFFFF5658)),
-                  footer: BallPulseFooter(),
+                  footer: BallPulseFooter(color: Color(0xFFFF5658)),
                   onRefresh: () async {
                     _loadData();
                   },
@@ -82,12 +84,18 @@ class _StaggeredGridState extends State<StaggeredGrid>
     } else {
       pageIndex = 1;
     }
-    _getModelInfo(context);
+    _addModelInfo(context);
   }
 
   Future _getModelInfo(BuildContext context) async {
-    Provide.value<ModelProvide>(context).getmodelList(pageIndex);
-    return '完成加载';
+    return _memoizer.runOnce(() async {
+      await     Provide.value<ModelProvide>(context).getmodelList(pageIndex);
+      return '完成加载';
+    });
+  }
+  Future _addModelInfo(BuildContext context) async {
+      await     Provide.value<ModelProvide>(context).getmodelList(pageIndex);
+      return '完成加载';
   }
 
   @override
@@ -109,7 +117,6 @@ class _StaggeredGridState extends State<StaggeredGrid>
   }
 }
 
-
 class TileCard extends StatelessWidget {
   final String headUrl;
   final String name;
@@ -122,52 +129,51 @@ class TileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context,"/modelDetail?id=$id");
+        Application.router.navigateTo(context, "/modelDetail?id=$id");
       },
-      child:     Card(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0))),
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8.0),
-                  topRight: Radius.circular(8.0)),
-              child: Image(
-                image: NetworkImage('$headUrl'),
-                fit: BoxFit.fitWidth,
-                width: 200,
-              )),
-          Container(
-            padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(20),
-                bottom: ScreenUtil().setWidth(20),
-                top: ScreenUtil().setWidth(20)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: NetworkImage('$headUrl'),
-                  radius: ScreenUtil().setWidth(30),
-                  // maxRadius: 40.0,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-                  width: ScreenUtil().setWidth(250),
-                  child: Text(
-                    '$name',
-                    style: TextStyle(
-                      fontSize: ScreenUtil().setSp(25),
-                    ),
+      child: Card(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0)),
+                child: Image(
+                  image: NetworkImage('$headUrl'),
+                  fit: BoxFit.fitWidth,
+                  width: 200,
+                )),
+            Container(
+              padding: EdgeInsets.only(
+                  left: ScreenUtil().setWidth(20),
+                  bottom: ScreenUtil().setWidth(20),
+                  top: ScreenUtil().setWidth(20)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: NetworkImage('$headUrl'),
+                    radius: ScreenUtil().setWidth(30),
+                    // maxRadius: 40.0,
                   ),
-                )
-              ],
-            ),
-          )
-        ],
+                  Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                    width: ScreenUtil().setWidth(250),
+                    child: Text(
+                      '$name',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(25),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
-    ),
     );
-
   }
 }
