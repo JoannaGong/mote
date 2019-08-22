@@ -5,18 +5,18 @@ import './routers/routes.dart';
 import './routers/application.dart';
 import 'package:provide/provide.dart';
 import './provide/home.dart';
+import './provide/model.dart';
 
-
-void main(){
+void main() {
   var providers = Providers();
   var homeProvide = HomeProvide();
+  var modelProvide = ModelProvide();
 
-  providers
-  ..provide(Provider<HomeProvide>.value(homeProvide));
+  providers..provide(Provider<HomeProvide>.value(homeProvide));
+  providers..provide(Provider<ModelProvide>.value(modelProvide));
 
-  runApp(ProviderNode(child: MyApp(),providers: providers));
+  runApp(ProviderNode(child: MyApp(), providers: providers));
 }
-
 
 class MyApp extends StatelessWidget {
   @override
