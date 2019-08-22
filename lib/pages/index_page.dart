@@ -66,11 +66,11 @@ class IndexPage extends StatelessWidget {
       BuildContext context, List<String> titles, List<String> icons) {
     return BottomNavigationBar(
       items: [
-        _bottomBarItem(titles[0], icons[0]),
-        _bottomBarItem(titles[1], icons[1]),
-        _bottomBarItem(titles[2], icons[2]),
-        _bottomBarItem(titles[3], icons[3]),
-        _bottomBarItem(titles[4], icons[4]),
+        _bottomBarItem(context, titles[0], icons[0]),
+        _bottomBarItem(context, titles[1], icons[1]),
+        _bottomBarItem(context, titles[2], icons[2]),
+        _bottomBarItem(context, titles[3], icons[3]),
+        _bottomBarItem(context, titles[4], icons[4]),
       ],
       currentIndex: Provide.value<CurrentIndexProvide>(context).currentIndex,
       type: BottomNavigationBarType.fixed, // 当items大于3时需要设置此类型
@@ -86,13 +86,13 @@ class IndexPage extends StatelessWidget {
   }
 
   // 创建item
-  BottomNavigationBarItem _bottomBarItem(
+  BottomNavigationBarItem _bottomBarItem(BuildContext context,
     String title,
     String iconName,
   ) {
     return BottomNavigationBarItem(
       icon: _image(iconName),
-      title: Text(title, style: TextStyle(color: Colors.black)),
+      title: Text(title),
       activeIcon: _image('${iconName}_selected'),
       backgroundColor: Colors.white,
     );

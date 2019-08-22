@@ -5,33 +5,30 @@ import '../../provide/home.dart';
 
 //作品推荐
 class RecommendProduction extends StatelessWidget {
-  final List productionList;
-  const RecommendProduction({Key key, this.productionList}) : super(key: key);
+  const RecommendProduction({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          _title(),
-          Container(
-            height: 250,
-            margin: EdgeInsets.only(top: ScreenUtil().setHeight(15)),
-            // child: GridView.count(
-            //     physics: NeverScrollableScrollPhysics(),
-            //     crossAxisCount: 3,
-            //     padding: EdgeInsets.all(4.0),
-            // children: productionList.map((item) {
-            //   return _gridViewItemUI(context, item);
-            // }).toList()),
-            child: Wrap(
-                spacing: 3,
-                children: productionList.map((item) {
-                  return _gridViewItemUI(context, item);
-                }).toList()),
-          )
-        ],
-      ),
+    return Provide<HomeProvide>(
+      builder: (context, child, val) {
+        var productionList = Provide.value<HomeProvide>(context).productionData.data.pageInfo.list;
+        return Container(
+          child: Column(
+            children: <Widget>[
+              _title(),
+              Container(
+                height: 250,
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(15)),
+                child: Wrap(
+                    spacing: 3,
+                    children: productionList.map((item) {
+                      return _gridViewItemUI(context, item);
+                    }).toList()),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -100,9 +97,9 @@ class RecommendProduction extends StatelessWidget {
               height: ScreenUtil().setWidth(210),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  'assets/images/4.png',
-                  fit: BoxFit.fill,
+                child: Image.network(
+                  item.coverUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -110,7 +107,7 @@ class RecommendProduction extends StatelessWidget {
               left: ScreenUtil().setWidth(20),
               bottom: 10,
               child: Text(
-                "潮牌写真",
+                item.worksLableList[0].lable.name,
                 style: TextStyle(color: Colors.white),
               ),
             ),

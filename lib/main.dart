@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: Application.router.generator,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.grey[50],
+          primaryColor: Colors.pink,
         ),
         home: IndexPage(),
       ),
