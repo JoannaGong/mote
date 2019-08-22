@@ -81,9 +81,7 @@ class _HomePageState extends State<HomePage>
                         RecommendModel(), //推荐模特
                         Line(), //横线
                         RecommendProduction(), //作品推荐
-                        RecommendOfficial(
-                          productionList: ponList,
-                        ) //官方推荐
+                        RecommendOfficial() //官方推荐
                       ],
                     ),
                   ),
@@ -103,6 +101,7 @@ class _HomePageState extends State<HomePage>
       await Provide.value<HomeProvide>(context).getShootlList(0); //获取摄影师、化妆师
       await Provide.value<HomeProvide>(context).getModelList(2); //获取模特、经纪人
       await Provide.value<HomeProvide>(context).getProductionList(); //获取推荐作品
+      await Provide.value<HomeProvide>(context).getOfficialList(); //获取官方推荐
       return '完成加载';
     });
   }
@@ -110,6 +109,7 @@ class _HomePageState extends State<HomePage>
   void _refresh(BuildContext context) async {
     var isShoot = Provide.value<HomeProvide>(context).isShoot ? 0 : 1;
     var isModel = Provide.value<HomeProvide>(context).isModel ? 2 : 3;
+    Provide.value<HomeProvide>(context).pageNum = 1;
 
     await Provide.value<HomeProvide>(context).getBannerList(); //获取banner
     await Provide.value<HomeProvide>(context).getNavigatorList(2); //获取顶部导航
@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage>
         .getShootlList(isShoot); //获取摄影师、化妆师
     await Provide.value<HomeProvide>(context).getModelList(isModel); //获取模特、经纪人
     await Provide.value<HomeProvide>(context).getProductionList(); //获取推荐作品
+    await Provide.value<HomeProvide>(context).getOfficialList(); //获取官方推荐
   }
 }
 
