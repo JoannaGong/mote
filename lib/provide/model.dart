@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../service/service_method.dart';
 import '../model_data/model/modeListModel.dart';
-import 'dart:convert';
 
 class ModelProvide with ChangeNotifier {
   ModelListModel modeListData;
@@ -11,6 +9,9 @@ class ModelProvide with ChangeNotifier {
 
   //获取模特列表
   getmodelList(int pageIndex) async {
+    if (pageIndex == 1) {
+      isEnd = false;
+    }
     if (isEnd) {
       return;
     }
@@ -18,7 +19,7 @@ class ModelProvide with ChangeNotifier {
     await requestGet('getmodelList', formData: formData).then((val) {
       modeListData = ModelListModel.fromJson(val);
 
-      if (list != null) {
+      if (pageIndex != 1) {
         list.addAll(modeListData.data.pageInfo.list);
       } else {
         list = modeListData.data.pageInfo.list;
