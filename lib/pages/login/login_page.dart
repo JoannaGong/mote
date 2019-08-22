@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0,),
+      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -136,5 +136,9 @@ class _LoginPageState extends State<LoginPage> {
     var res = await dio.get(
         'http://101.37.156.106/model_api/sendMessageController/sendMessage?phoneNumber=$phone&type=0');
     print(res);
+  }
+
+  login() async {
+    // var res = await dio get('')
   }
 }
