@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provide/provide.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
-import 'dart:async';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
+
+import 'dart:async';
 
 import '../../routers/application.dart';
 import '../../provide/home.dart';
@@ -78,9 +80,7 @@ class _HomePageState extends State<HomePage>
                         RecommendShoot(), //推荐摄影
                         RecommendModel(), //推荐模特
                         Line(), //横线
-                        RecommendProduction(
-                          productionList: ponList,
-                        ), //作品推荐
+                        RecommendProduction(), //作品推荐
                         RecommendOfficial(
                           productionList: ponList,
                         ) //官方推荐
@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage>
       await Provide.value<HomeProvide>(context).getNavigatorList(2); //获取顶部导航
       await Provide.value<HomeProvide>(context).getShootlList(0); //获取摄影师、化妆师
       await Provide.value<HomeProvide>(context).getModelList(2); //获取模特、经纪人
+      await Provide.value<HomeProvide>(context).getProductionList(); //获取推荐作品
       return '完成加载';
     });
   }
@@ -112,8 +113,10 @@ class _HomePageState extends State<HomePage>
 
     await Provide.value<HomeProvide>(context).getBannerList(); //获取banner
     await Provide.value<HomeProvide>(context).getNavigatorList(2); //获取顶部导航
-    await Provide.value<HomeProvide>(context).getShootlList(isShoot); //获取摄影师、化妆师
+    await Provide.value<HomeProvide>(context)
+        .getShootlList(isShoot); //获取摄影师、化妆师
     await Provide.value<HomeProvide>(context).getModelList(isModel); //获取模特、经纪人
+    await Provide.value<HomeProvide>(context).getProductionList(); //获取推荐作品
   }
 }
 

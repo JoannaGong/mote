@@ -116,7 +116,7 @@ class RecommendModel extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Image.network(
-                    item.headUrl,
+                    item.coverUrl,
                     width: ScreenUtil().setWidth(218),
                     height: ScreenUtil().setWidth(218),
                     fit: BoxFit.fill,

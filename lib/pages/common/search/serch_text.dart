@@ -27,7 +27,7 @@ class _SearchState extends State<Search> {
               child: Text(
                 widget.text,
                 style: TextStyle(
-                    fontSize: ScreenUtil().setSp(24), color: Color(0xFF999999)),
+                    fontSize: ScreenUtil().setSp(28), color: Color(0xFF999999),fontWeight: FontWeight.w400),
               ),
             )
           ],

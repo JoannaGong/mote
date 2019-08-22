@@ -5,15 +5,18 @@ import 'dart:convert';
 import '../model_data/home/banner_model.dart';
 import '../model_data/home/navigator_model.dart';
 import '../model_data/model/modeListModel.dart';
+import '../model_data/production/production_model.dart';
 
 class HomeProvide with ChangeNotifier {
   BannerModel bannerData = null; //banner
   NavigatorModel navigatorData = null; //navigator
   ModelListModel cameramanData = null; //摄影师
   ModelListModel modelData = null;  //模特
+  ProductionModel productionData = null;  //作品推荐
 
   bool isShoot = true; //是否摄影
   bool isModel = true; //是否模特
+  int pageNum= 1; //换一换页码
 
   //切换摄影、化妆
   changeShoot(bool type) {
@@ -79,5 +82,27 @@ class HomeProvide with ChangeNotifier {
       modelData = ModelListModel.fromJson(val);
       notifyListeners();
     });
+  }
+
+  //获取作品推荐
+  getProductionList() async {
+    var formData = {
+      'queryRecommendedFlug': 0,
+      'violationsFlag': 0,
+      'pageNum': pageNum,
+      'pageCount': 6,
+      'buttonCount': 5,
+      'sortBy': 'created_time',
+      'orderBy': 'desc'
+    };
+    await requestGet('getProductionList', formData: formData).then((val) {
+      productionData = ProductionModel.fromJson(val);
+      notifyListeners();
+    });
+  }
+
+  //换一换
+  addPage(){
+    pageNum++;
   }
 }

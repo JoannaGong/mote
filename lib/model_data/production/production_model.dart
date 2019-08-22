@@ -1,14 +1,14 @@
-class ModelListModel {
+class ProductionModel {
   int code;
   String msg;
-  ModelData data;
+  ProductionData data;
 
-  ModelListModel({this.code, this.msg, this.data});
+  ProductionModel({this.code, this.msg, this.data});
 
-  ModelListModel.fromJson(Map<String, dynamic> json) {
+  ProductionModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new ModelData.fromJson(json['data']) : null;
+    data = json['data'] != null ? new ProductionData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,14 +22,14 @@ class ModelListModel {
   }
 }
 
-class ModelData {
-  ModelPageInfo pageInfo;
+class ProductionData {
+  ProductionPageInfo pageInfo;
 
-  ModelData({this.pageInfo});
+  ProductionData({this.pageInfo});
 
-  ModelData.fromJson(Map<String, dynamic> json) {
+  ProductionData.fromJson(Map<String, dynamic> json) {
     pageInfo = json['pageInfo'] != null
-        ? new ModelPageInfo.fromJson(json['pageInfo'])
+        ? new ProductionPageInfo.fromJson(json['pageInfo'])
         : null;
   }
 
@@ -42,7 +42,7 @@ class ModelData {
   }
 }
 
-class ModelPageInfo {
+class ProductionPageInfo {
   int pageNum;
   int pageSize;
   int size;
@@ -50,7 +50,7 @@ class ModelPageInfo {
   int endRow;
   int total;
   int pages;
-  List<ModelList> list;
+  List<ProductionList> list;
   int prePage;
   int nextPage;
   bool isFirstPage;
@@ -64,7 +64,7 @@ class ModelPageInfo {
   int firstPage;
   int lastPage;
 
-  ModelPageInfo(
+  ProductionPageInfo(
       {this.pageNum,
       this.pageSize,
       this.size,
@@ -86,7 +86,7 @@ class ModelPageInfo {
       this.firstPage,
       this.lastPage});
 
-  ModelPageInfo.fromJson(Map<String, dynamic> json) {
+  ProductionPageInfo.fromJson(Map<String, dynamic> json) {
     pageNum = json['pageNum'];
     pageSize = json['pageSize'];
     size = json['size'];
@@ -95,9 +95,9 @@ class ModelPageInfo {
     total = json['total'];
     pages = json['pages'];
     if (json['list'] != null) {
-      list = new List<ModelList>();
+      list = new List<ProductionList>();
       json['list'].forEach((v) {
-        list.add(new ModelList.fromJson(v));
+        list.add(new ProductionList.fromJson(v));
       });
     }
     prePage = json['prePage'];
@@ -142,7 +142,443 @@ class ModelPageInfo {
   }
 }
 
-class ModelList {
+class ProductionList {
+  String id;
+  String userId;
+  String name;
+  String coverUrl;
+  int chargeFlag;
+  double chargeCount;
+  int recommendedFlug;
+  int violationsFlag;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+  List<WorksDetailsList> worksDetailsList;
+  List<WorksLableList> worksLableList;
+  User user;
+  Null queryString;
+  Null queryRecommendedFlug;
+
+  ProductionList(
+      {this.id,
+      this.userId,
+      this.name,
+      this.coverUrl,
+      this.chargeFlag,
+      this.chargeCount,
+      this.recommendedFlug,
+      this.violationsFlag,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10,
+      this.worksDetailsList,
+      this.worksLableList,
+      this.user,
+      this.queryString,
+      this.queryRecommendedFlug});
+
+  ProductionList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['userId'];
+    name = json['name'];
+    coverUrl = json['coverUrl'];
+    chargeFlag = json['chargeFlag'];
+    chargeCount = json['chargeCount'];
+    recommendedFlug = json['recommendedFlug'];
+    violationsFlag = json['violationsFlag'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+    if (json['worksDetailsList'] != null) {
+      worksDetailsList = new List<WorksDetailsList>();
+      json['worksDetailsList'].forEach((v) {
+        worksDetailsList.add(new WorksDetailsList.fromJson(v));
+      });
+    }
+    if (json['worksLableList'] != null) {
+      worksLableList = new List<WorksLableList>();
+      json['worksLableList'].forEach((v) {
+        worksLableList.add(new WorksLableList.fromJson(v));
+      });
+    }
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    queryString = json['queryString'];
+    queryRecommendedFlug = json['queryRecommendedFlug'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userId'] = this.userId;
+    data['name'] = this.name;
+    data['coverUrl'] = this.coverUrl;
+    data['chargeFlag'] = this.chargeFlag;
+    data['chargeCount'] = this.chargeCount;
+    data['recommendedFlug'] = this.recommendedFlug;
+    data['violationsFlag'] = this.violationsFlag;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    if (this.worksDetailsList != null) {
+      data['worksDetailsList'] =
+          this.worksDetailsList.map((v) => v.toJson()).toList();
+    }
+    if (this.worksLableList != null) {
+      data['worksLableList'] =
+          this.worksLableList.map((v) => v.toJson()).toList();
+    }
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
+    data['queryString'] = this.queryString;
+    data['queryRecommendedFlug'] = this.queryRecommendedFlug;
+    return data;
+  }
+}
+
+class WorksDetailsList {
+  String id;
+  String worksId;
+  String resourceUrl;
+  int resourceType;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+
+  WorksDetailsList(
+      {this.id,
+      this.worksId,
+      this.resourceUrl,
+      this.resourceType,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10});
+
+  WorksDetailsList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    worksId = json['worksId'];
+    resourceUrl = json['resourceUrl'];
+    resourceType = json['resourceType'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['worksId'] = this.worksId;
+    data['resourceUrl'] = this.resourceUrl;
+    data['resourceType'] = this.resourceType;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    return data;
+  }
+}
+
+class WorksLableList {
+  String id;
+  String worksId;
+  String labelId;
+  int labelType;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+  Lable lable;
+
+  WorksLableList(
+      {this.id,
+      this.worksId,
+      this.labelId,
+      this.labelType,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10,
+      this.lable});
+
+  WorksLableList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    worksId = json['worksId'];
+    labelId = json['labelId'];
+    labelType = json['labelType'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+    lable = json['lable'] != null ? new Lable.fromJson(json['lable']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['worksId'] = this.worksId;
+    data['labelId'] = this.labelId;
+    data['labelType'] = this.labelType;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    if (this.lable != null) {
+      data['lable'] = this.lable.toJson();
+    }
+    return data;
+  }
+}
+
+class Lable {
+  String id;
+  int groupType;
+  String name;
+  int theCustomFlag;
+  int type;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+
+  Lable(
+      {this.id,
+      this.groupType,
+      this.name,
+      this.theCustomFlag,
+      this.type,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10});
+
+  Lable.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    groupType = json['groupType'];
+    name = json['name'];
+    theCustomFlag = json['theCustomFlag'];
+    type = json['type'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['groupType'] = this.groupType;
+    data['name'] = this.name;
+    data['theCustomFlag'] = this.theCustomFlag;
+    data['type'] = this.type;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    return data;
+  }
+}
+
+class User {
   String id;
   int roleName;
   String permissionsId;
@@ -218,7 +654,7 @@ class ModelList {
   Null userLableList;
   Null permissionRoleList;
 
-  ModelList(
+  User(
       {this.id,
       this.roleName,
       this.permissionsId,
@@ -294,7 +730,7 @@ class ModelList {
       this.userLableList,
       this.permissionRoleList});
 
-  ModelList.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     roleName = json['roleName'];
     permissionsId = json['permissionsId'];
@@ -452,3 +888,4 @@ class ModelList {
     return data;
   }
 }
+
