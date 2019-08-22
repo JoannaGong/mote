@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               ))),
               Container(
                 width: ScreenUtil().setWidth(200),
-                margin: EdgeInsets.fromLTRB(16, 12, 0, 0),
+                margin: EdgeInsets.fromLTRB(12, 12, 0, 0),
                 child: RaisedButton(
                   child: Text('获取验证码',style: TextStyle(color: Color(0xFF999999))),
                   elevation: 0,
