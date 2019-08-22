@@ -1,20 +1,18 @@
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
+import 'package:provide/provide.dart';
+import '../provide/current_index.dart';
+
 import './home/home_page.dart';
 import './model/model_page.dart';
 import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
 
-class IndexPage extends StatefulWidget {
-  @override
-  _IndexPageState createState() => _IndexPageState();
-}
-
-class _IndexPageState extends State<IndexPage> {
-
+class IndexPage extends StatelessWidget {
   final List<Widget> tabBodies = [
     HomePage(),
     ModelPage(),
@@ -23,18 +21,50 @@ class _IndexPageState extends State<IndexPage> {
     MemberPage()
   ];
 
-  int currentIndex = 0;
-
   List<String> titles = ['首页', '模特', '发布', '消息', '我的'];
-  List<String> icons = ['home', 'model', 'home','message' , 'mine'];
+  List<String> icons = ['home', 'model', 'home', 'message', 'mine'];
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1624)..init(context);
+    return Provide<CurrentIndexProvide>(
+      builder: (context, child, val) {
+        var currentIndex = Provide.value<CurrentIndexProvide>(context).currentIndex;
+        return Scaffold(
+            backgroundColor: Colors.white,
+            floatingActionButton: Builder(builder: (BuildContext context) {
+              return Container(
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    color: Color(0xFFFAFAFA),
+                    borderRadius: BorderRadius.circular(40)),
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xFFFAFAFA),
+                  onPressed: () {
+                    _onAdd(context);
+                  },
+                  child: Image.asset('assets/images/add.png'),
+                  elevation: 0,
+                  //tooltip: "发布", // 常按显示提``示
+                  heroTag: null, // 去除系统默认动画效果
+                  highlightElevation: 0,
+                ),
+              );
+            }),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked, // 添加按钮位置
+            bottomNavigationBar: _bottomNavigationBar(context, titles, icons),
+            body: IndexedStack(
+              index: currentIndex,
+              children: tabBodies,
+            ));
+      },
+    );
   }
 
-  BottomNavigationBar _bottomNavigationBar(List <String>titles, List <String>icons){
-    return  BottomNavigationBar(
+  BottomNavigationBar _bottomNavigationBar(
+      BuildContext context, List<String> titles, List<String> icons) {
+    return BottomNavigationBar(
       items: [
         _bottomBarItem(titles[0], icons[0]),
         _bottomBarItem(titles[1], icons[1]),
@@ -42,14 +72,24 @@ class _IndexPageState extends State<IndexPage> {
         _bottomBarItem(titles[3], icons[3]),
         _bottomBarItem(titles[4], icons[4]),
       ],
-      currentIndex: currentIndex,
-      type: BottomNavigationBarType.fixed,// 当items大于3时需要设置此类型
-      onTap: _bottomBarItemClick,
+      currentIndex: Provide.value<CurrentIndexProvide>(context).currentIndex,
+      type: BottomNavigationBarType.fixed, // 当items大于3时需要设置此类型
+      onTap: (index) {
+        Provide.value<CurrentIndexProvide>(context).changeIndex(index);
+        if (index == 4) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
+        }
+      },
       selectedFontSize: 12,
     );
   }
+
   // 创建item
-  BottomNavigationBarItem _bottomBarItem(String title, String iconName,) {
+  BottomNavigationBarItem _bottomBarItem(
+    String title,
+    String iconName,
+  ) {
     return BottomNavigationBarItem(
       icon: _image(iconName),
       title: Text(title, style: TextStyle(color: Colors.black)),
@@ -57,6 +97,7 @@ class _IndexPageState extends State<IndexPage> {
       backgroundColor: Colors.white,
     );
   }
+
   //image
   Widget _image(String iconName) {
     return Image.asset(
@@ -65,52 +106,8 @@ class _IndexPageState extends State<IndexPage> {
       height: 20,
     );
   }
-  //item点击
-  _bottomBarItemClick(int index) {
-    setState(() {
-      currentIndex = index;
-      if(index == 4){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-      }
-    });
-  }
 
-  void _onAdd() {
-    setState(() {
-      currentIndex = 2;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1624)..init(context);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      floatingActionButton: Builder(builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: Color(0xFFFAFAFA),
-            borderRadius: BorderRadius.circular(40)
-          ),
-          child: FloatingActionButton(
-            backgroundColor: Color(0xFFFAFAFA),
-            onPressed: _onAdd,
-            child: Image.asset('assets/images/add.png'),
-            elevation: 0,
-            //tooltip: "发布", // 常按显示提``示
-            heroTag: null, // 去除系统默认动画效果
-            highlightElevation: 0,
-          ),
-        );
-      }),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked, // 添加按钮位置
-      bottomNavigationBar: _bottomNavigationBar(titles, icons),
-      body: IndexedStack(
-        index: currentIndex,
-        children: tabBodies,
-      ),
-    );
+  void _onAdd(BuildContext context) {
+    Provide.value<CurrentIndexProvide>(context).changeIndex(2);
   }
 }

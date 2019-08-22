@@ -21,7 +21,6 @@ class ModelProvide with ChangeNotifier {
       if (list != null) {
         list.addAll(modeListData.data.pageInfo.list);
       } else {
-        print(1);
         list = modeListData.data.pageInfo.list;
       }
       isEnd = modeListData.data.pageInfo.isLastPage;
