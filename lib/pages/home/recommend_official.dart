@@ -11,7 +11,8 @@ class RecommendOfficial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provide<HomeProvide>(
       builder: (context, child, val) {
-        var officialList = Provide.value<HomeProvide>(context).officialData.data.pageInfo.list;
+        var officialList =
+            Provide.value<HomeProvide>(context).officialData.data.pageInfo.list;
         return Container(
           margin: EdgeInsets.fromLTRB(
               0, ScreenUtil().setHeight(20), 0, ScreenUtil().setWidth(20)),
@@ -20,17 +21,11 @@ class RecommendOfficial extends StatelessWidget {
               _title(),
               Container(
                 padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
-                // child: ListView.builder(
-                //   itemCount: officialData.length,
-                //   itemBuilder: (context, index){
-                //     return _item(context, officialData[index]);
-                //   },
-                // )
                 child: Wrap(
                   spacing: 1,
-                  children:officialList.map((data) {
-                      return _item(context, data);
-                    }).toList(),
+                  children: officialList.map((data) {
+                    return _item(context, data);
+                  }).toList(),
                 ),
               )
             ],
@@ -81,6 +76,7 @@ class RecommendOfficial extends StatelessWidget {
   Widget _item(BuildContext context, data) {
     return Container(
       padding: EdgeInsets.all(3.0),
+      margin: EdgeInsets.only(bottom: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
@@ -144,13 +140,14 @@ class RecommendOfficial extends StatelessWidget {
   }
 
   Widget _itemContent(BuildContext context, item) {
-    
     return Container(
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(20.0)),
       child: Column(
         children: <Widget>[
-          Align(
-            child: Text(item.name),
+          Container(
+            width: ScreenUtil().setWidth(650),
+            child:
+                Text(item.name, maxLines: 1, overflow: TextOverflow.ellipsis),
             alignment: Alignment.centerLeft,
           ),
           Container(
@@ -167,7 +164,9 @@ class RecommendOfficial extends StatelessWidget {
             ),
           ),
           Row(
-            children: <Widget>[_tip()],
+            children: (item.worksLableList as List).map((val) {
+              return _tip(val);
+            }).toList(),
           )
         ],
       ),
@@ -195,17 +194,16 @@ class RecommendOfficial extends StatelessWidget {
     );
   }
 
-  Widget _tip() {
+  Widget _tip(item) {
     return Container(
-      width: 40,
-      height: 18,
       margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+      padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(width: 1, color: Color(0xFFFFAF3B))),
       child: Align(
         child: Text(
-          '夏天',
+          item.lable.name,
           style: TextStyle(
               color: Color(0xFFFFAF3B), fontSize: ScreenUtil().setSp(20)),
         ),
