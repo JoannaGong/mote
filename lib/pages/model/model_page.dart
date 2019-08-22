@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../common/serch_text.dart';
+import '../common/search/serch_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/model/staggered_grid_view.dart';
+
 
 class ModelPage extends StatefulWidget {
   @override
@@ -11,22 +13,27 @@ class _ModelState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        brightness: Brightness.light,
-        title: Search(
-          text: '外模',
-          router: '/detail',
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          brightness: Brightness.light,
+          title: Search(
+            text: '外模',
+            router: '/detail',
+          ),
+          automaticallyImplyLeading: false,
         ),
-        automaticallyImplyLeading: false,
-      ),
-      body: Container(
-        child: Column(
-          children: <Widget>[FiltratePanel()],
-        ),
-      ),
-    );
+        body: Container(
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top:ScreenUtil().setHeight(110)),
+                child: StaggeredGrid()
+              ),
+              FiltratePanel()
+            ],
+          ),
+        ));
   }
 }
 
@@ -63,12 +70,10 @@ class FiltratePanel extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: ScreenUtil().setHeight(6)),
                 child: Image(
-                width: ScreenUtil().setWidth(24),
-                height: ScreenUtil().setHeight(24),
-                image: AssetImage('assets/images/filtrate.png')
-              ),
+                    width: ScreenUtil().setWidth(24),
+                    height: ScreenUtil().setHeight(24),
+                    image: AssetImage('assets/images/filtrate.png')),
               )
-              
             ],
           ),
         ],

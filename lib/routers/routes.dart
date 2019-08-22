@@ -12,6 +12,6 @@ class Routes {
       }
     );
 
-    router.define(searchDetail,handler: detailsHandler);
+    router.define(searchDetail,handler: searchHandler);
   }
 }
