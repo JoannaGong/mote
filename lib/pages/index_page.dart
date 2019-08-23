@@ -78,7 +78,7 @@ class IndexPage extends StatelessWidget {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
         }
       },
       selectedFontSize: 12,

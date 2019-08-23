@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
+import '../../provide/login.dart';
+import 'package:provide/provide.dart';
+import 'dart:async';
 
 Dio dio = new Dio();
 
@@ -42,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xFF999999))),
               validator: (String value) {
                 var phoneReg = RegExp(
-                    r"^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}\$");
+                    r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
                 if (!phoneReg.hasMatch(value)) {
                   return '请输入正确的手机号';
                 }
@@ -54,11 +57,11 @@ class _LoginPageState extends State<LoginPage> {
                 width: ScreenUtil().setWidth(400),
                 child: TextFormField(
                   onSaved: (String value) => validate = value,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return '请输入验证码';
-                    }
-                  },
+                  // validator: (String value) {
+                  //   if (value.isEmpty) {
+                  //     return '请输入验证码';
+                  //   }
+                  // },
                   decoration: InputDecoration(
                     labelText: '请输入验证码',
                     labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32.0),color: Color(0xFF999999))
@@ -73,7 +76,10 @@ class _LoginPageState extends State<LoginPage> {
                   shape: StadiumBorder(side: BorderSide(color: Color(0xFFE2E2E2),width: ScreenUtil().setWidth(2))),
                   color: Color(0xFFFFFFFF),
                   onPressed: () {
-                    validPhoneNum();
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      Provide.value<LoginProvide>(context).getPhoneValid(phone);
+                    }
               }))
             ]),
             Container(
@@ -85,7 +91,15 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color(0xFFFF5658),
                 splashColor: Color(0xFFFF5658),
                 child: Text('登录', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white),),
-                onPressed: () {},
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    print('phone:$phone , phoneValid:$validate');
+                    Provide.value<LoginProvide>(context).loginByPhone(phone, validate);
+                    // var token = Provide.value<LoginProvide>(context).token;
+                    // print('token: $token');
+                  }
+                },
             )),
             Align(child:
               Text('其他登录方式', style: TextStyle(fontSize: ScreenUtil().setSp(26), color: Color(0xFF999999))),
@@ -130,15 +144,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  validPhoneNum() async {
-    var res = await dio.get(
-        'http://101.37.156.106/model_api/sendMessageController/sendMessage?phoneNumber=$phone&type=0');
-    print(res);
-  }
-
-  login() async {
-    // var res = await dio get('')
   }
 }

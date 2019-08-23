@@ -39,8 +39,8 @@ class MemberPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                  Container(margin: EdgeInsets.only(bottom: 8), child: Text('金闪闪', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(32)))),
-                  Container(child: Text('模特     ID: 87789909', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(24))))
+                  Container(margin: EdgeInsets.only(bottom: 8), child: Text('金闪闪', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(36)))),
+                  Container(child: Text('模特     ID: 87789909', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(28))))
                 ])
               ]),
             ])
@@ -69,8 +69,9 @@ class MemberPage extends StatelessWidget {
                 Container(
                   height: ScreenUtil().setHeight(148),
                   child: GridView.count(
+                    physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 5,
-                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(44)),
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(40)),
                     children: <Widget>[
                       Column(children: <Widget>[
                         Container(
@@ -142,6 +143,7 @@ class MemberPage extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
         ),
         child: ListView(
+          physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(0),
           children: <Widget>[
           ListTile(
@@ -208,6 +210,7 @@ class MemberPage extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
         ),
         child: ListView(
+          physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(0),
           children: <Widget>[
           ListTile(
