@@ -8,12 +8,12 @@ import '../model_data/model/modeListModel.dart';
 import '../model_data/production/production_model.dart';
 
 class HomeProvide with ChangeNotifier {
-  BannerModel bannerData = null; //banner
-  NavigatorModel navigatorData = null; //navigator
-  ModelListModel cameramanData = null; //摄影师
-  ModelListModel modelData = null;  //模特
-  ProductionModel productionData = null;  //作品推荐
-  ProductionModel officialData = null;  //官方推荐
+  BannerModel bannerData; //banner
+  NavigatorModel navigatorData; //navigator
+  ModelListModel cameramanData; //摄影师
+  ModelListModel modelData;  //模特
+  ProductionModel productionData;  //作品推荐
+  ProductionModel officialData;  //官方推荐
 
   bool isShoot = true; //是否摄影
   bool isModel = true; //是否模特

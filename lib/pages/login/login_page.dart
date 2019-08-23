@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
-      body: Form(
+      body: ListView(children: <Widget>[ Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
-      ),
+      )])
     );
   }
 }

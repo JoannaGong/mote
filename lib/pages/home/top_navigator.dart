@@ -1,6 +1,9 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import '../../routers/application.dart';
+
 import '../../provide/home.dart';
 
 
@@ -34,7 +37,7 @@ class TopNavigator extends StatelessWidget {
   Widget _gridViewItemUI(BuildContext context, item) {
     return GestureDetector(
       onTap: () {
-        // Application.router.navigateTo(context, "/detail");
+        Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
       },
       child: Column(
         children: <Widget>[
