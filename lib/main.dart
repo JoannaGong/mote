@@ -7,16 +7,19 @@ import 'package:provide/provide.dart';
 import './provide/current_index.dart';
 import './provide/home.dart';
 import './provide/model.dart';
+import './provide/activity.dart';
 
 void main() {
   var providers = Providers();
   var currentIndexProvide = CurrentIndexProvide();
   var homeProvide = HomeProvide();
   var modelProvide = ModelProvide();
+  var activityProvide = ActivityProvide();
 
   providers..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide));
   providers..provide(Provider<HomeProvide>.value(homeProvide));
   providers..provide(Provider<ModelProvide>.value(modelProvide));
+  providers..provide(Provider<ActivityProvide>.value(activityProvide));
 
   runApp(ProviderNode(child: MyApp(), providers: providers));
 }

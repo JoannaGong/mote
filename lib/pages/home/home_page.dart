@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 
@@ -29,14 +28,8 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
   final AsyncMemoizer _memoizer = AsyncMemoizer();
-  List list = [
-    'assets/images/ic_home_fmodel.png',
-    'assets/images/ic_home_other.png',
-    'assets/images/ic_home_activity.png',
-    'assets/images/ic_home_photo.png'
-  ];
-  List ponList = [1, 2, 3, 4, 5, 6];
 
   @override
   void initState() {
