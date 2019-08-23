@@ -5,7 +5,8 @@ import './router_handler.dart';
 class Routes {
   static String root = '/';
   static String searchDetail = '/searchDetail'; //搜索页面
-  static String modelDetail = '/modelDetail'; //搜索页面
+  static String modelDetail = '/modelDetail'; //模特详情页
+  static String activity = '/activity'; //模特详情页
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -15,5 +16,6 @@ class Routes {
 
     router.define(searchDetail,handler: searchHandler);
     router.define(modelDetail,handler: modelDetailHandler);
+    router.define(activity,handler: activityPageHandler);
   }
 }
