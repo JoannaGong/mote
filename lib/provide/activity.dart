@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '../service/service_method.dart';
 import '../model_data/activity/activity_data.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import '../model_data/activity/activityDetail_data.dart';
 
 class ActivityProvide with ChangeNotifier {
   ActivityModel activitydata;
+  ActivityDetailModel activityDetaildata;
   List<ActivityList> list = [];
   int pageNum = 1;
 
@@ -14,10 +17,10 @@ class ActivityProvide with ChangeNotifier {
     await requestGet('getActivityList', formData: formData).then((val) {
       activitydata = ActivityModel.fromJson(val);
       if (type) {
-        if(!activitydata.data.pageInfo.isLastPage){
+        if (!activitydata.data.pageInfo.isLastPage) {
           list.addAll(activitydata.data.pageInfo.list);
           pageNum++;
-        }else{
+        } else {
           Fluttertoast.showToast(
               msg: "无更多数据",
               toastLength: Toast.LENGTH_SHORT,
@@ -25,13 +28,21 @@ class ActivityProvide with ChangeNotifier {
               timeInSecForIos: 1,
               backgroundColor: Colors.white,
               textColor: Colors.black,
-              fontSize: 16.0
-          );
+              fontSize: 16.0);
         }
       } else {
         list = activitydata.data.pageInfo.list;
         pageNum = 1;
       }
+      notifyListeners();
+    });
+  }
+
+  //活动详情
+  getActivityDetail(String id) async {
+    var formData = {'pageNum': pageNum};
+    await requestGet('getActivityList', formData: formData).then((val) {
+      activityDetaildata = ActivityDetailModel.fromJson(val);
       notifyListeners();
     });
   }

@@ -37,16 +37,15 @@ class ActivityPage extends StatelessWidget {
         backgroundColor: Color(0xFFF5F5F5),
         elevation: 0,
         brightness: Brightness.light,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.keyboard_arrow_left,
-            color: Color(0xFF333333),
-            size: 30,
-          ),
-        ),
+        leading: IconButton(
+            icon: Icon(
+              Icons.keyboard_arrow_left,
+              color: Color(0xFF333333),
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           '活动报名',
           style: TextStyle(
@@ -91,10 +90,10 @@ class ActivityList extends StatelessWidget {
             header: BallPulseHeader(color: Color(0xFFFF5658)),
             footer: BallPulseFooter(color: Color(0xFFFF5658)),
             onRefresh: () async {
-              _getActivityList(context,false);
+              _getActivityList(context, false);
             },
             onLoad: () async {
-              _getActivityList(context,true);
+              _getActivityList(context, true);
             },
             child: ListView.builder(
               itemCount: activityList.length,

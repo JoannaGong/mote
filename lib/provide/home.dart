@@ -54,11 +54,6 @@ class HomeProvide with ChangeNotifier {
       'queryCertificationSonType': queryCertificationSonType,
       'roleName': 5,
       'recommendedFlag': 1,
-      'pageNum': 1,
-      'pageCount': 10,
-      'buttonCount': 5,
-      'sortBy': 'created_time',
-      'orderBy': 'desc'
     };
     await requestGet('getmodelList', formData: formData).then((val) {
       // var responseData= json.decode(val.toString());
@@ -73,11 +68,6 @@ class HomeProvide with ChangeNotifier {
     var formData = {
       'roleName': roleName,
       'recommendedFlag': 1,
-      'pageNum': 1,
-      'pageCount': 10,
-      'buttonCount': 5,
-      'sortBy': 'created_time',
-      'orderBy': 'desc'
     };
     await requestGet('getmodelList', formData: formData).then((val) {
       modelData = ModelListModel.fromJson(val);
@@ -92,9 +82,6 @@ class HomeProvide with ChangeNotifier {
       'violationsFlag': 0,
       'pageNum': pageNum,
       'pageCount': 6,
-      'buttonCount': 5,
-      'sortBy': 'created_time',
-      'orderBy': 'desc'
     };
     await requestGet('getProductionList', formData: formData).then((val) {
       productionData = ProductionModel.fromJson(val);
@@ -114,9 +101,6 @@ class HomeProvide with ChangeNotifier {
       'violationsFlag': 0,
       'pageNum': 1,
       'pageCount': 2,
-      'buttonCount': 5,
-      'sortBy': 'created_time',
-      'orderBy': 'desc'
     };
     await requestGet('getProductionList', formData: formData).then((val) {
       officialData = ProductionModel.fromJson(val);
