@@ -3,6 +3,7 @@ import 'package:fluro/fluro.dart';
 import '../pages/common/search/search_detail.dart';
 import '../pages/model/model_detail.dart';
 import '../pages/activity/activity_page.dart';
+import '../pages/activity/activityDetail_page.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -11,12 +12,18 @@ Handler searchHandler =
 
 Handler modelDetailHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  String goodsId = params['id'].first;
-  return ModelDetail(id: goodsId);
+  String modelId = params['id'].first;
+  return ModelDetail(id: modelId);
 });
 
 Handler activityPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return ActivityPage();
+});
+
+Handler activityDetailPageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  String activityId = params['id'].first;    
+  return ActivityDetailPage(id: activityId);
 });
 

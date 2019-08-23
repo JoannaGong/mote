@@ -1,9 +1,12 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:async/src/async_memoizer.dart';
+import '../../routers/application.dart';
 
 import '../../provide/activity.dart';
 
@@ -55,7 +58,7 @@ class ActivityPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15),
               child: ActivityList(),
             );
           } else {
@@ -68,7 +71,8 @@ class ActivityPage extends StatelessWidget {
 
   Future _getActivityList(BuildContext context) async {
     return _memoizer.runOnce(() async {
-      await Provide.value<ActivityProvide>(context).getActivityList(); //获取活动列表
+      await Provide.value<ActivityProvide>(context)
+          .getActivityList(false); //获取活动列表
       return '完成加载';
     });
   }
@@ -85,13 +89,17 @@ class ActivityList extends StatelessWidget {
         return Container(
           child: EasyRefresh(
             header: BallPulseHeader(color: Color(0xFFFF5658)),
+            footer: BallPulseFooter(color: Color(0xFFFF5658)),
             onRefresh: () async {
-              print(111);
+              _getActivityList(context,false);
+            },
+            onLoad: () async {
+              _getActivityList(context,true);
             },
             child: ListView.builder(
               itemCount: activityList.length,
               itemBuilder: (context, index) {
-                return _item(activityList[index]);
+                return _item(context, activityList[index]);
               },
             ),
           ),
@@ -100,23 +108,34 @@ class ActivityList extends StatelessWidget {
     );
   }
 
-  Widget _item(data) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.grey[200],
-              offset: Offset(1, 1),
-              blurRadius: 3,
-              spreadRadius: 0.1),
-        ],
-      ),
-      margin: EdgeInsets.only(bottom: 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          child: Column(
-            children: <Widget>[_img(data), _title(data)],
+  void _getActivityList(BuildContext context, bool type) async {
+    await Provide.value<ActivityProvide>(context)
+        .getActivityList(type); //获取活动列表
+  }
+
+  Widget _item(BuildContext context, data) {
+    return GestureDetector(
+      onTap: () {
+        Application.router.navigateTo(context, 'activityDetail?id=${data.id}',
+            transition: TransitionType.inFromRight);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey[200],
+                offset: Offset(1, 1),
+                blurRadius: 3,
+                spreadRadius: 0.1),
+          ],
+        ),
+        margin: EdgeInsets.only(bottom: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            child: Column(
+              children: <Widget>[_img(data), _title(data)],
+            ),
           ),
         ),
       ),
@@ -131,7 +150,7 @@ class ActivityList extends StatelessWidget {
           Expanded(
             child: Image.network(
               item.coverPicUrl,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           )
         ],
@@ -142,15 +161,22 @@ class ActivityList extends StatelessWidget {
   Widget _title(item) {
     return Container(
       // height: ScreenUtil().setHeight(108),
-      padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
+      padding: EdgeInsets.all(10),
       color: Colors.white,
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Text(item.name),
+            child: Text(item.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: ScreenUtil().setSp(30))),
           ),
           Text(status[item.status.toString()],
-              style: TextStyle(color: statusColor[item.status.toString()]))
+              style: TextStyle(
+                  color: statusColor[item.status.toString()],
+                  fontSize: ScreenUtil().setSp(28)))
         ],
       ),
     );
