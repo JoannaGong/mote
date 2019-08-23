@@ -149,7 +149,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的钱包', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/qianbao.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),
@@ -161,7 +161,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的收藏', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/shoucang-3.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),
@@ -173,7 +173,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的主页', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/zhuye-xuanzhong.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),
@@ -185,7 +185,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的佣金管理（经纪）', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/jine.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),
@@ -197,7 +197,7 @@ class MemberPage extends StatelessWidget {
         ])),
     );
   }
-
+  // 我的作品
   Positioned buildWork(){
     return Positioned(
       top: ScreenUtil().setHeight(1175),            
@@ -216,7 +216,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的作品', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/wendang.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),
@@ -228,7 +228,7 @@ class MemberPage extends StatelessWidget {
           ListTile(
             title: Text('我的经纪公司（模特）', style: TextStyle(fontSize: ScreenUtil().setSp(28))),
             leading: Image(
-              image: AssetImage('assets/images/2.png'),
+              image: AssetImage('assets/images/gongsiguanli.png'),
               width: ScreenUtil().setWidth(50),
               height: ScreenUtil().setHeight(50),
             ),

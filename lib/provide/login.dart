@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../service/service_method.dart';
 import 'dart:convert';
-import '../login_data/login_in.dart';
+import '../model_data/login/login_in.dart';
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData = null;
