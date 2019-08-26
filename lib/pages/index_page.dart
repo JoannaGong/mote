@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../provide/current_index.dart';
 
 import './home/home_page.dart';
@@ -63,7 +64,13 @@ class IndexPage extends StatelessWidget {
   }
 
   BottomNavigationBar _bottomNavigationBar(
-      BuildContext context, List<String> titles, List<String> icons) {
+    BuildContext context, List<String> titles, List<String> icons) {
+    Future<String> get() async {
+      var token;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      token = prefs.getString(token);
+      return token;
+    }
     return BottomNavigationBar(
       items: [
         _bottomBarItem(context, titles[0], icons[0]),
@@ -77,8 +84,15 @@ class IndexPage extends StatelessWidget {
       onTap: (index) {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
-          Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+          Future<String> token = get();          
+          token.then((String token){
+            print('获取token -- $token');
+            if(token == null){
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage())
+              );
+            }
+          });
         }
       },
       selectedFontSize: 12,

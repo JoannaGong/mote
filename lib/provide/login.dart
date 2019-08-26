@@ -2,16 +2,33 @@ import 'package:flutter/material.dart';
 import '../service/service_method.dart';
 import 'dart:convert';
 import '../model_data/login/login_in.dart';
+import '../model_data/login/user_info.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData = null;
+  GetUserInfo userData = null;
   var token;
 
   // 获取手机验证码
   getPhoneValid(String phoneNumber) async {
     var formData = {'phoneNumber': phoneNumber};
     await requestGet('getPhoneValid', formData: formData).then((val) {
-      print(val);
+      // print(val);
+      if(val['code'] == 101){
+        Fluttertoast.showToast(
+          msg: '验证码发送成功',
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 1
+        );
+      }else{
+        Fluttertoast.showToast(
+          msg: val['msg'],
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 1
+        );
+      }
       notifyListeners();
     });
   }
@@ -24,7 +41,27 @@ class LoginProvide with ChangeNotifier {
     };
     await requestPost('loginForPhone', formData: formData).then((val){
       loginData = LoginByPhone.fromJson(val);
-      print(val['data']['token']);
+      if(val['code'] == 101){
+        token = val['data']['token'];
+      }else{
+        Fluttertoast.showToast(
+          msg: val['data']['msg'],
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 1
+        );
+      }
+      notifyListeners();
+    });
+  }
+
+  // 获取用户信息
+  getUserInfo(String token) async {
+    var formData = {
+      'id': token
+    };
+    await requestPost('getUserInfo', formData: formData).then((val){
+      print(val);
+      userData = GetUserInfo.fromJson(val);
       notifyListeners();
     });
   }
