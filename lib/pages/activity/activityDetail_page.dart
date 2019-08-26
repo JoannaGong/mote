@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:fluro/fluro.dart';
 
+import '../../routers/application.dart';
 import '../../provide/activity.dart';
 
 class ActivityDetailPage extends StatelessWidget {
@@ -50,6 +52,9 @@ class ActivityDetailPage extends StatelessWidget {
                         Positioned(
                           bottom: 20,
                           child: GestureDetector(
+                            onTap: (){
+                              Application.router.navigateTo(context, '/activityForm',transition: TransitionType.inFromRight);
+                            },
                             child: Container(
                               width: ScreenUtil().setWidth(686),
                               height: ScreenUtil().setHeight(88),

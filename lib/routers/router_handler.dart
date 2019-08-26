@@ -4,6 +4,7 @@ import '../pages/common/search/search_detail.dart';
 import '../pages/model/model_detail.dart';
 import '../pages/activity/activity_page.dart';
 import '../pages/activity/activityDetail_page.dart';
+import '../pages/activity/activity_form.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -25,5 +26,10 @@ Handler activityDetailPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   String activityId = params['id'].first;    
   return ActivityDetailPage(id: activityId);
+});
+
+Handler activityFormPageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ActivityForm();
 });
 
