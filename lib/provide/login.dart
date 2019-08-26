@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../service/service_method.dart';
 import 'dart:convert';
@@ -24,7 +26,7 @@ class LoginProvide with ChangeNotifier {
         );
       }else{
         Fluttertoast.showToast(
-          msg: val['msg'],
+          msg: val['data']['error'],
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1
         );
@@ -37,9 +39,10 @@ class LoginProvide with ChangeNotifier {
   loginByPhone(String phone, var phoneCode) async {
     var formData = {
       'phone': phone,
-      'phoneCode': phoneCode 
+      'phoneCode': phoneCode
     };
     await requestPost('loginForPhone', formData: formData).then((val){
+      // print(val);
       loginData = LoginByPhone.fromJson(val);
       if(val['code'] == 101){
         token = val['data']['token'];
@@ -56,10 +59,11 @@ class LoginProvide with ChangeNotifier {
 
   // 获取用户信息
   getUserInfo(String token) async {
-    var formData = {
-      'id': token
-    };
-    await requestPost('getUserInfo', formData: formData).then((val){
+    var headers = Map<String, String>();
+    Dio dio = new Dio();
+    headers['token'] = token;
+    dio.options.headers = headers;
+    await requestPost('getUserInfo', ).then((val){
       print(val);
       userData = GetUserInfo.fromJson(val);
       notifyListeners();

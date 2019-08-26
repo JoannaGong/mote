@@ -6,6 +6,7 @@ import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../member/member_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Dio dio = new Dio();
 
@@ -100,22 +101,48 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    // save();
-                    // Provide.value<LoginProvide>(context).getUserInfo('6048FFF6A485D6D18F6F20BE32B3EFE5');
-                    print('phone:$phone , phoneValid:$validate');
-                    Provide.value<LoginProvide>(context).loginByPhone(phone, validate);  // 用手机登录app
-                    token = Provide.value<LoginProvide>(context).token;
-                    print('token---$token');
-                    Timer.run((){
+                    save();
+
+                    Future(() => 
+                      Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
+                    ).then((val){
+                      token = Provide.value<LoginProvide>(context).token;
+                      print('token1---$token');
+                    }).then((val){
                       if(token != null){
-                        print('token---$token');
                         save();
-                        Provide.value<LoginProvide>(context).getUserInfo(token);  // 请求用户数据
+                        print('token2---$token');
+                        Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
                         Navigator.pop(
                           context, MaterialPageRoute(builder: (context) => MemberPage())
                         );
                       }
-                    });  
+                    }).whenComplete(() => 
+                      Fluttertoast.showToast(
+                        msg: '登录成功',
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIos: 1
+                      )
+                    );
+
+
+                    
+                    
+                    // Future((){
+                    //   token = Provide.value<LoginProvide>(context).token;
+                    //   print('token---$token');
+                    // });
+                    // Future((){
+                    //   if(token != null){
+                    //     save();
+                    //     print('token---$token');
+                    //     Provide.value<LoginProvide>(context).getUserInfo(token);  // 请求用户数据
+                    //     Navigator.pop(
+                    //       context, MaterialPageRoute(builder: (context) => MemberPage())
+                    //     );
+                    //   }
+                    // });
+                    // print('hhh');
                   }
                 },
             )),

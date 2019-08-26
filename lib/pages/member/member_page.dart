@@ -59,8 +59,11 @@ class MemberPage extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('通告管理', style: TextStyle(fontSize: ScreenUtil().setSp(26), fontWeight: FontWeight.w500)),
+              children: <Widget>[                
+                Row(                  
+                  children: <Widget>[
+                  Text('通告管理', style: TextStyle(fontSize: ScreenUtil().setSp(26), fontWeight: FontWeight.w500)),
+                ]),
                 Container(
                   height: ScreenUtil().setHeight(1),
                   margin: EdgeInsets.only(top: ScreenUtil().setHeight(22)),

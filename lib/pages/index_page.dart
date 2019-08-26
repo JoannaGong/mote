@@ -12,6 +12,7 @@ import './model/model_page.dart';
 import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
+import '../provide/login.dart';
 
 class IndexPage extends StatelessWidget {
   final List<Widget> tabBodies = [
@@ -84,13 +85,14 @@ class IndexPage extends StatelessWidget {
       onTap: (index) {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
-          Future<String> token = get();          
+          Future<String> token = get();
           token.then((String token){
-            print('获取token -- $token');
             if(token == null){
               Navigator.push(
                 context, MaterialPageRoute(builder: (context) => LoginPage())
               );
+            }else{
+              Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
             }
           });
         }
