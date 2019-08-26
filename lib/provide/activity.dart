@@ -40,9 +40,9 @@ class ActivityProvide with ChangeNotifier {
 
   //活动详情
   getActivityDetail(String id) async {
-    var formData = {'pageNum': pageNum};
-    await requestGet('getActivityList', formData: formData).then((val) {
+    await requestGetDetail('getActivityList',id: id).then((val) {
       activityDetaildata = ActivityDetailModel.fromJson(val);
+      print(val);
       notifyListeners();
     });
   }

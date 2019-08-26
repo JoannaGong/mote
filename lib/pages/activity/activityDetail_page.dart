@@ -34,6 +34,8 @@ class ActivityDetailPage extends StatelessWidget {
                   );
                 },
               );
+            }else{
+              return Container();
             }
           },
         ));
@@ -42,7 +44,7 @@ class ActivityDetailPage extends StatelessWidget {
   Future _getActivityDetail(BuildContext context) async {
     return _memoizer.runOnce(() async {
       await Provide.value<ActivityProvide>(context)
-          .getActivityList(false); //获取活动列表
+          .getActivityDetail(id); //获取活动列表
       return '完成加载';
     });
   }

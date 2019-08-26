@@ -44,3 +44,24 @@ Future requestGet(url, {formData}) async {
     return print('Error: ==========>${e}');
   }
 }
+
+Future requestGetDetail(url,{id}) async{
+  try {
+    print('开始获取数据...........');
+    Response response;
+    Dio dio = new Dio();
+    dio.options.contentType = ContentType.parse("application/x-www-form-urlencoded");
+    if(id == null){
+      response = await dio.get(servicePath[url]);
+    }else{
+      response = await dio.get(servicePath[url]+'/${id}');
+    }
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception('接口报错');
+    }
+  } catch (e) {
+    return print('Error: ==========>${e}');
+  }
+}
