@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import '../../provide/login.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../member/member_page.dart';
 
 Dio dio = new Dio();
 
@@ -16,10 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   var phone;
   var validate;
-  int isLogin;
+  String token;
 
   @override
   Widget build(BuildContext context) {
+    save() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString(token, Provide.value<LoginProvide>(context).token);
+    }
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
@@ -94,10 +100,22 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
+                    // save();
+                    // Provide.value<LoginProvide>(context).getUserInfo('6048FFF6A485D6D18F6F20BE32B3EFE5');
                     print('phone:$phone , phoneValid:$validate');
-                    Provide.value<LoginProvide>(context).loginByPhone(phone, validate);
-                    // var token = Provide.value<LoginProvide>(context).token;
-                    // print('token: $token');
+                    Provide.value<LoginProvide>(context).loginByPhone(phone, validate);  // 用手机登录app
+                    token = Provide.value<LoginProvide>(context).token;
+                    print('token---$token');
+                    Timer.run((){
+                      if(token != null){
+                        print('token---$token');
+                        save();
+                        Provide.value<LoginProvide>(context).getUserInfo(token);  // 请求用户数据
+                        Navigator.pop(
+                          context, MaterialPageRoute(builder: (context) => MemberPage())
+                        );
+                      }
+                    });  
                   }
                 },
             )),
