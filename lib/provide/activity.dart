@@ -42,7 +42,6 @@ class ActivityProvide with ChangeNotifier {
   getActivityDetail(String id) async {
     await requestGetDetail('getActivityList',id: id).then((val) {
       activityDetaildata = ActivityDetailModel.fromJson(val);
-      print(val);
       notifyListeners();
     });
   }

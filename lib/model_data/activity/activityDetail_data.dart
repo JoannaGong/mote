@@ -50,6 +50,7 @@ class Activity {
   String activityStartTime;
   String activityStopTime;
   String organizersName;
+  String address;
   double applicationPrice;
   String coverPicUrl;
   int status;
@@ -81,6 +82,7 @@ class Activity {
       this.activityStartTime,
       this.activityStopTime,
       this.organizersName,
+      this.address,
       this.applicationPrice,
       this.coverPicUrl,
       this.status,
@@ -112,6 +114,7 @@ class Activity {
     activityStartTime = json['activityStartTime'];
     activityStopTime = json['activityStopTime'];
     organizersName = json['organizersName'];
+    address = json['address'];
     applicationPrice = json['applicationPrice'];
     coverPicUrl = json['coverPicUrl'];
     status = json['status'];
@@ -145,6 +148,7 @@ class Activity {
     data['activityStartTime'] = this.activityStartTime;
     data['activityStopTime'] = this.activityStopTime;
     data['organizersName'] = this.organizersName;
+    data['address'] = this.address;
     data['applicationPrice'] = this.applicationPrice;
     data['coverPicUrl'] = this.coverPicUrl;
     data['status'] = this.status;
