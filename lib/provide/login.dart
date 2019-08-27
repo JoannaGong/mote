@@ -19,17 +19,9 @@ class LoginProvide with ChangeNotifier {
     await requestGet('getPhoneValid', formData: formData).then((val) {
       // print(val);
       if(val['code'] == 101){
-        Fluttertoast.showToast(
-          msg: '验证码发送成功',
-          gravity: ToastGravity.CENTER,
-          timeInSecForIos: 1
-        );
+        toast('验证码发送成功');
       }else{
-        Fluttertoast.showToast(
-          msg: val['data']['error'],
-          gravity: ToastGravity.CENTER,
-          timeInSecForIos: 1
-        );
+        toast(val['data']['error']);
       }
       notifyListeners();
     });
@@ -47,11 +39,7 @@ class LoginProvide with ChangeNotifier {
       if(val['code'] == 101){
         token = val['data']['token'];
       }else{
-        Fluttertoast.showToast(
-          msg: val['data']['msg'],
-          gravity: ToastGravity.CENTER,
-          timeInSecForIos: 1
-        );
+        toast(val['data']['msg']);
       }
       notifyListeners();
     });
@@ -64,5 +52,17 @@ class LoginProvide with ChangeNotifier {
       print(val);
       notifyListeners();
     });
+  }
+
+  toast(String toast) {
+    Fluttertoast.showToast(
+      msg: toast,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIos: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 14.0
+    );
   }
 }

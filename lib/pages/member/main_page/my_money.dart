@@ -7,7 +7,7 @@ class MyMoney extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: ScreenUtil().setHeight(458),
-        margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(40)),
+        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(32), ScreenUtil().setHeight(40), ScreenUtil().setWidth(32), 0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(12.0)),

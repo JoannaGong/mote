@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/member/main_page/no_identify.dart';
 import 'package:provide/provide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:async/src/async_memoizer.dart';
@@ -8,10 +9,12 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 
 import '../../provide/login.dart';
-import './user_info.dart';
-import './announce_manage.dart';
-import './my_money.dart';
-import './my_work.dart';
+import './main_page/user_info.dart';
+import './main_page/announce_manage.dart';
+import './main_page/my_money.dart';
+import './main_page/my_work.dart';
+import './main_page/my_money_merchant.dart';
+import './main_page/no_identify.dart';
 
 class MemberPage extends StatefulWidget {
   const MemberPage({Key key}) : super(key: key);
@@ -33,6 +36,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
     // var userInfo = Provide.value<LoginProvide>(context).userData;
     return Scaffold(
       body: Container(
+        color: Color(0xFFF5F5F5),
         child: FutureBuilder(
           future: _getMemberInfo(context),
           builder: (context, snapshot){
@@ -58,8 +62,11 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                           ),
                           AnnounceManage(),  // 通告管理
                       ])),
-                    MyMoney(),  // 我的钱包、收藏、主页、佣金管理
-                    MyWork(),  // 我的作品、经纪公司（模特）
+                    NoIdentify(),  // 无身份 认证信息
+                    // MyMoney(),  //  模特 - 我的钱包、收藏、主页、佣金管理
+                    // MyMoneyMerchant(),  // 商户 -- 我的钱包、收藏、专业服务、通告统计、付费作品
+
+                    // MyWork(),  // 模特 - 我的作品、经纪公司（模特）
                   ])
                 )
               );

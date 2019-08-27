@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
 
-import '../../provide/login.dart';
+import '../../../provide/login.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({Key key}) : super(key: key);
