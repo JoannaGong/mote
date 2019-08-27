@@ -115,7 +115,7 @@ class UserInfo {
   int queryCertificationSonType;
   String queryString;
   String phoneCode;
-  Null userLableList;
+  List<UserLableList> userLableList;
   List<PermissionRoleList> permissionRoleList;
   String workExperience;
   String serviceOffers;
@@ -274,7 +274,12 @@ class UserInfo {
     queryCertificationSonType = json['queryCertificationSonType'];
     queryString = json['queryString'];
     phoneCode = json['phoneCode'];
-    userLableList = json['userLableList'];
+    if (json['userLableList'] != null) {
+      userLableList = new List<UserLableList>();
+      json['userLableList'].forEach((v) {
+        userLableList.add(new UserLableList.fromJson(v));
+      });
+    }
     if (json['permissionRoleList'] != null) {
       permissionRoleList = new List<PermissionRoleList>();
       json['permissionRoleList'].forEach((v) {
@@ -361,7 +366,10 @@ class UserInfo {
     data['queryCertificationSonType'] = this.queryCertificationSonType;
     data['queryString'] = this.queryString;
     data['phoneCode'] = this.phoneCode;
-    data['userLableList'] = this.userLableList;
+    if (this.userLableList != null) {
+      data['userLableList'] =
+          this.userLableList.map((v) => v.toJson()).toList();
+    }
     if (this.permissionRoleList != null) {
       data['permissionRoleList'] =
           this.permissionRoleList.map((v) => v.toJson()).toList();
@@ -369,6 +377,202 @@ class UserInfo {
     data['workExperience'] = this.workExperience;
     data['serviceOffers'] = this.serviceOffers;
     data['certificationText'] = this.certificationText;
+    return data;
+  }
+}
+
+class UserLableList {
+  String id;
+  String userId;
+  String labelId;
+  int labelType;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+  Lable lable;
+
+  UserLableList(
+      {this.id,
+      this.userId,
+      this.labelId,
+      this.labelType,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10,
+      this.lable});
+
+  UserLableList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['userId'];
+    labelId = json['labelId'];
+    labelType = json['labelType'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+    lable = json['lable'] != null ? new Lable.fromJson(json['lable']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['userId'] = this.userId;
+    data['labelId'] = this.labelId;
+    data['labelType'] = this.labelType;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    if (this.lable != null) {
+      data['lable'] = this.lable.toJson();
+    }
+    return data;
+  }
+}
+
+class Lable {
+  String id;
+  int groupType;
+  String name;
+  int theCustomFlag;
+  int type;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+
+  Lable(
+      {this.id,
+      this.groupType,
+      this.name,
+      this.theCustomFlag,
+      this.type,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10});
+
+  Lable.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    groupType = json['groupType'];
+    name = json['name'];
+    theCustomFlag = json['theCustomFlag'];
+    type = json['type'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['groupType'] = this.groupType;
+    data['name'] = this.name;
+    data['theCustomFlag'] = this.theCustomFlag;
+    data['type'] = this.type;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
     return data;
   }
 }

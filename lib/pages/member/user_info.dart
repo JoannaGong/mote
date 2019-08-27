@@ -9,14 +9,13 @@ class UserInfo extends StatelessWidget {
   const UserInfo({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-    return Positioned(
-      top: 0,
-      child:Container(
+    // var userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+    return Container(
         height: ScreenUtil().setHeight(460),
         width: ScreenUtil().setWidth(750),
         decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFFF9E9F), Color(0xFFFF5658)], begin: FractionalOffset(0, 0), end: FractionalOffset(1, 1))),
-        child:Column(children: <Widget>[
+        child:Column(
+          children: <Widget>[
           Container(
             padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(674), 20, 0, 0),
             child: IconButton(
@@ -44,6 +43,6 @@ class UserInfo extends StatelessWidget {
             ])
           ]),
         ])
-      ));
+      );
   }
 }

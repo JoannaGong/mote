@@ -5,10 +5,7 @@ class MyMoney extends StatelessWidget {
   const MyMoney({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: ScreenUtil().setHeight(675),            
-      child: Container(        
-        width: ScreenUtil().setWidth(686),
+    return Container(
         height: ScreenUtil().setHeight(458),
         margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(40)),
         decoration: BoxDecoration(
@@ -67,7 +64,7 @@ class MyMoney extends StatelessWidget {
             isThreeLine: false,
             dense: true,
           )
-        ])),
+        ]),
     );
   }
 }

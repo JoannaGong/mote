@@ -38,19 +38,30 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
           builder: (context, snapshot){
             if(snapshot.hasData){
               return  Container(
-                // child: EasyRefresh(
-                //   header: BallPulseHeader(color: Color(0xFFFF5658)),
-                //   onRefresh: () async {
-                //     _refresh(context);
-                //   },
-                  child: Stack(children: <Widget>[
-                    Container(color: Color(0xFFF5F5F5),),
-                    UserInfo(),        // 用户信息
-                    AnnounceManage(),  // 通告管理
-                    MyMoney(),         // 我的钱包
-                    MyWork()           // 我的作品
+                child: EasyRefresh(
+                  header: BallPulseHeader(color: Color(0xFFFF5658)),
+                  onRefresh: () async {
+                    _refresh(context);
+                  },
+                  child: 
+                  ListView(children: <Widget>[
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        alignment: AlignmentDirectional.center,
+                        children: <Widget>[
+                          Container(color: Color(0xFFF5F5F5),),
+                          Positioned(
+                            top: 0,
+                            child:UserInfo(),     // 用户信息
+                          ),
+                          AnnounceManage(),  // 通告管理
+                      ])),
+                    MyMoney(),  // 我的钱包、收藏、主页、佣金管理
+                    MyWork(),  // 我的作品、经纪公司（模特）
                   ])
-                // )
+                )
               );
             }else{
               return Container();

@@ -5,12 +5,9 @@ class MyWork extends StatelessWidget {
   const MyWork({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: ScreenUtil().setHeight(1175),            
-      child: Container(        
-        width: ScreenUtil().setWidth(686),
+    return Container(
         height: ScreenUtil().setHeight(228),
-        margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(40)),
+        margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -43,7 +40,7 @@ class MyWork extends StatelessWidget {
             isThreeLine: false,
             dense: true,
           )
-        ])),
+        ]),
     );
   }
 }
