@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   var phone;
   var validate;
-  String token;
+  var token;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                     _formKey.currentState.save();
                     save();
 
-                    Future(() => 
+                    Future(() =>
                       Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
                     ).then((val){
                       token = Provide.value<LoginProvide>(context).token;
@@ -124,25 +124,6 @@ class _LoginPageState extends State<LoginPage> {
                         timeInSecForIos: 1
                       )
                     );
-
-
-                    
-                    
-                    // Future((){
-                    //   token = Provide.value<LoginProvide>(context).token;
-                    //   print('token---$token');
-                    // });
-                    // Future((){
-                    //   if(token != null){
-                    //     save();
-                    //     print('token---$token');
-                    //     Provide.value<LoginProvide>(context).getUserInfo(token);  // 请求用户数据
-                    //     Navigator.pop(
-                    //       context, MaterialPageRoute(builder: (context) => MemberPage())
-                    //     );
-                    //   }
-                    // });
-                    // print('hhh');
                   }
                 },
             )),

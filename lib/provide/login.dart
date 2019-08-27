@@ -59,13 +59,9 @@ class LoginProvide with ChangeNotifier {
 
   // 获取用户信息
   getUserInfo(String token) async {
-    var headers = Map<String, String>();
-    Dio dio = new Dio();
-    headers['token'] = token;
-    dio.options.headers = headers;
-    await requestPost('getUserInfo', ).then((val){
-      print(val);
+    await requestPost('getUserInfo', token: token).then((val){
       userData = GetUserInfo.fromJson(val);
+      print(val);
       notifyListeners();
     });
   }

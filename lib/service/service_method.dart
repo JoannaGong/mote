@@ -2,13 +2,23 @@ import 'package:dio/dio.dart';
 import 'dart:async';
 import 'dart:io';
 import '../config/service_url.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
-Future requestPost(url, {formData}) async {
+// Future get() async {
+//   var token;
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   token = prefs.getString(token);
+//   return token;
+// }
+
+Future requestPost(url, {token, formData}) async {
   try {
     print('开始获取数据...........');
     Response response;
     Dio dio = new Dio();
     dio.options.contentType = ContentType.parse("application/json");
+    
+    dio.options.headers['token'] = token;
     if(formData == null){
       response = await dio.post(servicePath[url]);
     }else{
