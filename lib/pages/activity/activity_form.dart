@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../provide/activity.dart';
+
 class ActivityForm extends StatefulWidget {
-  ActivityForm({Key key}) : super(key: key);
+  final String id;
+  ActivityForm({Key key, this.id}) : super(key: key);
 
   _ActivityFormState createState() => _ActivityFormState();
 }
@@ -17,6 +20,11 @@ class _ActivityFormState extends State<ActivityForm> {
     this.setState(() {
       value = v;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -68,7 +76,12 @@ class _ActivityFormState extends State<ActivityForm> {
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: () {
-                      
+                      FormState formState = _formKey.currentState;
+                      if (formState.validate()) {
+                        formState.save();
+                        Provide.value<ActivityProvide>(context).id = widget.id;
+                        Provide.value<ActivityProvide>(context).activityGuest();
+                      }
                     },
                     child: Container(
                       width: ScreenUtil().setWidth(686),
@@ -134,10 +147,9 @@ class _ActivityFormState extends State<ActivityForm> {
                         fontWeight: FontWeight.w300),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    return value.trim().length > 0 ? null : '姓名不能为空';
+                  onSaved: (v) {
+                    Provide.value<ActivityProvide>(context).name = v;
                   },
-                  onSaved: (String value) {},
                 ),
               ),
             )
@@ -177,14 +189,9 @@ class _ActivityFormState extends State<ActivityForm> {
                           fontWeight: FontWeight.w300),
                       border: InputBorder.none,
                     ),
-                    validator: (String value) {
-                      var phoneReg = RegExp(
-                          r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
-                      if (!phoneReg.hasMatch(value)) {
-                        return '请输入正确的手机号';
-                      }
+                    onSaved: (v) {
+                      Provide.value<ActivityProvide>(context).contact = v;
                     },
-                    onSaved: (String value) {},
                   ),
                 ),
               )
@@ -223,8 +230,9 @@ class _ActivityFormState extends State<ActivityForm> {
                           fontWeight: FontWeight.w300),
                       border: InputBorder.none,
                     ),
-                    validator: (String value) {},
-                    onSaved: (String value) {},
+                    onSaved: (v) {
+                      Provide.value<ActivityProvide>(context).companyName = v;
+                    },
                   ),
                 ),
               )
@@ -259,8 +267,9 @@ class _ActivityFormState extends State<ActivityForm> {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                     ),
-                    validator: (String value) {},
-                    onSaved: (String value) {},
+                    onSaved: (v) {
+                      Provide.value<ActivityProvide>(context).note = v;
+                    },
                   ),
                 ),
               )
