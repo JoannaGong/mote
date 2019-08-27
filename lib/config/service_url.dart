@@ -7,5 +7,6 @@ const servicePath = {
   'getActivityList':'${serviceUrl}activityController/activity',  //活动列表
   'getPhoneValid': '${serviceUrl}sendMessageController/sendMessage',  // 发送手机短信验证码
   'loginForPhone': '${serviceUrl}loginController/loginForPhone',   // 用手机登录
-  'getUserInfo': '${serviceUrl}loginController/getUserInfo'  // 获取用户信息
+  'getUserInfo': '${serviceUrl}loginController/getUserInfo',  // 获取用户信息
+  'activityGuest': '${serviceUrl}activityGuestController/activityGuest'  // 活动报名成员
 };

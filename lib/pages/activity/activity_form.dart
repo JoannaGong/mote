@@ -2,14 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-GlobalKey _formKey = new GlobalKey<FormState>();
+class ActivityForm extends StatefulWidget {
+  ActivityForm({Key key}) : super(key: key);
 
-class ActivityForm extends StatelessWidget {
-  const ActivityForm({Key key}) : super(key: key);
+  _ActivityFormState createState() => _ActivityFormState();
+}
+
+class _ActivityFormState extends State<ActivityForm> {
+  GlobalKey _formKey = new GlobalKey<FormState>();
+
+  String value = '0';
+
+  void onChange(v) {
+    this.setState(() {
+      value = v;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -32,12 +45,13 @@ class ActivityForm extends StatelessWidget {
             children: <Widget>[
               Form(
                 key: _formKey,
+                autovalidate: false,
                 child: Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Column(
                     children: <Widget>[
                       _nameText(),
-                      Gender(),
+                      // _gender(),
                       _phoneText(),
                       _workText(),
                       _remarksText()
@@ -53,7 +67,9 @@ class ActivityForm extends StatelessWidget {
                   height: ScreenUtil().setHeight(182),
                   alignment: Alignment.center,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      
+                    },
                     child: Container(
                       width: ScreenUtil().setWidth(686),
                       height: ScreenUtil().setHeight(88),
@@ -119,10 +135,7 @@ class ActivityForm extends StatelessWidget {
                     border: InputBorder.none,
                   ),
                   validator: (String value) {
-                    //删除首尾空格
-                    if (value.isEmpty || value.trim().length <= 5) {
-                      return '名称字数必须大于5';
-                    }
+                    return value.trim().length > 0 ? null : '姓名不能为空';
                   },
                   onSaved: (String value) {},
                 ),
@@ -165,9 +178,10 @@ class ActivityForm extends StatelessWidget {
                       border: InputBorder.none,
                     ),
                     validator: (String value) {
-                      //删除首尾空格
-                      if (value.isEmpty || value.trim().length <= 5) {
-                        return '名称字数必须大于5';
+                      var phoneReg = RegExp(
+                          r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
+                      if (!phoneReg.hasMatch(value)) {
+                        return '请输入正确的手机号';
                       }
                     },
                     onSaved: (String value) {},
@@ -209,12 +223,7 @@ class ActivityForm extends StatelessWidget {
                           fontWeight: FontWeight.w300),
                       border: InputBorder.none,
                     ),
-                    validator: (String value) {
-                      //删除首尾空格
-                      if (value.isEmpty || value.trim().length <= 5) {
-                        return '名称字数必须大于5';
-                      }
-                    },
+                    validator: (String value) {},
                     onSaved: (String value) {},
                   ),
                 ),
@@ -250,12 +259,7 @@ class ActivityForm extends StatelessWidget {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                     ),
-                    validator: (String value) {
-                      //删除首尾空格
-                      if (value.isEmpty || value.trim().length <= 5) {
-                        return '名称字数必须大于5';
-                      }
-                    },
+                    validator: (String value) {},
                     onSaved: (String value) {},
                   ),
                 ),
@@ -264,25 +268,8 @@ class ActivityForm extends StatelessWidget {
           ),
         ));
   }
-}
 
-class Gender extends StatefulWidget {
-  Gender({Key key}) : super(key: key);
-
-  _GenderState createState() => _GenderState();
-}
-
-class _GenderState extends State<Gender> {
-  String value = '';
-
-  void onChange(v) {
-    this.setState(() {
-      value = v;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _gender() {
     return Container(
       color: Colors.white,
       padding: EdgeInsets.only(left: 10),

@@ -11,6 +11,11 @@ class ActivityProvide with ChangeNotifier {
   List<ActivityList> list = [];
   int pageNum = 1;
 
+  String name = '';
+  String contact = '';
+  String companyName = '';
+  String note = '';
+
   //获取活动列表
   getActivityList(bool type) async {
     var formData = {'pageNum': pageNum};
@@ -40,7 +45,7 @@ class ActivityProvide with ChangeNotifier {
 
   //活动详情
   getActivityDetail(String id) async {
-    await requestGetDetail('getActivityList',id: id).then((val) {
+    await requestGetDetail('getActivityList', id: id).then((val) {
       activityDetaildata = ActivityDetailModel.fromJson(val);
       notifyListeners();
     });
