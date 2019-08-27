@@ -24,12 +24,12 @@ Handler activityPageHandler =
 
 Handler activityDetailPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  String activityId = params['id'].first;    
+  String activityId = params['id'].first;
   return ActivityDetailPage(id: activityId);
 });
 
 Handler activityFormPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  return ActivityForm();
+  String activityId = params['id'].first;
+  return ActivityForm(id: activityId);
 });
-

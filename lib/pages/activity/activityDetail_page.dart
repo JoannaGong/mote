@@ -53,7 +53,7 @@ class ActivityDetailPage extends StatelessWidget {
                           bottom: 20,
                           child: GestureDetector(
                             onTap: (){
-                              Application.router.navigateTo(context, '/activityForm',transition: TransitionType.inFromRight);
+                              Application.router.navigateTo(context, '/activityForm?id=$id',transition: TransitionType.inFromRight);
                             },
                             child: Container(
                               width: ScreenUtil().setWidth(686),
