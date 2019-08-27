@@ -3,6 +3,7 @@ import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../provide/activity.dart';
+import '../../provide/main.dart';
 
 class ActivityForm extends StatefulWidget {
   final String id;
@@ -80,7 +81,7 @@ class _ActivityFormState extends State<ActivityForm> {
                       if (formState.validate()) {
                         formState.save();
                         Provide.value<ActivityProvide>(context).id = widget.id;
-                        Provide.value<ActivityProvide>(context).activityGuest();
+                        Provide.value<ActivityProvide>(context).activityGuest(Provide.value<MainProvide>(context).token);
                       }
                     },
                     child: Container(

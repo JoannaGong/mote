@@ -46,7 +46,7 @@ class ActivityProvide with ChangeNotifier {
   }
 
   //报名
-  activityGuest() async {
+  activityGuest(String token) async {
     var formData = {
       'activityId': id,
       'name': name,
@@ -64,11 +64,11 @@ class ActivityProvide with ChangeNotifier {
       toast('请输入正确手机号码');
       return;
     }
-    //  await requestPost('activityGuest', formData: formData).then((val) {
-    //   // activityDetaildata = ActivityDetailModel.fromJson(val);
-    //   print(val);
-    //   notifyListeners();
-    // });
+     await requestPost('activityGuest', formData: formData,token: token).then((val) {
+      // activityDetaildata = ActivityDetailModel.fromJson(val);
+      print(val);
+      notifyListeners();
+    });
   }
 
   toast(String toast) {

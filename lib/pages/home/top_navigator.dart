@@ -5,6 +5,7 @@ import 'package:provide/provide.dart';
 import '../../routers/application.dart';
 
 import '../../provide/home.dart';
+import '../../provide/main.dart';
 
 
 //顶部导航栏
@@ -37,6 +38,11 @@ class TopNavigator extends StatelessWidget {
   Widget _gridViewItemUI(BuildContext context, item) {
     return GestureDetector(
       onTap: () {
+        // if(Provide.value<MainProvide>(context).token != ''){
+        //   Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
+        // }else{
+        //   Application.router.navigateTo(context, "/login");
+        // }
         Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
       },
       child: Column(

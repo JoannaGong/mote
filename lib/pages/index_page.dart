@@ -6,6 +6,7 @@ import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../provide/current_index.dart';
+import '../provide/main.dart';
 
 import './home/home_page.dart';
 import './model/model_page.dart';
@@ -93,6 +94,7 @@ class IndexPage extends StatelessWidget {
               );
             }else{
               Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+              Provide.value<MainProvide>(context).token = token; // 保存token
             }
           });
         }

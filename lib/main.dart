@@ -5,6 +5,7 @@ import './routers/routes.dart';
 import './routers/application.dart';
 import 'package:provide/provide.dart';
 import './provide/current_index.dart';
+import './provide/main.dart';
 import './provide/home.dart';
 import './provide/model.dart';
 import './provide/login.dart';
@@ -13,11 +14,13 @@ import './provide/activity.dart';
 void main() {
   var providers = Providers();
   var currentIndexProvide = CurrentIndexProvide();
+  var mainProvide = MainProvide();
   var homeProvide = HomeProvide();
   var modelProvide = ModelProvide();
   var loginProvide = LoginProvide();
   var activityProvide = ActivityProvide();
 
+  providers..provide(Provider<MainProvide>.value(mainProvide));
   providers..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide));
   providers..provide(Provider<HomeProvide>.value(homeProvide));
   providers..provide(Provider<ModelProvide>.value(modelProvide));

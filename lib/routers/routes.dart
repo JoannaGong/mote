@@ -9,6 +9,7 @@ class Routes {
   static String activity = '/activity'; //活动报名页
   static String activityDetail = '/activityDetail'; //活动报名详情页
   static String activityForm = '/activityForm'; //报名活动信息页
+  static String login = '/login'; //登录注册页
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -21,5 +22,6 @@ class Routes {
     router.define(activity,handler: activityPageHandler);
     router.define(activityDetail,handler: activityDetailPageHandler);
     router.define(activityForm,handler: activityFormPageHandler);
+    router.define(login,handler: loginPageHandler);
   }
 }
