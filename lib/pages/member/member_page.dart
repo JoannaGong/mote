@@ -50,7 +50,8 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                   child: 
                   ListView(children: <Widget>[
                     ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),
+                      // constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),
+                      constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(396)),  // 无身份
                       child: Stack(
                         fit: StackFit.expand,
                         alignment: AlignmentDirectional.center,
@@ -60,7 +61,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                             top: 0,
                             child:UserInfo(),     // 用户信息
                           ),
-                          AnnounceManage(),  // 通告管理
+                          // AnnounceManage(),  // 通告管理
                       ])),
                     NoIdentify(),  // 无身份 认证信息
                     // MyMoney(),  //  模特 - 我的钱包、收藏、主页、佣金管理
