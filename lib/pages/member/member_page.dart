@@ -52,7 +52,9 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                   ])
                 // )
               );
-            }  
+            }else{
+              return Container();
+            }
           }
         ) 
       )
