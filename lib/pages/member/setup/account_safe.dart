@@ -43,7 +43,7 @@ class AccountSafe extends StatelessWidget {
                 color: Colors.grey,
                 size: ScreenUtil().setSp(44),
               )
-          ])
+          ]))
         )
       ]))
     );
