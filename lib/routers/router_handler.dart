@@ -12,6 +12,7 @@ import '../pages/member/setup/set_user_info.dart';
 import '../pages/member/setup/about_us.dart';
 import '../pages/member/setup/contact_us.dart';
 import '../pages/member/setup/account_safe.dart';
+import '../pages/member/setup/bind_telephone.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -75,4 +76,9 @@ Handler contactUsHandler =
 Handler accountSafeHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return AccountSafe();
+});
+
+Handler bindTelephoneHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return BindTelephone();
 });

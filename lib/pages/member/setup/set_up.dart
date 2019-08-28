@@ -66,6 +66,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               Application.router.navigateTo(context, "/aboutUs", transition: TransitionType.inFromRight);
             },
@@ -86,6 +87,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               Application.router.navigateTo(context, "/contactUs", transition: TransitionType.inFromRight);
             },
@@ -106,6 +108,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               Application.router.navigateTo(context, "/accountSafe", transition: TransitionType.inFromRight);
             },
@@ -126,6 +129,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         margin: EdgeInsets.only(top: ScreenUtil().setHeight(120)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               print('hhh');
             },

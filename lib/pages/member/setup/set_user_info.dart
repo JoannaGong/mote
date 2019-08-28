@@ -63,6 +63,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
       color: Color(0xFFFFFFFF),
       padding: EdgeInsets.all(ScreenUtil().setWidth(32)),
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () {
           Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
         },
@@ -97,6 +98,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
         margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               print('hhh');
             },
@@ -119,6 +121,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               print('hhh');
             },
@@ -141,6 +144,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
         child: Column(children: <Widget>[
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               print('hhh');
             },
