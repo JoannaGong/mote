@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
+import 'package:mote/pages/common/toast.dart';
 import '../../provide/login.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
@@ -8,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../member/member_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../pages/home/home_page.dart';
+import '../common/toast.dart';
 
 Dio dio = new Dio();
 
@@ -28,15 +30,20 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString(token, Provide.value<LoginProvide>(context).token);
     }
-    // onPressed() {
-    //   Navigator.pop(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => HomePage()),
-    //   );
-    // }
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
+      appBar: AppBar(
+        // leading: Builder(builder: (BuildContext context){
+        //   return IconButton(
+        //     icon: Icon(Icons.arrow_back_ios),
+        //     onPressed: (){
+        //       Navigator.push(
+        //         context, MaterialPageRoute(builder: (context) => HomePage())
+        //       );
+        //     },
+        //   );
+        // }),
+        backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -71,11 +78,6 @@ class _LoginPageState extends State<LoginPage> {
                 width: ScreenUtil().setWidth(400),
                 child: TextFormField(
                   onSaved: (String value) => validate = value,
-                  // validator: (String value) {
-                  //   if (value.isEmpty) {
-                  //     return '请输入验证码';
-                  //   }
-                  // },
                   decoration: InputDecoration(
                     labelText: '请输入验证码',
                     labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32.0),color: Color(0xFF999999))
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     save();
-
+                    // 链式请求
                     Future(() =>
                       Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
                     ).then((val){
@@ -119,17 +121,18 @@ class _LoginPageState extends State<LoginPage> {
                       if(token != null){
                         save();
                         print('token2---$token');
-                        Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+                        // Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
                         Navigator.pop(
                           context, MaterialPageRoute(builder: (context) => MemberPage())
                         );
                       }
-                    }).whenComplete(() => 
-                      Fluttertoast.showToast(
-                        msg: '登录成功',
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIos: 1
-                      )
+                    }).then((val){
+                      Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+                        // Navigator.pop(
+                        //   context, MaterialPageRoute(builder: (context) => MemberPage())
+                        // );
+                      }).whenComplete(() => 
+                      showToast('登录成功')
                     );
                   }
                 },
