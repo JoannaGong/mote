@@ -123,15 +123,15 @@ class RecommendShoot extends StatelessWidget {
             Container(
                 margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(5)),
                 padding: EdgeInsets.fromLTRB(
-                    ScreenUtil().setWidth(8),
-                    ScreenUtil().setHeight(8),
-                    ScreenUtil().setWidth(8),
-                    ScreenUtil().setHeight(8)),
+                    ScreenUtil().setWidth(10),
+                    ScreenUtil().setHeight(10),
+                    ScreenUtil().setWidth(10),
+                    ScreenUtil().setHeight(10)),
                 decoration: BoxDecoration(
                     border: Border.all(width: 1, color: Color(0xFFFF7E80)),
                     borderRadius: BorderRadius.circular(100)),
                 child: CircleAvatar(
-                  radius: ScreenUtil().setWidth(45),
+                  radius: ScreenUtil().setWidth(40),
                   backgroundImage: NetworkImage(data.headUrl),
                   backgroundColor: Colors.white,
                 )),

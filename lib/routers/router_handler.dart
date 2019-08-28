@@ -8,6 +8,7 @@ import '../pages/activity/activity_form.dart';
 import '../pages/activity/activity_pay.dart';
 import '../pages/login/login_page.dart';
 import '../pages/member/setup/set_up.dart';
+import '../pages/shootSite/shoot_site.dart';
 import '../pages/member/setup/set_user_info.dart';
 import '../pages/member/setup/about_us.dart';
 import '../pages/member/setup/contact_us.dart';
@@ -56,6 +57,11 @@ Handler loginPageHandler =
 Handler setupHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return SetUp();
+});
+
+Handler shootSitePageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ShootSitePage();
 });
 
 Handler setUserInfoHandler =

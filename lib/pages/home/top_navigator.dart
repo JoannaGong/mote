@@ -43,7 +43,7 @@ class TopNavigator extends StatelessWidget {
         // }else{
         //   Application.router.navigateTo(context, "/login");
         // }
-        Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
+        Application.router.navigateTo(context, "/shootSite", transition: TransitionType.inFromRight);
       },
       child: Column(
         children: <Widget>[
