@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading/loading.dart';
 
 import '../../provide/activity.dart';
-import '../../provide/main.dart';
+import '../../provide/login.dart';
 
 class ActivityForm extends StatefulWidget {
   final String id;
@@ -52,6 +54,7 @@ class _ActivityFormState extends State<ActivityForm> {
           color: Color(0xFFF5F5F5),
           child: Stack(
             children: <Widget>[
+              Loading(indicator: BallPulseIndicator(), size: 100.0),
               Form(
                 key: _formKey,
                 autovalidate: false,
@@ -81,7 +84,7 @@ class _ActivityFormState extends State<ActivityForm> {
                       if (formState.validate()) {
                         formState.save();
                         Provide.value<ActivityProvide>(context).id = widget.id;
-                        Provide.value<ActivityProvide>(context).activityGuest(Provide.value<MainProvide>(context).token);
+                        Provide.value<ActivityProvide>(context).activityGuest(Provide.value<LoginProvide>(context).token);
                       }
                     },
                     child: Container(
