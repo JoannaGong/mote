@@ -12,6 +12,7 @@ class Routes {
   static String activityPay = '/activityPay'; //报名活动支付页
   static String login = '/login'; //登录注册页
   static String setup = '/setup';  // 设置个人信息
+  static String shootSite = '/shootSite';  // 设置个人信息
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -27,5 +28,6 @@ class Routes {
     router.define(activityPay,handler: activityPayPageHandler);
     router.define(login,handler: loginPageHandler);
     router.define(setup,handler: setupHandler);
+    router.define(shootSite,handler: shootSitePageHandler);
   }
 }

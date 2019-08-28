@@ -8,6 +8,7 @@ import '../pages/activity/activity_form.dart';
 import '../pages/activity/activity_pay.dart';
 import '../pages/login/login_page.dart';
 import '../pages/member/setup/set_up.dart';
+import '../pages/shootSite/shoot_site.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -51,4 +52,9 @@ Handler loginPageHandler =
 Handler setupHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return SetUp();
+});
+
+Handler shootSitePageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ShootSitePage();
 });
