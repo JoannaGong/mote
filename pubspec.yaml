@@ -34,6 +34,7 @@ dependencies:
   shared_preferences: ^0.5.3+4 #持久化
   fluttertoast: ^3.1.0 #toast
   flutter_html: ^0.10.4 #转HTML
+  loading: ^1.0.1
 
 dev_dependencies:
   flutter_test:

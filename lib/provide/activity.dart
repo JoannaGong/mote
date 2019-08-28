@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../service/service_method.dart';
 import '../model_data/activity/activity_data.dart';
 import '../model_data/activity/activityDetail_data.dart';
+import '../pages/common/toast.dart';
 
 class ActivityProvide with ChangeNotifier {
   ActivityModel activitydata;
@@ -11,7 +11,7 @@ class ActivityProvide with ChangeNotifier {
   List<ActivityList> list = [];
   int pageNum = 1;
 
-  String id= '';
+  String id = '';
   String name = '';
   String contact = '';
   String companyName = '';
@@ -27,7 +27,7 @@ class ActivityProvide with ChangeNotifier {
           list.addAll(activitydata.data.pageInfo.list);
           pageNum++;
         } else {
-          toast('无更多数据');    
+          showToast('无更多数据');
         }
       } else {
         list = activitydata.data.pageInfo.list;
@@ -47,6 +47,7 @@ class ActivityProvide with ChangeNotifier {
 
   //报名
   activityGuest(String token) async {
+    print(token);
     var formData = {
       'activityId': id,
       'name': name,
@@ -55,30 +56,20 @@ class ActivityProvide with ChangeNotifier {
       'note': note
     };
     if (name == '') {
-      toast('姓名不能为空');
+      showToast('姓名不能为空');
       return;
     }
     var phoneReg = RegExp(
         r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
     if (!phoneReg.hasMatch(contact)) {
-      toast('请输入正确手机号码');
+      showToast('请输入正确手机号码');
       return;
     }
-     await requestPost('activityGuest', formData: formData,token: token).then((val) {
+    await requestPost('activityGuest', formData: formData, token: token)
+        .then((val) {
       // activityDetaildata = ActivityDetailModel.fromJson(val);
       print(val);
       notifyListeners();
     });
-  }
-
-  toast(String toast) {
-    Fluttertoast.showToast(
-        msg: toast,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 14.0);
   }
 }
