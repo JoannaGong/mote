@@ -13,6 +13,10 @@ class Routes {
   static String login = '/login'; //登录注册页
   static String setup = '/setup';  // 设置个人信息
   static String shootSite = '/shootSite';  // 设置个人信息
+  static String setUserInfo = '/setUserInfo';  // 编辑个人信息
+  static String aboutUs = '/aboutUs';  // 设置 - 关于我们
+  static String contactUs = '/contactUs';  // 设置 - 联系我们
+  static String accountSafe = '/accountSafe';  // 设置 - 账户安全
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -29,5 +33,9 @@ class Routes {
     router.define(login,handler: loginPageHandler);
     router.define(setup,handler: setupHandler);
     router.define(shootSite,handler: shootSitePageHandler);
+    router.define(setUserInfo,handler: setUserInfoHandler);
+    router.define(aboutUs,handler: aboutUsHandler);
+    router.define(contactUs,handler: contactUsHandler);
+    router.define(accountSafe,handler: accountSafeHandler);
   }
 }

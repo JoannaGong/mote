@@ -9,6 +9,10 @@ import '../pages/activity/activity_pay.dart';
 import '../pages/login/login_page.dart';
 import '../pages/member/setup/set_up.dart';
 import '../pages/shootSite/shoot_site.dart';
+import '../pages/member/setup/set_user_info.dart';
+import '../pages/member/setup/about_us.dart';
+import '../pages/member/setup/contact_us.dart';
+import '../pages/member/setup/account_safe.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -57,4 +61,24 @@ Handler setupHandler =
 Handler shootSitePageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return ShootSitePage();
+});
+
+Handler setUserInfoHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return SetUserInfo();
+});
+
+Handler aboutUsHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return AboutUs();
+});
+
+Handler contactUsHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ContactUs();
+});
+
+Handler accountSafeHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return AccountSafe();
 });

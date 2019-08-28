@@ -8,11 +8,28 @@ import '../../../routers/application.dart';
 import '../../../provide/login.dart';
 import '../setup/set_up.dart';
 
+var userInfo;
+var identity;
+
 class UserInfo extends StatelessWidget {
+
   const UserInfo({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // var userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
+      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+      if(userInfo.roleName == 0){
+        identity = '未认证用户';
+      }else if(userInfo.roleName == 1){
+        identity = '模特';
+      }else if(userInfo.roleName == 2){
+        identity = '经纪公司';
+      }else if(userInfo.roleName == 3){
+        identity = '商户';
+      }else if(userInfo.roleName == 4){
+        identity = '其他职业(摄影师化妆师等)';
+      }
+    }
     return Container(
         height: ScreenUtil().setHeight(460),
         width: ScreenUtil().setWidth(750),
@@ -27,26 +44,32 @@ class UserInfo extends StatelessWidget {
                 Application.router.navigateTo(context, "/setup", transition: TransitionType.inFromRight);
               },
           )),
-          Row(children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: ScreenUtil().setHeight(32)),
-              child: Container(
-                width: ScreenUtil().setWidth(104),
-                height: ScreenUtil().setWidth(104),
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/images/2.png'), fit: BoxFit.cover),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: ScreenUtil().setWidth(3))
-                ),
-              )
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-              Container(margin: EdgeInsets.only(bottom: 8), child: Text('金闪闪', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(36)))),
-              Container(child: Text('模特     ID: 87789909', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(28))))
-            ])
-          ]),
+          GestureDetector(
+            onTap: (){
+              Application.router.navigateTo(context, "/setUserInfo", transition: TransitionType.inFromRight);
+            },
+            child:Row(children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: ScreenUtil().setHeight(32)),
+                child: Container(
+                  width: ScreenUtil().setWidth(104),
+                  height: ScreenUtil().setWidth(104),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage('${userInfo.headUrl}'), fit: BoxFit.cover),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: ScreenUtil().setWidth(3))
+                  ),
+                )
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                Container(margin: EdgeInsets.only(bottom: 8), child: Text('${userInfo.name}', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(36)))),
+                Container(child: Text('$identity', style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(28))))
+              ])
+            ]), 
+          )
+          
         ])
       );
   }
