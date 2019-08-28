@@ -18,7 +18,7 @@ class NoIdentify extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(15)),
           margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(20)),
           child: Column(children: <Widget>[
-            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证商家', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white)))),
+            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证商家', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white)))),
             Expanded(child: Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
@@ -36,7 +36,7 @@ class NoIdentify extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(15)),
           margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(20)),
           child: Column(children: <Widget>[
-            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证艺人', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white)))),
+            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证艺人', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white)))),
             Expanded(child: Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
@@ -49,12 +49,12 @@ class NoIdentify extends StatelessWidget {
           width: ScreenUtil().setWidth(694),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(12))),
-            gradient: LinearGradient(colors: [Color(0xFFDA83E9), Color(0xFF6B5BFE)], begin: FractionalOffset(0, 0), end: FractionalOffset(1, 1))
+            gradient: LinearGradient(colors: [Color(0xFF6B5BFE), Color(0xFFDA83E9)], begin: FractionalOffset(0, 0), end: FractionalOffset(1, 1))
           ),
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(15)),
           margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(20)),
           child: Column(children: <Widget>[
-            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证经纪', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white)))),
+            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证经纪', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white)))),
             Expanded(child: Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
@@ -72,7 +72,7 @@ class NoIdentify extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(15)),
           margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(20)),
           child: Column(children: <Widget>[
-            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证其他职业', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white)))),
+            Expanded(child: Container(alignment: Alignment.centerLeft, child: Text('认证其他职业', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white)))),
             Expanded(child: Container(
               alignment: Alignment.centerLeft,
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
+import 'package:fluro/fluro.dart';
 
+import '../../../routers/application.dart';
 import '../../../provide/login.dart';
+import '../setup/set_up.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({Key key}) : super(key: key);
@@ -20,7 +23,9 @@ class UserInfo extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(674), 20, 0, 0),
             child: IconButton(
               icon: Image.asset('assets/images/settings.png'),
-              onPressed: (){},
+              onPressed: (){
+                Application.router.navigateTo(context, "/setup", transition: TransitionType.inFromRight);
+              },
           )),
           Row(children: <Widget>[
             Container(

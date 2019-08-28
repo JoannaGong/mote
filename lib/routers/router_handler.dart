@@ -6,6 +6,7 @@ import '../pages/activity/activity_page.dart';
 import '../pages/activity/activityDetail_page.dart';
 import '../pages/activity/activity_form.dart';
 import '../pages/login/login_page.dart';
+import '../pages/member/setup/set_up.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -38,4 +39,9 @@ Handler activityFormPageHandler =
 Handler loginPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return LoginPage();
+});
+
+Handler setupHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return SetUp();
 });

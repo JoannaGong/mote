@@ -50,7 +50,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                   child: 
                   ListView(children: <Widget>[
                     ConstrainedBox(
-                      // constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),
+                      // constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),  // 模特、商户
                       constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(396)),  // 无身份
                       child: Stack(
                         fit: StackFit.expand,
