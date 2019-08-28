@@ -5,6 +5,7 @@ import '../pages/model/model_detail.dart';
 import '../pages/activity/activity_page.dart';
 import '../pages/activity/activityDetail_page.dart';
 import '../pages/activity/activity_form.dart';
+import '../pages/activity/activity_pay.dart';
 import '../pages/login/login_page.dart';
 import '../pages/member/setup/set_up.dart';
 import '../pages/member/setup/set_user_info.dart';
@@ -38,6 +39,12 @@ Handler activityFormPageHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   String activityId = params['id'].first;
   return ActivityForm(id: activityId);
+});
+
+Handler activityPayPageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  String activityId = params['id'].first;
+  return ActivityPayPage(id: activityId);
 });
 
 Handler loginPageHandler =
