@@ -37,15 +37,16 @@ class ActivityPage extends StatelessWidget {
         backgroundColor: Color(0xFFF5F5F5),
         elevation: 0,
         brightness: Brightness.light,
-        leading: IconButton(
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: Color(0xFF333333),
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.keyboard_arrow_left,
+            color: Color(0xFF333333),
+            size: 30,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           '活动报名',
           style: TextStyle(

@@ -40,15 +40,16 @@ class _ActivityFormState extends State<ActivityForm> {
         title: Text('填写信息',
             style: TextStyle(
                 color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34))),
-        leading: IconButton(
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: Color(0xFF333333),
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
+        leading: GestureDetector(
+          child: Icon(
+            Icons.keyboard_arrow_left,
+            color: Color(0xFF333333),
+            size: 30,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Container(
           color: Color(0xFFF5F5F5),
@@ -84,7 +85,9 @@ class _ActivityFormState extends State<ActivityForm> {
                       if (formState.validate()) {
                         formState.save();
                         Provide.value<ActivityProvide>(context).id = widget.id;
-                        Provide.value<ActivityProvide>(context).activityGuest(Provide.value<LoginProvide>(context).token);
+                        Provide.value<ActivityProvide>(context).activityGuest(
+                            context,
+                            Provide.value<LoginProvide>(context).token);
                       }
                     },
                     child: Container(
@@ -123,10 +126,10 @@ class _ActivityFormState extends State<ActivityForm> {
 
   Widget _nameText() {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 15),
       color: Colors.white,
       child: Container(
-        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+        padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
@@ -140,7 +143,7 @@ class _ActivityFormState extends State<ActivityForm> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(right: 10),
+                padding: EdgeInsets.only(right: 15),
                 child: TextFormField(
                   maxLines: 1,
                   textAlign: TextAlign.end,
@@ -165,10 +168,10 @@ class _ActivityFormState extends State<ActivityForm> {
 
   Widget _phoneText() {
     return Container(
-        padding: EdgeInsets.only(left: 10),
+        padding: EdgeInsets.only(left: 15),
         color: Colors.white,
         child: Container(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+          padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
           decoration: BoxDecoration(
               border: Border(
                   bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
@@ -182,7 +185,7 @@ class _ActivityFormState extends State<ActivityForm> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: EdgeInsets.only(right: 15),
                   child: TextFormField(
                     maxLines: 1,
                     textAlign: TextAlign.end,
@@ -206,10 +209,10 @@ class _ActivityFormState extends State<ActivityForm> {
 
   Widget _workText() {
     return Container(
-        padding: EdgeInsets.only(left: 10),
+        padding: EdgeInsets.only(left: 15),
         color: Colors.white,
         child: Container(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+          padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
           decoration: BoxDecoration(
               border: Border(
                   bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
@@ -223,7 +226,7 @@ class _ActivityFormState extends State<ActivityForm> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: EdgeInsets.only(right: 15),
                   child: TextFormField(
                     maxLines: 1,
                     textAlign: TextAlign.end,
@@ -247,10 +250,10 @@ class _ActivityFormState extends State<ActivityForm> {
 
   Widget _remarksText() {
     return Container(
-        padding: EdgeInsets.only(left: 10),
+        padding: EdgeInsets.only(left: 15),
         color: Colors.white,
         child: Container(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+          padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
           decoration: BoxDecoration(
               border: Border(
                   bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
@@ -264,7 +267,7 @@ class _ActivityFormState extends State<ActivityForm> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: EdgeInsets.only(right: 15),
                   child: TextFormField(
                     maxLines: 1,
                     textAlign: TextAlign.end,
@@ -282,54 +285,54 @@ class _ActivityFormState extends State<ActivityForm> {
         ));
   }
 
-  Widget _gender() {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(left: 10),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                '性别',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(30),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.only(right: 10),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: RadioListTile(
-                        activeColor: Color(0xFFFF5658),
-                        title: Text('女'),
-                        value: '1',
-                        groupValue: this.value,
-                        onChanged: onChange,
-                      ),
-                    ),
-                    Expanded(
-                      child: RadioListTile(
-                        activeColor: Color(0xFFFF5658),
-                        title: Text('男'),
-                        value: '0',
-                        groupValue: this.value,
-                        onChanged: onChange,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _gender() {
+  //   return Container(
+  //     color: Colors.white,
+  //     padding: EdgeInsets.only(left: 15),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //           border: Border(
+  //               bottom: BorderSide(width: 0.5, color: Color(0xFFE2E2E2)))),
+  //       child: Row(
+  //         children: <Widget>[
+  //           Expanded(
+  //             child: Text(
+  //               '性别',
+  //               style: TextStyle(
+  //                 fontSize: ScreenUtil().setSp(30),
+  //               ),
+  //             ),
+  //           ),
+  //           Expanded(
+  //             child: Container(
+  //               padding: EdgeInsets.only(right: 15),
+  //               child: Row(
+  //                 children: <Widget>[
+  //                   Expanded(
+  //                     child: RadioListTile(
+  //                       activeColor: Color(0xFFFF5658),
+  //                       title: Text('女'),
+  //                       value: '1',
+  //                       groupValue: this.value,
+  //                       onChanged: onChange,
+  //                     ),
+  //                   ),
+  //                   Expanded(
+  //                     child: RadioListTile(
+  //                       activeColor: Color(0xFFFF5658),
+  //                       title: Text('男'),
+  //                       value: '0',
+  //                       groupValue: this.value,
+  //                       onChanged: onChange,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
