@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../member/member_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../pages/home/home_page.dart';
 
 Dio dio = new Dio();
 
@@ -27,9 +28,15 @@ class _LoginPageState extends State<LoginPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString(token, Provide.value<LoginProvide>(context).token);
     }
+    // onPressed() {
+    //   Navigator.pop(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => HomePage()),
+    //   );
+    // }
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
-      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
+      appBar: AppBar(backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
       body: Form(
         key: _formKey,
         child: ListView(

@@ -8,15 +8,14 @@ import 'package:provide/provide.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 
-
 import '../../../routers/application.dart';
 
-class SetUp extends StatefulWidget {
+class SetUserInfo extends StatefulWidget {
   @override
-  _SetUpState createState() => _SetUpState();
+  _SetUserInfoState createState() => _SetUserInfoState();
 }
 
-class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
+class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -30,7 +29,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
-      appBar: AppBar(title: Text('设置', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
+      appBar: AppBar(title: Text('个人信息', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
       body: Container(
         child: FutureBuilder(
           future: _setupInfo(context),
@@ -44,7 +43,8 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
                   },
                   child: 
                   ListView(children: <Widget>[
-                    aboutUs(),    // 关于我们 联系我们
+                    setAvatar(),   // 头像
+                    setUserInfo(),  // 昵称、性别、地区
                   ])
                 )
               );
@@ -57,8 +57,39 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  // 关于我们 联系我们
-  Column aboutUs(){
+  // 头像
+  Container setAvatar(){
+    return Container(
+      color: Color(0xFFFFFFFF),
+      padding: EdgeInsets.all(ScreenUtil().setWidth(32)),
+      child: GestureDetector(
+        onTap: () {
+          Application.router.navigateTo(context, "/activity", transition: TransitionType.inFromRight);
+        },
+        child: Row(children: <Widget>[
+          Text('头像', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
+          Expanded(child: Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+              width: ScreenUtil().setWidth(100),
+              height: ScreenUtil().setWidth(100),
+              margin: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/images/2.png'), fit: BoxFit.cover),
+                shape: BoxShape.circle,
+              )
+          ))),
+          Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.grey,
+            size: ScreenUtil().setSp(44),
+          )
+      ])),
+    );
+  }
+
+  // 昵称、性别、地区
+  Column setUserInfo(){
     return Column(children: <Widget>[
       Container(
         color: Color(0xFFFFFFFF),
@@ -67,17 +98,19 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         child: Column(children: <Widget>[
           GestureDetector(
             onTap: () {
-              Application.router.navigateTo(context, "/aboutUs", transition: TransitionType.inFromRight);
+              print('hhh');
             },
             child: Row(children: <Widget>[
-              Text('关于我们', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
-              Expanded(child:Align(
+              Text('昵称', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
+              Expanded(child: Align(
                 alignment: Alignment.centerRight,
-                child: Icon(
+                child: Text('胡萝卜', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+              )),
+              Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.grey,
                 size: ScreenUtil().setSp(44),
-              )))
+              )
           ]))
       ])),
       line(),
@@ -87,52 +120,43 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
         child: Column(children: <Widget>[
           GestureDetector(
             onTap: () {
-              Application.router.navigateTo(context, "/contactUs", transition: TransitionType.inFromRight);
+              print('hhh');
             },
             child: Row(children: <Widget>[
-              Text('联系我们', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
-              Expanded(child:Align(
+              Text('性别', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
+              Expanded(child: Align(
                 alignment: Alignment.centerRight,
-                child: Icon(
+                child: Text('女', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+              )),
+              Icon(
                 Icons.keyboard_arrow_right,
                 color: Colors.grey,
                 size: ScreenUtil().setSp(44),
-              )))
+              )
           ]))
       ])),
+      line(),
       Container(
         color: Color(0xFFFFFFFF),
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
-        margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
-        child: Column(children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Application.router.navigateTo(context, "/accountSafe", transition: TransitionType.inFromRight);
-            },
-            child: Row(children: <Widget>[
-              Text('账户安全', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
-              Expanded(child:Align(
-                alignment: Alignment.centerRight,
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  color: Colors.grey,
-                  size: ScreenUtil().setSp(44),
-              )))
-          ]))
-      ])),
-      Container(
-        color: Color(0xFFFFFFFF),
-        padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
-        margin: EdgeInsets.only(top: ScreenUtil().setHeight(120)),
         child: Column(children: <Widget>[
           GestureDetector(
             onTap: () {
               print('hhh');
             },
-            child: Center(
-              child: Text('退出登录', style: TextStyle(fontSize: ScreenUtil().setSp(32)))
-          ))
-      ]))
+            child: Row(children: <Widget>[
+              Text('地区', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
+              Expanded(child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('新加坡', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+              )),
+              Icon(
+                Icons.keyboard_arrow_right,
+                color: Colors.grey,
+                size: ScreenUtil().setSp(44),
+              )
+          ]))
+      ])),
     ]);
   }
 
