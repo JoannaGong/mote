@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import '../service/service_method.dart';
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../service/service_method.dart';
 import '../model_data/login/login_in.dart';
 import '../model_data/login/user_info.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../pages/common/toast.dart';
+
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData = null;
@@ -19,9 +21,9 @@ class LoginProvide with ChangeNotifier {
     await requestGet('getPhoneValid', formData: formData).then((val) {
       // print(val);
       if(val['code'] == 101){
-        toast('验证码发送成功');
+        showToast('验证码发送成功');
       }else{
-        toast(val['data']['error']);
+        showToast(val['data']['error']);
       }
       notifyListeners();
     });
@@ -39,7 +41,7 @@ class LoginProvide with ChangeNotifier {
       if(val['code'] == 101){
         token = val['data']['token'];
       }else{
-        toast(val['data']['msg']);
+        showToast(val['data']['msg']);
       }
       notifyListeners();
     });
@@ -52,17 +54,5 @@ class LoginProvide with ChangeNotifier {
       print(val);
       notifyListeners();
     });
-  }
-
-  toast(String toast) {
-    Fluttertoast.showToast(
-      msg: toast,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIos: 1,
-      backgroundColor: Colors.black,
-      textColor: Colors.white,
-      fontSize: 14.0
-    );
   }
 }

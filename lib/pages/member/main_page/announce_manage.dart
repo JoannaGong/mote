@@ -22,6 +22,25 @@ class AnnounceManage extends StatelessWidget {
             Row(                  
               children: <Widget>[
               Text('通告管理', style: TextStyle(fontSize: ScreenUtil().setSp(26), fontWeight: FontWeight.w500)),
+              Expanded(
+                child: Align(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      '全部',
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(24),
+                          color: Color(0xFF999999)),
+                    ),
+                  ),
+                  alignment: Alignment.centerRight,
+                ),
+              ),
+              Icon(
+                Icons.keyboard_arrow_right,
+                color: Colors.grey,
+                size: ScreenUtil().setSp(36),
+              )
             ]),
             Container(
               height: ScreenUtil().setHeight(1),
