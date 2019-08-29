@@ -17,6 +17,9 @@ import './main_page/my_money.dart';
 import './main_page/my_work.dart';
 import './main_page/my_money_merchant.dart';
 import './main_page/no_identify.dart';
+import './main_page/user_info_no_identify.dart';
+
+var userInfo;
 
 class MemberPage extends StatefulWidget {
   const MemberPage({Key key}) : super(key: key);
@@ -62,7 +65,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                             Container(color: Color(0xFFF5F5F5),),
                             Positioned(
                               top: 0,
-                              child:UserInfo(),     // 用户信息
+                              child: UserInfoNoIdentify(),     // 用户信息
                             ),
                         ])),
                       NoIdentify(),  // 无身份 认证信息
