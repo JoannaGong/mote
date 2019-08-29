@@ -8,5 +8,6 @@ const servicePath = {
   'getPhoneValid': '${serviceUrl}sendMessageController/sendMessage',  // 发送手机短信验证码
   'loginForPhone': '${serviceUrl}loginController/loginForPhone',   // 用手机登录
   'getUserInfo': '${serviceUrl}loginController/getUserInfo',  // 获取用户信息
-  'activityGuest': '${serviceUrl}activityGuestController/activityGuest'  // 活动报名成员
+  'activityGuest': '${serviceUrl}activityGuestController/activityGuest',  // 活动报名成员
+  'areaList': '${serviceUrl}areaController/areaForAjax',   // 地区列表
 };

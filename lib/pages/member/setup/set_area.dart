@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
+
+import '../../../provide/login.dart';
+
+var userInfo;
 
 class SetArea extends StatefulWidget {
   @override
@@ -7,12 +12,20 @@ class SetArea extends StatefulWidget {
 }
 
 class _SetAreaState extends State<SetArea> {
-  final TextEditingController _controller = new TextEditingController();
   var area;
+  List<int> items = List.generate(10, (i) => i);
+
+  @override
+  void initState(){
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    area = '新加坡';
+    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
+      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+    }
+    area = '${userInfo.areaId}';
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -40,17 +53,12 @@ class _SetAreaState extends State<SetArea> {
         color: Color(0xFFFFFFFF),
         margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
-        child: TextField(
-          controller: _controller,
-          style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Color(0xFF333333)),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: '$area'
-          ),
-          onChanged: (val){
-            area = val;
-          },
-        ),
+        child: ListView.builder(
+          // itemBuilder: items.length,
+          // itemBuilder: (context, index){
+          //   return ListTile(title: Text("Number $index"));
+          // },
+        )
       ),
     );
   }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
+
+import '../../../provide/login.dart';
+
+var userInfo;
 
 class SetName extends StatefulWidget {
   @override
@@ -12,7 +17,10 @@ class _SetNameState extends State<SetName> {
 
   @override
   Widget build(BuildContext context) {
-    userName = '金闪闪';
+    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
+      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+    }
+    userName = '${userInfo.name}';
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -48,7 +56,9 @@ class _SetNameState extends State<SetName> {
             hintText: '$userName'
           ),
           onChanged: (val){
-            userName = val;
+            setState(() {
+              userName = val;
+            });
           },
         ),
       ),

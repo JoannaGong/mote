@@ -4,11 +4,15 @@ import 'package:async/src/async_memoizer.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:fluro/fluro.dart';
-import 'package:provide/provide.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 
 import '../../../routers/application.dart';
+import '../../../provide/login.dart';
+
+var userInfo;
+var areaList;
+var area;
 
 class SetUserInfo extends StatefulWidget {
   @override
@@ -20,6 +24,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
   bool get wantKeepAlive => true;
 
   final AsyncMemoizer _memoizer = AsyncMemoizer();
+  var sex;
 
   @override
   void initState() {
@@ -27,9 +32,20 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
   }
   @override
   Widget build(BuildContext context) {
+    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
+      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+      if(userInfo.certificationSex == 0){
+        sex = '男';
+      }else if(userInfo.certificationSex == 1){
+        sex = '女';
+      }else if(userInfo.certificationSex == 2 || userInfo.certificationSex == null){
+        sex = '未知';
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
-      appBar: AppBar(title: Text('个人信息', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
+      appBar: AppBar(title: Text('个人信息', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
       body: Container(
         child: FutureBuilder(
           future: _setupInfo(context),
@@ -76,7 +92,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
               height: ScreenUtil().setWidth(100),
               margin: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
               decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/images/2.png'), fit: BoxFit.cover),
+                image: DecorationImage(image: NetworkImage('${userInfo.headUrl}'), fit: BoxFit.cover),
                 shape: BoxShape.circle,
               )
           ))),
@@ -106,7 +122,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
               Text('昵称', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
               Expanded(child: Align(
                 alignment: Alignment.centerRight,
-                child: Text('胡萝卜', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+                child: Text('${userInfo.name}', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
               )),
               Icon(
                 Icons.keyboard_arrow_right,
@@ -119,25 +135,51 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
       Container(
         color: Color(0xFFFFFFFF),
         padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32), vertical: ScreenUtil().setHeight(32)),
-        child: Column(children: <Widget>[
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              Application.router.navigateTo(context, "/setSex", transition: TransitionType.inFromRight);
-            },
-            child: Row(children: <Widget>[
-              Text('性别', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
-              Expanded(child: Align(
-                alignment: Alignment.centerRight,
-                child: Text('女', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
-              )),
-              Icon(
-                Icons.keyboard_arrow_right,
-                color: Colors.grey,
-                size: ScreenUtil().setSp(44),
-              )
-          ]))
-      ])),
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context){
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('男', textAlign: TextAlign.center),
+                      contentPadding: EdgeInsets.symmetric(vertical: 0),
+                      onTap: (){
+                        setState(() {
+                          userInfo.certificationSex = 0;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      title: Text('女', textAlign: TextAlign.center),
+                      onTap: (){
+                        setState(() {
+                          userInfo.certificationSex = 1;
+                        });
+                        Navigator.pop(context);
+                      },
+                    )
+                ]);
+              }
+            );
+          },
+          child: Row(children: <Widget>[
+            Text('性别', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
+            Expanded(child: Align(
+              alignment: Alignment.centerRight,
+              child: Text('$sex', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+            )),
+            Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.grey,
+              size: ScreenUtil().setSp(44),
+            ),
+      ]))),
       line(),
       Container(
         color: Color(0xFFFFFFFF),
@@ -152,7 +194,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
               Text('地区', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
               Expanded(child: Align(
                 alignment: Alignment.centerRight,
-                child: Text('新加坡', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+                child: Text('${userInfo.areaId}', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
               )),
               Icon(
                 Icons.keyboard_arrow_right,
@@ -175,7 +217,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
   Future _setupInfo(BuildContext context) async {
     return _memoizer.runOnce(() async {
       // Future<String> token = get();
-      // await Provide.value<LoginProvide>(context).getUserInfo(token); //获取摄影师、化妆师
+      // await Provide.value<SettingProvide>(context).getAreaList(); //获取地区列表
       return '完成加载';
     });
   }
@@ -184,7 +226,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
     // var isShoot = Provide.value<HomeProvide>(context).isShoot ? 0 : 1;
     // Provide.value<HomeProvide>(context).pageNum = 1;
     // var token = Provide.value<LoginProvide>(context).token;
-    // await Provide.value<LoginProvide>(context).getUserInfo(token); //获取用户信息
+    // await Provide.value<SettingProvide>(context).getAreaList(); //获取地区列表
   }
 
 }
