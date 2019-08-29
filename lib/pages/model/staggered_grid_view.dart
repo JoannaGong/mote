@@ -1,3 +1,4 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mote/model_data/model/modeListModel.dart';
@@ -24,13 +25,17 @@ class _StaggeredGridState extends State<StaggeredGrid>
   int pageIndex = 1;
 
   var posts = [];
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
         body: Container(
-      padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(50)),
+          color: Color(0xFFF5F5F5),
+      padding: EdgeInsets.only(
+        top: ScreenUtil().setHeight(37),
+        left: ScreenUtil().setHeight(29),
+        right: ScreenUtil().setHeight(37)
+      ),
       child: FutureBuilder(
           future: _getModelInfo(context),
           builder: (context, snapsshot) {
@@ -61,8 +66,8 @@ class _StaggeredGridState extends State<StaggeredGrid>
                                 id: '${cardItem[index].id}'),
                         staggeredTileBuilder: (int index) =>
                             new StaggeredTile.fit(2),
-                        mainAxisSpacing: 4.0,
-                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: ScreenUtil().setHeight(18),
+                        crossAxisSpacing: ScreenUtil().setHeight(27),
                       );
                     },
                   ),
@@ -89,13 +94,14 @@ class _StaggeredGridState extends State<StaggeredGrid>
 
   Future _getModelInfo(BuildContext context) async {
     return _memoizer.runOnce(() async {
-      await     Provide.value<ModelProvide>(context).getmodelList(pageIndex);
+      await Provide.value<ModelProvide>(context).getmodelList(pageIndex);
       return '完成加载';
     });
   }
+
   Future _addModelInfo(BuildContext context) async {
-      await     Provide.value<ModelProvide>(context).getmodelList(pageIndex);
-      return '完成加载';
+    await Provide.value<ModelProvide>(context).getmodelList(pageIndex);
+    return '完成加载';
   }
 
   @override
@@ -129,7 +135,8 @@ class TileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, "/modelDetail?id=$id");
+        Application.router.navigateTo(context, "/modelDetail?id=$id",
+            transition: TransitionType.inFromRight);
       },
       child: Card(
         shape: const RoundedRectangleBorder(
@@ -143,7 +150,7 @@ class TileCard extends StatelessWidget {
                 child: Image(
                   image: NetworkImage('$headUrl'),
                   fit: BoxFit.fitWidth,
-                  width: 200,
+                  width: ScreenUtil().setWidth(500),
                 )),
             Container(
               padding: EdgeInsets.only(
@@ -156,11 +163,10 @@ class TileCard extends StatelessWidget {
                   CircleAvatar(
                     backgroundImage: NetworkImage('$headUrl'),
                     radius: ScreenUtil().setWidth(30),
-                    // maxRadius: 40.0,
                   ),
                   Container(
                     margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-                    width: ScreenUtil().setWidth(250),
+                    width: ScreenUtil().setWidth(200),
                     child: Text(
                       '$name',
                       style: TextStyle(
