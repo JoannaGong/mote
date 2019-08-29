@@ -7,11 +7,8 @@ import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../member/member_page.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../pages/home/home_page.dart';
 import '../common/toast.dart';
-
-Dio dio = new Dio();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -74,21 +71,20 @@ class _LoginPageState extends State<LoginPage> {
               onSaved: (String value) => phone = value,
             ),
             Row(children: <Widget>[
-              Container(
-                width: ScreenUtil().setWidth(400),
+              Expanded(child: Container(
+                width: ScreenUtil().setWidth(410),
                 child: TextFormField(
                   onSaved: (String value) => validate = value,
                   decoration: InputDecoration(
                     labelText: '请输入验证码',
                     labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32.0),color: Color(0xFF999999))
-              ))),
-              Container(
-                width: ScreenUtil().setWidth(200),
-                margin: EdgeInsets.fromLTRB(12, 12, 0, 0),
+              )))),
+              Expanded(child: Container(
+                margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60), ScreenUtil().setHeight(50), 0, ScreenUtil().setHeight(8)),
                 child: RaisedButton(
-                  child: Text('获取验证码',style: TextStyle(color: Color(0xFF999999))),
+                  child: Text('获取验证码',style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32))),
                   elevation: 0,
-                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 11),
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: ScreenUtil().setWidth(22)),
                   shape: StadiumBorder(side: BorderSide(color: Color(0xFFE2E2E2),width: ScreenUtil().setWidth(2))),
                   color: Color(0xFFFFFFFF),
                   onPressed: () {
@@ -96,16 +92,19 @@ class _LoginPageState extends State<LoginPage> {
                       _formKey.currentState.save();
                       Provide.value<LoginProvide>(context).getPhoneValid(phone);
                     }
-              }))
+              })))
             ]),
             Container(
               margin: EdgeInsets.fromLTRB(0, 30, 0, 100),
-              padding: EdgeInsets.fromLTRB(5, 5, 0, 0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(44)),
+                gradient: LinearGradient(colors: [Color(0xFFFF9E9F), Color(0xFFFF5658)], begin: FractionalOffset(0, 0), end: FractionalOffset(1, 1))
+              ),
               child: RaisedButton(
                 shape: StadiumBorder(),
                 padding: EdgeInsets.symmetric(vertical: 10),
-                color: Color(0xFFFF5658),
-                splashColor: Color(0xFFFF5658),
+                color: Colors.transparent,
+                elevation: 0,
                 child: Text('登录', style: TextStyle(fontSize: ScreenUtil().setSp(34), color: Colors.white),),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {

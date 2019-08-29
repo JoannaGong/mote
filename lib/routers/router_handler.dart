@@ -14,6 +14,8 @@ import '../pages/member/setup/about_us.dart';
 import '../pages/member/setup/contact_us.dart';
 import '../pages/member/setup/account_safe.dart';
 import '../pages/member/setup/bind_telephone.dart';
+import '../pages/member/setup/change_telephone.dart';
+import '../pages/member/setup/change_finish.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -87,4 +89,14 @@ Handler accountSafeHandler =
 Handler bindTelephoneHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return BindTelephone();
+});
+
+Handler changeTelephoneHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ChangeTelephone();
+});
+
+Handler changeFinishHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return ChangeFinish();
 });

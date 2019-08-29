@@ -18,6 +18,8 @@ class Routes {
   static String contactUs = '/contactUs';  // 设置 - 联系我们
   static String accountSafe = '/accountSafe';  // 设置 - 账户安全
   static String bindTelephone = '/bindTelephone';  // 设置 - 绑定手机号
+  static String changeTelephone = '/changeTelephone';  // 设置 - 更换手机号
+  static String changeFinish = '/changeFinish';  // 设置 - 更换成功
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -39,5 +41,7 @@ class Routes {
     router.define(contactUs,handler: contactUsHandler);
     router.define(accountSafe,handler: accountSafeHandler);
     router.define(bindTelephone,handler: bindTelephoneHandler);
+    router.define(changeTelephone,handler: changeTelephoneHandler);
+    router.define(changeFinish,handler: changeFinishHandler);
   }
 }
