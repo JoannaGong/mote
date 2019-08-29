@@ -16,6 +16,9 @@ import '../pages/member/setup/account_safe.dart';
 import '../pages/member/setup/bind_telephone.dart';
 import '../pages/member/setup/change_telephone.dart';
 import '../pages/member/setup/change_finish.dart';
+import '../pages/member/setup/set_name.dart';
+import '../pages/member/setup/set_sex.dart';
+import '../pages/member/setup/set_area.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -99,4 +102,19 @@ Handler changeTelephoneHandler =
 Handler changeFinishHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return ChangeFinish();
+});
+
+Handler setNameHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return SetName();
+});
+
+Handler setSexHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return SetSex();
+});
+
+Handler setAreaHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return SetArea();
 });

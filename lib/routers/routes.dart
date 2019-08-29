@@ -20,6 +20,10 @@ class Routes {
   static String bindTelephone = '/bindTelephone';  // 设置 - 绑定手机号
   static String changeTelephone = '/changeTelephone';  // 设置 - 更换手机号
   static String changeFinish = '/changeFinish';  // 设置 - 更换成功
+  static String setName = '/setName';  // 设置 - 设置名字
+  static String setSex = '/setSex';  // 设置 - 设置性别
+  static String setArea = '/setArea';  // 设置 - 设置地区
+
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
@@ -42,6 +46,8 @@ class Routes {
     router.define(accountSafe,handler: accountSafeHandler);
     router.define(bindTelephone,handler: bindTelephoneHandler);
     router.define(changeTelephone,handler: changeTelephoneHandler);
-    router.define(changeFinish,handler: changeFinishHandler);
+    router.define(setName,handler: setNameHandler);
+    router.define(setSex,handler: setSexHandler);
+    router.define(setArea,handler: setAreaHandler);
   }
 }

@@ -100,7 +100,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              print('hhh');
+              Application.router.navigateTo(context, "/setName", transition: TransitionType.inFromRight);
             },
             child: Row(children: <Widget>[
               Text('昵称', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
@@ -123,7 +123,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              print('hhh');
+              Application.router.navigateTo(context, "/setSex", transition: TransitionType.inFromRight);
             },
             child: Row(children: <Widget>[
               Text('性别', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
@@ -146,7 +146,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              print('hhh');
+              Application.router.navigateTo(context, "/setArea", transition: TransitionType.inFromRight);
             },
             child: Row(children: <Widget>[
               Text('地区', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
