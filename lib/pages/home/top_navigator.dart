@@ -6,7 +6,7 @@ import '../../routers/application.dart';
 
 import '../../provide/home.dart';
 import '../../provide/main.dart';
-
+import '../../provide/current_index.dart';
 
 //顶部导航栏
 class TopNavigator extends StatelessWidget {
@@ -43,7 +43,12 @@ class TopNavigator extends StatelessWidget {
         // }else{
         //   Application.router.navigateTo(context, "/login");
         // }
-        Application.router.navigateTo(context, "/shootSite", transition: TransitionType.inFromRight);
+        if (item.routingUrl == 'mote') {
+          Provide.value<CurrentIndexProvide>(context).changeIndex(1);
+        } else {
+          Application.router.navigateTo(context, "/${item.routingUrl}",
+              transition: TransitionType.inFromRight);
+        }
       },
       child: Column(
         children: <Widget>[

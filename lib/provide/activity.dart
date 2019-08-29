@@ -21,6 +21,12 @@ class ActivityProvide with ChangeNotifier {
 
   //获取活动列表
   getActivityList(bool type) async {
+    if (type) {
+      pageNum++;
+    } else {
+      pageNum = 1;
+    }
+
     var formData = {'pageNum': pageNum};
     await requestGet('getActivityList', formData: formData).then((val) {
       activitydata = ActivityModel.fromJson(val);
@@ -33,7 +39,6 @@ class ActivityProvide with ChangeNotifier {
         }
       } else {
         list = activitydata.data.pageInfo.list;
-        pageNum = 1;
       }
       notifyListeners();
     });
@@ -48,8 +53,9 @@ class ActivityProvide with ChangeNotifier {
   }
 
   //报名
-  activityGuest(BuildContext context,String token) async {
-    Application.router.navigateTo(context, '/activityPay?id=$id',transition: TransitionType.inFromRight);
+  activityGuest(BuildContext context, String token) async {
+    Application.router.navigateTo(context, '/activityPay?id=$id',
+        transition: TransitionType.inFromRight);
     // var formData = {
     //   'activityId': id,
     //   'name': name,
@@ -71,7 +77,7 @@ class ActivityProvide with ChangeNotifier {
     //     .then((response) {
     //   // activityDetaildata = ActivityDetailModel.fromJson(val);
     //   if(response['code']){}
-      
+
     // });
   }
 }

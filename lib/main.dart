@@ -10,6 +10,7 @@ import './provide/home.dart';
 import './provide/model.dart';
 import './provide/login.dart';
 import './provide/activity.dart';
+import './provide/shoot_site.dart';
 
 void main() {
   var providers = Providers();
@@ -19,6 +20,7 @@ void main() {
   var modelProvide = ModelProvide();
   var loginProvide = LoginProvide();
   var activityProvide = ActivityProvide();
+  var shootSiteProvide = ShootSiteProvide();
 
   providers..provide(Provider<MainProvide>.value(mainProvide));
   providers..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide));
@@ -26,6 +28,7 @@ void main() {
   providers..provide(Provider<ModelProvide>.value(modelProvide));
   providers..provide(Provider<LoginProvide>.value(loginProvide));
   providers..provide(Provider<ActivityProvide>.value(activityProvide));
+  providers..provide(Provider<ShootSiteProvide>.value(shootSiteProvide));
 
   runApp(ProviderNode(child: MyApp(), providers: providers));
 }

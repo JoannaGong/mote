@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import './router_handler.dart';
+import '../pages/notFound/not_found.dart';
 
 class Routes {
   static String root = '/';
@@ -12,7 +13,8 @@ class Routes {
   static String activityPay = '/activityPay'; //报名活动支付页
   static String login = '/login'; //登录注册页
   static String setup = '/setup';  // 设置个人信息
-  static String shootSite = '/shootSite';  // 设置个人信息
+  static String shootSite = '/shootSite';  // 拍摄圣地
+  static String shootSiteDetail = '/shootSiteDetail';  // 拍摄圣地详情
   static String setUserInfo = '/setUserInfo';  // 编辑个人信息
   static String aboutUs = '/aboutUs';  // 设置 - 关于我们
   static String contactUs = '/contactUs';  // 设置 - 联系我们
@@ -26,7 +28,7 @@ class Routes {
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
-        print('无路由');
+        return NotFoundPage();
       }
     );
 
@@ -47,5 +49,6 @@ class Routes {
     router.define(changeTelephone,handler: changeTelephoneHandler);
     router.define(setName,handler: setNameHandler);
     router.define(setArea,handler: setAreaHandler);
+    router.define(shootSiteDetail,handler: shootSiteDetailHandler);
   }
 }
