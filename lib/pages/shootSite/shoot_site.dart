@@ -189,7 +189,7 @@ class ShootList extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: GestureDetector(
           onTap: () {
-             Application.router.navigateTo(context, 'activityDetail?id=${data.id}',
+             Application.router.navigateTo(context, 'shootSiteDetail?id=${data.id}',
             transition: TransitionType.inFromRight);
           },
           child: Container(

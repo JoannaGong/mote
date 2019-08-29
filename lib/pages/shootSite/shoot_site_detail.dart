@@ -5,7 +5,15 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fluro/fluro.dart';
 
 import '../../routers/application.dart';
-import '../../provide/activity.dart';
+import '../../provide/shoot_site.dart';
+
+final lableColor = {
+  '0': Color(0xFFFF7417),
+  '1': Color(0xFFFF5658),
+  '2': Color(0xFF3DCAFF),
+  '3': Color(0xFFFF5658),
+  '4': Color(0xFFFFAF3B)
+};
 
 class ShootSiteDetailPage extends StatelessWidget {
   final String id;
@@ -16,20 +24,20 @@ class ShootSiteDetailPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Color(0xFFF5F5F5),
         body: FutureBuilder(
-          future: _getActivityDetail(context),
+          future: _getShootSiteDetail(context),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Provide<ActivityProvide>(
+              return Provide<ShootSiteProvide>(
                 builder: (context, child, val) {
-                  var activityDetaildata =
-                      Provide.value<ActivityProvide>(context)
-                          .activityDetaildata
+                  var shootSiteDetaildata =
+                      Provide.value<ShootSiteProvide>(context)
+                          .shootSiteDetaildata
                           .data
-                          .activity;
+                          .shootingPlace;
                   return NestedScrollView(
                     headerSliverBuilder:
                         (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[_appbar(context, activityDetaildata)];
+                      return <Widget>[_appbar(context, shootSiteDetaildata)];
                     },
                     body: Stack(
                       alignment: Alignment.center,
@@ -41,19 +49,21 @@ class ShootSiteDetailPage extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 DetailTitle(
-                                  detail: activityDetaildata,
+                                  detail: shootSiteDetaildata,
                                 ),
                                 Line(),
-                                DetailContent(contentData: activityDetaildata)
+                                DetailContent(contentData: shootSiteDetaildata)
                               ],
                             ),
                           ),
                         ),
                         Positioned(
-                          bottom: 20,
+                          bottom: 30,
                           child: GestureDetector(
-                            onTap: (){
-                              Application.router.navigateTo(context, '/activityForm?id=$id',transition: TransitionType.inFromRight);
+                            onTap: () {
+                              Application.router.navigateTo(
+                                  context, '/activityForm?id=$id',
+                                  transition: TransitionType.inFromRight);
                             },
                             child: Container(
                               width: ScreenUtil().setWidth(686),
@@ -75,7 +85,7 @@ class ShootSiteDetailPage extends StatelessWidget {
                                 ],
                               ),
                               child: Text(
-                                '参加报名',
+                                '转发',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: ScreenUtil().setSp(34)),
@@ -95,16 +105,16 @@ class ShootSiteDetailPage extends StatelessWidget {
         ));
   }
 
-  Future _getActivityDetail(BuildContext context) async {
-    await Provide.value<ActivityProvide>(context)
-        .getActivityDetail(id); //获取活动列表
+  Future _getShootSiteDetail(BuildContext context) async {
+    await Provide.value<ShootSiteProvide>(context)
+        .getShootSiteDetail(id); //获取活动列表
     return '完成加载';
   }
 
   Widget _appbar(BuildContext context, data) {
     return SliverAppBar(
       title: Text(
-        '活动详情',
+        '拍摄圣地详情',
         style: TextStyle(
             color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34)),
       ),
@@ -117,14 +127,6 @@ class ShootSiteDetailPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           }),
-      actions: <Widget>[
-        IconButton(
-            icon: Icon(
-              Icons.share,
-              color: Color(0xFF333333),
-            ),
-            onPressed: () {}),
-      ],
       brightness: Brightness.light,
       backgroundColor: Color(0xFFF5F5F5),
       elevation: 0,
@@ -155,118 +157,92 @@ class DetailTitle extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15),
       child: Column(
-        children: <Widget>[
-          _title(detail.name),
-          _price(detail.applicationPrice),
-          _list(detail)
-        ],
+        children: <Widget>[_title(detail), _address(detail), _lable(detail)],
       ),
     );
   }
 
-  Widget _title(name) {
+  Widget _title(data) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       child: Row(
         children: <Widget>[
           Text(
-            name,
+            data.name,
             style: TextStyle(
                 color: Color(0xFF333333),
                 fontSize: ScreenUtil().setSp(40),
                 fontWeight: FontWeight.w500),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              '${data.score.toString()}分',
+              style: TextStyle(
+                  color: Color(0xFFFF1919),
+                  fontSize: ScreenUtil().setSp(28),
+                  fontWeight: FontWeight.w500),
+            ),
           )
         ],
       ),
     );
   }
 
-  Widget _price(price) {
+  Widget _address(data) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       child: Row(
         children: <Widget>[
-          Text(
-            '￥${price.toString()}',
-            style: TextStyle(
-                color: Color(0xFFFF1919),
-                fontSize: ScreenUtil().setSp(40),
-                fontWeight: FontWeight.w500),
+          Image.asset('assets/images/didian.png',
+              width: ScreenUtil().setWidth(28),
+              height: ScreenUtil().setHeight(32)),
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              data.address,
+              style: TextStyle(
+                  color: Color(0xFF999999), fontSize: ScreenUtil().setSp(28)),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           )
         ],
       ),
     );
   }
 
-  Widget _list(data) {
+  Widget _lable(data) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
+        child: Row(
+      children: <Widget>[
+        Image.asset('assets/images/didian.png',
+            width: ScreenUtil().setWidth(28),
+            height: ScreenUtil().setHeight(32)),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(left: 10),
             child: Row(
-              children: <Widget>[
-                Icon(
-                  Icons.local_atm,
-                  color: Color(0xFF777777),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                        '${data.activityStartTime.substring(0, 10)} - ${data.activityStopTime.substring(0, 10)}',
-                        style: TextStyle(
-                            color: Color(0xFF777777),
-                            fontSize: ScreenUtil().setSp(28),
-                            fontWeight: FontWeight.w100),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                )
-              ],
+              children: (data.shootingPlaceLableList as List)
+                  .asMap()
+                  .keys
+                  .map((index) {
+                return _lableText(data.shootingPlaceLableList[index], index);
+              }).toList(),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.local_atm, color: Color(0xFF777777)),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text('${data.address}',
-                        style: TextStyle(
-                            color: Color(0xFF777777),
-                            fontSize: ScreenUtil().setSp(28),
-                            fontWeight: FontWeight.w100),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.local_atm, color: Color(0xFF777777)),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text('${data.organizersName}',
-                        style: TextStyle(
-                            color: Color(0xFF777777),
-                            fontSize: ScreenUtil().setSp(28),
-                            fontWeight: FontWeight.w100),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        )
+      ],
+    ));
+  }
+
+  Widget _lableText(data, index) {
+    index = index % lableColor.length;
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      child: Text(data.lable.name,style: TextStyle(color: lableColor[index.toString()]),),
     );
   }
 }
@@ -300,7 +276,7 @@ class DetailContent extends StatelessWidget {
     return Container(
       child: Row(
         children: <Widget>[
-          Text('活动详情',
+          Text('图文详情',
               style: TextStyle(
                   color: Color(0xFF333333),
                   fontSize: ScreenUtil().setSp(30),

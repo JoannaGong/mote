@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../service/service_method.dart';
 import '../model_data/shootSite/shoot_site_data.dart';
+import '../model_data/shootSite/shoot_site_detail_data.dart';
 import '../pages/common/toast.dart';
 
 class ShootSiteProvide with ChangeNotifier {
   ShootSiteModel shootSitedata;
+  ShootSiteDetailModel shootSiteDetaildata;
   List<ShootSiteList> list;
 
   int pageNum = 1;
@@ -30,6 +32,14 @@ class ShootSiteProvide with ChangeNotifier {
       } else {
         list = shootSitedata.data.pageInfo.list;
       }
+      notifyListeners();
+    });
+  }
+
+  //拍摄地详情
+  getShootSiteDetail(String id) async {
+    await requestGetDetail('shootingPlace', id: id).then((val) {
+      shootSiteDetaildata = ShootSiteDetailModel.fromJson(val);
       notifyListeners();
     });
   }

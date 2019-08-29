@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import './router_handler.dart';
+import '../pages/notFound/not_found.dart';
 
 class Routes {
   static String root = '/';
@@ -28,7 +29,7 @@ class Routes {
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String, dynamic> params){
-        print('无路由');
+        return NotFoundPage();
       }
     );
 
