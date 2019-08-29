@@ -19,6 +19,7 @@ import '../pages/member/setup/change_finish.dart';
 import '../pages/member/setup/set_name.dart';
 import '../pages/member/setup/set_sex.dart';
 import '../pages/member/setup/set_area.dart';
+import '../pages/shootSite/shoot_site_detail.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -117,4 +118,12 @@ Handler setSexHandler =
 Handler setAreaHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return SetArea();
+});
+
+Handler shootSiteDetailHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  String shootId = params['id'].first;
+  return ShootSiteDetailPage(
+    id: shootId,
+  );
 });

@@ -188,7 +188,10 @@ class ShootList extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+             Application.router.navigateTo(context, 'activityDetail?id=${data.id}',
+            transition: TransitionType.inFromRight);
+          },
           child: Container(
             child: Column(
               children: <Widget>[_img(data.coverPicUrl), _content(data)],

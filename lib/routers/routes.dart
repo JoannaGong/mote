@@ -12,7 +12,8 @@ class Routes {
   static String activityPay = '/activityPay'; //报名活动支付页
   static String login = '/login'; //登录注册页
   static String setup = '/setup';  // 设置个人信息
-  static String shootSite = '/shootSite';  // 设置个人信息
+  static String shootSite = '/shootSite';  // 拍摄圣地
+  static String shootSiteDetail = '/shootSiteDetail';  // 拍摄圣地详情
   static String setUserInfo = '/setUserInfo';  // 编辑个人信息
   static String aboutUs = '/aboutUs';  // 设置 - 关于我们
   static String contactUs = '/contactUs';  // 设置 - 联系我们
@@ -49,5 +50,6 @@ class Routes {
     router.define(setName,handler: setNameHandler);
     router.define(setSex,handler: setSexHandler);
     router.define(setArea,handler: setAreaHandler);
+    router.define(shootSiteDetail,handler: shootSiteDetailHandler);
   }
 }
