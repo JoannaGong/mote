@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/member/main_page/announce_manage_merchant.dart';
 import 'package:mote/pages/member/main_page/no_identify.dart';
 import 'package:provide/provide.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:async/src/async_memoizer.dart';
 import 'dart:async';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -50,9 +49,6 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
           builder: (context, snapshot){
             if(snapshot.hasData){
               return Provide<LoginProvide>(builder: (context, child, val){
-                token = Provide.value<LoginProvide>(context).token;
-                print('member_page: $token');
-                Provide.value<LoginProvide>(context).getUserInfo(token);
                 userInfo = Provide.value<LoginProvide>(context).userInfo;
                 if(userInfo?.roleName == 1){   // 未认证用户
                   return  Container(

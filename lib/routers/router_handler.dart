@@ -19,6 +19,7 @@ import '../pages/member/setup/change_finish.dart';
 import '../pages/member/setup/set_name.dart';
 import '../pages/member/setup/set_area.dart';
 import '../pages/shootSite/shoot_site_detail.dart';
+import '../pages/member/member_page.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -120,4 +121,9 @@ Handler shootSiteDetailHandler =
   return ShootSiteDetailPage(
     id: shootId,
   );
+});
+
+Handler memberPageHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return MemberPage();
 });

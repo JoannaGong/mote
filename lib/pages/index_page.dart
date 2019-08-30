@@ -13,6 +13,7 @@ import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
 import '../provide/login.dart';
+import '../routers/application.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 
@@ -99,9 +100,10 @@ class IndexPage extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => LoginPage())
             );
           }else{
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MemberPage())
-            );
+            // Application.router.navigateTo(context, "/memberPage"); //, transition: TransitionType.inFromRight
+            // Navigator.push(
+            //   context, MaterialPageRoute(builder: (context) => MemberPage())
+            // );
           }
         }
       },

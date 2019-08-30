@@ -51,7 +51,7 @@ class LoginProvide with ChangeNotifier {
   }
 
   // 获取用户信息
-  getUserInfo(String token) async {
+  getUserInfo() async {
     await requestPost('getUserInfo').then((val){
       userData = GetUserInfo.fromJson(val);
       userInfo = userData.data.userInfo;
@@ -62,7 +62,7 @@ class LoginProvide with ChangeNotifier {
 
   // 获取地区列表（不分页）
   getAreaList(String token) async {
-    await requestGet('areaList', token: token).then((val){
+    await requestGet('areaList').then((val){
       // print(val);
       areaData = GetAreaList.fromJson(val);
       list = areaData.data.areaList;
