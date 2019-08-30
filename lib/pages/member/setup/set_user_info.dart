@@ -49,14 +49,12 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
                 }else if(userInfo.certificationSex == 2 || userInfo.certificationSex == null){
                   sex = '未知';
                 }
-                return  Container(
-                child: EasyRefresh(
+                return  Container(child: EasyRefresh(
                   header: BallPulseHeader(color: Color(0xFFFF5658)),
                   onRefresh: () async {
                     _refresh(context);
                   },
-                  child: 
-                  ListView(children: <Widget>[
+                  child: ListView(children: <Widget>[
                     setAvatar(),   // 头像
                     setUserInfo(),  // 昵称、性别、地区
                   ])

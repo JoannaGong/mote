@@ -94,9 +94,10 @@ class IndexPage extends StatelessWidget {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
-          if (token != '') {
-            Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
-          } else {
+          // if (token != '') {
+          //   Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+          // } else 
+          if(token == ''){
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => LoginPage()));
           }

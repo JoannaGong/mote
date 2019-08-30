@@ -5,6 +5,7 @@ import 'package:provide/provide.dart';
 import '../../../provide/login.dart';
 
 var userInfo;
+var changedName;
 
 class SetName extends StatefulWidget {
   @override
@@ -13,22 +14,17 @@ class SetName extends StatefulWidget {
 
 class _SetNameState extends State<SetName> {
   final TextEditingController _controller = new TextEditingController();
-  var userName;
 
   @override
   Widget build(BuildContext context) {
     if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
       userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
     }
-    userName = '${userInfo.name}';
+    // userName = '${userInfo.name}';
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
-        title: Text('设置名字',
-          style: TextStyle(
-            color: Color(0xFF333333),
-            fontSize: ScreenUtil().setSp(34),
-            fontWeight: FontWeight.bold)),
+        title: Text('设置名字', style: TextStyle(color: Color(0xFF333333),fontSize: ScreenUtil().setSp(34),fontWeight: FontWeight.bold)),
         centerTitle: true,
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
@@ -36,7 +32,8 @@ class _SetNameState extends State<SetName> {
         actions: <Widget>[
           RaisedButton(
             onPressed: (){
-              print('$userName');
+              userInfo.name = changedName;
+              Navigator.pop(context);
             },
             child: Text('保存', style: TextStyle(color: Color(0xFFFF5658), fontSize: ScreenUtil().setSp(32)),),
             color: Colors.transparent,
@@ -53,11 +50,11 @@ class _SetNameState extends State<SetName> {
           style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Color(0xFF333333)),
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: '$userName'
+            hintText: '${userInfo.name}'
           ),
           onChanged: (val){
             setState(() {
-              userName = val;
+              changedName = val;
             });
           },
         ),

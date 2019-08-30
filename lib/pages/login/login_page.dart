@@ -113,21 +113,15 @@ class _LoginPageState extends State<LoginPage> {
                       token = Provide.value<LoginProvide>(context).token;
                       Provide.value<MainProvide>(context).saveToken(token);
                       Provide.value<MainProvide>(context).changeToken(token);
-                      print('token1---$token');
                     }).then((val){
                       if(token != null){
                         Provide.value<MainProvide>(context).saveToken(token);
-                        print('token2---$token');
-                        // Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
                         Navigator.pop(
                           context, MaterialPageRoute(builder: (context) => MemberPage())
                         );
                       }
                     }).then((val){
                       Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
-                        // Navigator.pop(
-                        //   context, MaterialPageRoute(builder: (context) => MemberPage())
-                        // );
                     });
                   }
                 },
