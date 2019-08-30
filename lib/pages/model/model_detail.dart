@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/model/detail_intro.dart';
 
 class ModelDetail extends StatelessWidget {
   final String id;
@@ -23,67 +24,183 @@ class _ModelDetailPageState extends State<ModelDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: Stack(
           children: <Widget>[
-            MediaQuery.removePadding(
-                removeTop: true,
-                context: context,
+            Container(child: SAppBar()),
+            Positioned(
+                bottom: 0,
                 child: Container(
-                  color: Colors.white,
-                  child: ListView(
-                    children: <Widget>[FilterImage()],
+                  height: ScreenUtil().setHeight(196),
+                  width: ScreenUtil().setWidth(750),
+                  padding: EdgeInsets.symmetric(vertical:  ScreenUtil().setHeight(20),horizontal: ScreenUtil().setHeight(32)),
+                  decoration: BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      new BoxShadow(
+                        color: Color.fromRGBO(219, 219, 219, 0.5), //阴影颜色
+                        blurRadius: 20.0, //阴影大小
+                      ),
+                    ],
+                    color: Colors.white,
                   ),
-                )),
-            TopAppBar(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: ScreenUtil().setWidth(260),
+                          height: ScreenUtil().setHeight(88),
+                          child: Text('联系',style:TextStyle(color: Color(0xFFFF5658),fontSize: ScreenUtil().setSp(34),fontWeight: FontWeight.w500)),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Color(0xFFFF5658)),
+                            borderRadius: new BorderRadius.all(Radius.circular(44)),
+                            boxShadow: [BoxShadow(color: Color(0x80FFABAC),blurRadius:8,offset: Offset(0, 4))]
+                          ),
+                        ),
+                      ),
+                       GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: ScreenUtil().setWidth(394),
+                          height: ScreenUtil().setHeight(88),
+                          child: Text('预约',style:TextStyle(color: Colors.white,fontSize: ScreenUtil().setSp(34),fontWeight: FontWeight.w500)),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFFF9E9F),Color(0xFFFF5658)]
+                            ),
+                            borderRadius: new BorderRadius.all(Radius.circular(44)),
+                            boxShadow: [BoxShadow(color: Color(0x80FFABAC),blurRadius:8,offset: Offset(0, 4))],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ))
           ],
         ));
   }
 }
 
-class TopAppBar extends StatelessWidget {
+class SAppBar extends StatefulWidget {
+  @override
+  _SAppBarState createState() => _SAppBarState();
+}
+
+class _SAppBarState extends State<SAppBar> with SingleTickerProviderStateMixin {
+  ScrollController _scrollViewController;
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollViewController = ScrollController(initialScrollOffset: 0.0);
+    _tabController = TabController(vsync: this, length: 3);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollViewController.dispose();
+    _tabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(24),
-          ScreenUtil().setHeight(112),
-          ScreenUtil().setWidth(10),
-          ScreenUtil().setHeight(24)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            child: IconButton(
-              icon: Image.asset(
-                'assets/images/back_white.png',
-                width: ScreenUtil().setWidth(44),
-              ),
-              onPressed: () {},
-            ),
-          ),
-          Row(
-            children: <Widget>[
-              IconButton(
-                icon: Image.asset(
-                  'assets/images/launch.png',
-                  width: ScreenUtil().setWidth(44),
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+              leading: IconButton(
+                  icon: IconButton(
+                    icon: Image.asset(
+                      'assets/images/back_white.png',
+                      width: ScreenUtil().setWidth(40),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              actions: <Widget>[
+                IconButton(
+                  icon: Image.asset(
+                    'assets/images/launch.png',
+                    width: ScreenUtil().setWidth(37),
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Image.asset(
-                  'assets/images/settings_2.png',
-                  width: ScreenUtil().setWidth(44),
+                IconButton(
+                  icon: Image.asset(
+                    'assets/images/settings_2.png',
+                    width: ScreenUtil().setWidth(40),
+                  ),
+                  onPressed: () {},
                 ),
-                onPressed: () {},
-              ),
-            ],
-          )
-        ],
-      ),
+              ],
+              brightness: Brightness.light,
+              backgroundColor: Color(0xFFFF5658),
+              elevation: 0,
+              primary: true, //是否预留高度
+              forceElevated: false,
+              titleSpacing: NavigationToolbar.kMiddleSpacing,
+              expandedHeight: ScreenUtil().setWidth(580), //展开高度
+              pinned: true, //是否固定在顶部
+              flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  centerTitle: true,
+                  background: FilterImage()),
+              bottom: PreferredSize(
+                child: Material(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20)),
+                    child: Column(
+                      children: <Widget>[
+                        TabBar(
+                            labelPadding: EdgeInsets.only(
+                                top: ScreenUtil().setHeight(10),
+                                bottom: ScreenUtil().setHeight(6)),
+                            controller: _tabController,
+                            unselectedLabelColor: Color(0xFF333333),
+                            labelColor: Color(0xFFFF5658),
+                            indicatorWeight: ScreenUtil().setHeight(4),
+                            indicatorSize: TabBarIndicatorSize.label,
+                            indicatorColor: Color(0xFFFF8F91),
+                            labelStyle: TextStyle(
+                                fontSize: ScreenUtil().setSp(32),
+                                fontWeight: FontWeight.w500),
+                            tabs: [
+                              Tab(text: "简介"),
+                              Tab(text: "作品"),
+                              Tab(text: "服务记录"),
+                            ]),
+                        Container(
+                          height: 0.5,
+                          color: Color(0xFFE2E2E2),
+                        )
+                      ],
+                    )),
+                preferredSize: Size.fromHeight(60),
+              ))
+        ];
+      },
+      body: TabBarView(
+          controller: _tabController,
+          children: [Intro(), Intro(), Intro()]),
     );
   }
+
 }
 
 class FilterImage extends StatelessWidget {
@@ -103,7 +220,7 @@ class FilterImage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: ScreenUtil().setWidth(222),
+        top: ScreenUtil().setWidth(200),
         child: Container(
           width: ScreenUtil().setWidth(750),
           padding: EdgeInsets.fromLTRB(
@@ -115,7 +232,7 @@ class FilterImage extends StatelessWidget {
               ClipOval(
                   child: Container(
                       color: Colors.white,
-                      padding: EdgeInsets.all(ScreenUtil().setWidth(6)),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(4)),
                       width: ScreenUtil().setWidth(128),
                       height: ScreenUtil().setWidth(128),
                       child: ClipOval(
@@ -136,7 +253,7 @@ class FilterImage extends StatelessWidget {
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: ScreenUtil().setWidth(36),
+                              fontSize: ScreenUtil().setSp(36),
                               fontWeight: FontWeight.w600)),
                     ),
                     Image.asset('assets/images/female.png',
@@ -158,13 +275,13 @@ class FilterImage extends StatelessWidget {
                         child: Text('中国·上海',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: ScreenUtil().setWidth(28),
+                              fontSize: ScreenUtil().setSp(28),
                             )),
                       ),
                       Text('模特',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: ScreenUtil().setWidth(28),
+                            fontSize: ScreenUtil().setSp(28),
                           ))
                     ]),
                     SizedBox(
@@ -173,7 +290,7 @@ class FilterImage extends StatelessWidget {
                           child: Text('收藏',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: ScreenUtil().setWidth(24))),
+                                  fontSize: ScreenUtil().setSp(24))),
                           borderSide: BorderSide(
                               color: Colors.white,
                               width: ScreenUtil().setWidth(2)),
@@ -188,27 +305,7 @@ class FilterImage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      Positioned(
-        top: ScreenUtil().setHeight(560),
-        child: ModelInfo(),
       )
     ]);
   }
-}
-
-class ModelInfo extends StatefulWidget {
-  @override
-  _ModelInfoState createState() => _ModelInfoState();
-}
-
-class _ModelInfoState extends State<ModelInfo> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('tar'),
-    );
-  }
-  
-  
 }
