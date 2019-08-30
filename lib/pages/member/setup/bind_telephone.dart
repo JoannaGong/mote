@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
+import 'package:provide/provide.dart';
 
 import '../../../routers/application.dart';
+import '../../../provide/login.dart';
+import '../../../provide/main.dart';
 
 class BindTelephone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var userInfo = Provide.value<LoginProvide>(context).userInfo;
     return Scaffold(
       appBar: AppBar(title: Text('绑定手机号', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
       body: Container(
@@ -25,7 +29,7 @@ class BindTelephone extends StatelessWidget {
           )),
           Align(
             alignment: Alignment.center,
-            child: Text('你的手机号：18876229997', style: TextStyle(fontSize: ScreenUtil().setSp(36), fontWeight: FontWeight.w500)),
+            child: Text('你的手机号：${userInfo.phone}', style: TextStyle(fontSize: ScreenUtil().setSp(36), fontWeight: FontWeight.w500)),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(80)),

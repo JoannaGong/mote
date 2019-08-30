@@ -13,6 +13,7 @@ import '../../../provide/main.dart';
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 var areaList;
 var areaInfo;
+var temp;
 
 class SetArea extends StatefulWidget {
   SetArea({Key key}) : super(key: key);
@@ -21,6 +22,11 @@ class SetArea extends StatefulWidget {
 }
 
 class _SetAreaState extends State<SetArea> {
+  @override
+  void initState() {
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +44,8 @@ class _SetAreaState extends State<SetArea> {
         actions: <Widget>[
           RaisedButton(
             onPressed: (){
-              
+              areaInfo.name = temp;
+              Navigator.pop(context);
             },
             child: Text('保存', style: TextStyle(color: Color(0xFFFF5658), fontSize: ScreenUtil().setSp(32)),),
             color: Colors.transparent,
@@ -72,8 +79,9 @@ class _SetAreaState extends State<SetArea> {
                         itemBuilder: (context, index){
                           return ListTile(
                             title: Text("${areaList[index].name}", style: TextStyle(fontSize: ScreenUtil().setSp(28))),
+                            // trailing: Icon(Icons.done, color: Color(0xFFFF5658)),
                             onTap: (){
-                              areaInfo.name = areaList[index].name;
+                              temp = areaList[index].name;
                             },
                           );
                         },
@@ -97,15 +105,13 @@ class _SetAreaState extends State<SetArea> {
 
   Future _getArea(BuildContext context) async {    
     return _memoizer.runOnce(() async {
-      var token = Provide.value<MainProvide>(context).token;
-      await Provide.value<LoginProvide>(context).getAreaList(token); // 获取地区列表
+      await Provide.value<LoginProvide>(context).getAreaList(); // 获取地区列表
       return '完成加载';
     });
   }
 
   Future _getAreaList(BuildContext context) async {
-    var token = Provide.value<MainProvide>(context).token;
-    await Provide.value<LoginProvide>(context).getAreaList(token); // 获取地区列表
+    await Provide.value<LoginProvide>(context).getAreaList(); // 获取地区列表
     return '完成加载';
   }
 

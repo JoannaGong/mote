@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
+import 'package:fluro/fluro.dart';
 
 import '../provide/current_index.dart';
 import '../provide/main.dart';
@@ -95,12 +96,10 @@ class IndexPage extends StatelessWidget {
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
           print('index_page: $token');
-          if(token == null ){
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage())
-            );
+          if(token == '' ){
+            Application.router.navigateTo(context, "/login", transition: TransitionType.inFromRight);
           }else{
-            // Application.router.navigateTo(context, "/memberPage"); //, transition: TransitionType.inFromRight
+            // Application.router.navigateTo(context, "/member"); //, transition: TransitionType.inFromRight
             // Navigator.push(
             //   context, MaterialPageRoute(builder: (context) => MemberPage())
             // );

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluro/fluro.dart';
+
+import '../certification/certification_select.dart';
+import '../../../routers/application.dart';
 
 class NoIdentify extends StatelessWidget {
   @override
@@ -11,7 +15,7 @@ class NoIdentify extends StatelessWidget {
         Container(alignment: Alignment.centerLeft, child: Text('认证之后才可开通附加功能', style: TextStyle(fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)))),
         GestureDetector(
           onTap: (){
-            print('hhh');
+            Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),

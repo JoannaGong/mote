@@ -8,6 +8,7 @@ import '../model_data/login/login_in.dart';
 import '../model_data/login/user_info.dart';
 import '../pages/common/toast.dart';
 import '../model_data/setting/area_list.dart';
+import '../model_data/setting/change_phone.dart';
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData;
@@ -16,6 +17,7 @@ class LoginProvide with ChangeNotifier {
   List<AreaList> list;
   Area areaInfo;
   UserInfo userInfo;
+  // ChangePhoneData phoneData;
   var token;
 
   // 获取手机验证码
@@ -53,6 +55,7 @@ class LoginProvide with ChangeNotifier {
   // 获取用户信息
   getUserInfo() async {
     await requestPost('getUserInfo').then((val){
+      // print(val);
       userData = GetUserInfo.fromJson(val);
       userInfo = userData.data.userInfo;
       areaInfo = userData.data.userInfo.area;
@@ -61,11 +64,24 @@ class LoginProvide with ChangeNotifier {
   }
 
   // 获取地区列表（不分页）
-  getAreaList(String token) async {
+  getAreaList() async {
     await requestGet('areaList').then((val){
       // print(val);
       areaData = GetAreaList.fromJson(val);
       list = areaData.data.areaList;
+      notifyListeners();
+    });
+  }
+
+  // 更换手机号
+  changedPhone(String id, String phone, String phoneCode) async {
+    var formData = {
+      id: id,
+      phone: phone,
+      phoneCode: phoneCode
+    };
+    await requestPost('changePhone', formData: formData).then((val) {
+      // phoneData = ChangePhoneData.fromJson(val);
       notifyListeners();
     });
   }

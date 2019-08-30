@@ -10,5 +10,6 @@ const servicePath = {
   'getUserInfo': '${serviceUrl}loginController/getUserInfo',  // 获取用户信息
   'activityGuest': '${serviceUrl}activityGuestController/activityGuest',  // 活动报名成员
   'areaList': '${serviceUrl}areaController/areaForAjax',   // 地区列表
-  'shootingPlace': '${serviceUrl}shootingPlaceController/shootingPlace'  // 拍摄圣地
+  'shootingPlace': '${serviceUrl}shootingPlaceController/shootingPlace',  // 拍摄圣地
+  'changePhone': '${serviceUrl}loginController/updatePhone'  // 更换手机号
 };

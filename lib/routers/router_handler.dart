@@ -123,7 +123,7 @@ Handler shootSiteDetailHandler =
   );
 });
 
-Handler memberPageHandler =
+Handler memberHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return MemberPage();
 });

@@ -22,10 +22,7 @@ class _ChangeTelephoneState extends State<ChangeTelephone> {
 
   @override
   Widget build(BuildContext context) {
-    // save() async {
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   prefs.setString(token, Provide.value<LoginProvide>(context).token);
-    // }
+    var userInfo = Provide.value<LoginProvide>(context).userInfo;
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(title: Text('', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black),),
@@ -42,7 +39,7 @@ class _ChangeTelephoneState extends State<ChangeTelephone> {
               margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(60)),
               child: Column(children: <Widget>[
                 Align(alignment: Alignment.centerLeft, child: Text('更换手机后，下次登陆可使用新的手机号登陆', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Color(0xFF999999), height: ScreenUtil().setHeight(3)))),
-                Align(alignment: Alignment.centerLeft, child: Text('当前手机号码：18827667822', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Color(0xFF999999), height: ScreenUtil().setHeight(3)))),
+                Align(alignment: Alignment.centerLeft, child: Text('当前手机号码：${userInfo.phone}', style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Color(0xFF999999), height: ScreenUtil().setHeight(3)))),
               ])
             ),
             Text('输入需要绑定的手机号', style: TextStyle(fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.w500)),
@@ -119,22 +116,25 @@ class _ChangeTelephoneState extends State<ChangeTelephone> {
         onPressed: () {
           if (_formKey.currentState.validate()) {
             _formKey.currentState.save();
-            save();
+
+            
             // 链式请求
-            Future(() =>
-              Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
-            ).then((val){
-              token = Provide.value<LoginProvide>(context).token;
-              print('token1---$token');
-            }).then((val){
-              if(token != null){
-                save();
-                print('token2---$token');
-                Provide.value<LoginProvide>(context).getUserInfo(); // 请求用户数据
-              }
-            }).whenComplete(() => 
-              Application.router.navigateTo(context, "/changeFinish", transition: TransitionType.inFromRight)
-            );
+            // Future(() =>
+            //   Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
+            // ).then((val){
+            //   token = Provide.value<LoginProvide>(context).token;
+            //   Provide.value<MainProvide>(context).saveToken(token);
+            //   Provide.value<MainProvide>(context).changeToken(token);
+            // }).then((val){
+            //   if(token != null){
+            //     Provide.value<MainProvide>(context).saveToken(token);
+            //     Navigator.pop(
+            //       context, MaterialPageRoute(builder: (context) => MemberPage())
+            //     );
+            //   }
+            // }).then((val){
+            //   Provide.value<LoginProvide>(context).getUserInfo(); // 请求用户数据
+            // });
           }
         },
     ));
