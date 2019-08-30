@@ -20,6 +20,7 @@ import './main_page/no_identify.dart';
 import './main_page/user_info_no_identify.dart';
 
 var userInfo;
+var token;
 
 class MemberPage extends StatefulWidget {
   const MemberPage({Key key}) : super(key: key);
@@ -38,9 +39,9 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
   }
 
   Widget build(BuildContext context) {
-    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
-      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-    }
+    // if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
+    //   userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
+    // }
     return Scaffold(
       body: Container(
         color: Color(0xFFF5F5F5),
@@ -48,109 +49,115 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
           future: _getMemberInfo(context),
           builder: (context, snapshot){
             if(snapshot.hasData){
-              if(userInfo?.roleName == 1){   // 未认证用户
-                return  Container(
-                  child: EasyRefresh(
-                    header: BallPulseHeader(color: Color(0xFFFF5658)),
-                    onRefresh: () async {
-                      _refresh(context);
-                    },
-                    child: ListView(children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(396)),  // 无身份
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: AlignmentDirectional.center,
-                          children: <Widget>[
-                            Container(color: Color(0xFFF5F5F5),),
-                            Positioned(
-                              top: 0,
-                              child: UserInfoNoIdentify(),     // 用户信息
-                            ),
-                        ])),
-                      NoIdentify(),  // 无身份 认证信息
-                    ])
-                  )
-                );
-              }else if(userInfo?.roleName == 2 || userInfo?.roleName == 3){   // 模特经纪
-                return  Container(
-                  child: EasyRefresh(
-                    header: BallPulseHeader(color: Color(0xFFFF5658)),
-                    onRefresh: () async {
-                      _refresh(context);
-                    },
-                    child: ListView(children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),  // 模特、商户
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: AlignmentDirectional.center,
-                          children: <Widget>[
-                            Container(color: Color(0xFFF5F5F5)),
-                            Positioned(
-                              top: 0,
-                              child:UserInfo(),     // 用户信息
-                            ),
-                            AnnounceManage(),  // 通告管理
-                        ])),
-                      MyMoneyMerchant(),  // 商户 -- 我的钱包、收藏、专业服务、通告统计、付费作品
-                    ])
-                  )
-                );
-              }else if(userInfo?.roleName == 4){   // 商户
-                return  Container(
-                  child: EasyRefresh(
-                    header: BallPulseHeader(color: Color(0xFFFF5658)),
-                    onRefresh: () async {
-                      _refresh(context);
-                    },
-                    child: ListView(children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),  // 模特、商户
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: AlignmentDirectional.center,
-                          children: <Widget>[
-                            Container(color: Color(0xFFF5F5F5),),
-                            Positioned(
-                              top: 0,
-                              child:UserInfo(),     // 用户信息
-                            ),
-                            AnnounceManageMerchant(),  // 通告管理
-                        ])),
-                      MyMoney(),  //  我的钱包、收藏、主页、佣金管理
-                      MyWork(),  // 我的作品、经纪公司（模特）
-                    ])
-                  )
-                );
-              }else if(userInfo?.roleName == 5){   // 其他职业  // 待完善
-                return  Container(
-                  child: EasyRefresh(
-                    header: BallPulseHeader(color: Color(0xFFFF5658)),
-                    onRefresh: () async {
-                      _refresh(context);
-                    },
-                    child: ListView(children: <Widget>[
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)), 
-                        child: Stack(
-                          fit: StackFit.expand,
-                          alignment: AlignmentDirectional.center,
-                          children: <Widget>[
-                            Container(color: Color(0xFFF5F5F5)),
-                            Positioned(
-                              top: 0,
-                              child:UserInfo(),     // 用户信息
-                            ),
-                            AnnounceManage(),  // 通告管理
-                        ])),
-                      MyMoneyMerchant(),
-                    ])
-                  )
-                );
-              }else{
-                return Container();
-              }
+              return Provide<LoginProvide>(builder: (context, child, val){
+                token = Provide.value<LoginProvide>(context).token;
+                print('member_page: $token');
+                Provide.value<LoginProvide>(context).getUserInfo(token);
+                userInfo = Provide.value<LoginProvide>(context).userInfo;
+                if(userInfo?.roleName == 1){   // 未认证用户
+                  return  Container(
+                    child: EasyRefresh(
+                      header: BallPulseHeader(color: Color(0xFFFF5658)),
+                      onRefresh: () async {
+                        _refresh(context);
+                      },
+                      child: ListView(children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(396)),  // 无身份
+                          child: Stack(
+                            fit: StackFit.expand,
+                            alignment: AlignmentDirectional.center,
+                            children: <Widget>[
+                              Container(color: Color(0xFFF5F5F5),),
+                              Positioned(
+                                top: 0,
+                                child: UserInfoNoIdentify(),     // 用户信息
+                              ),
+                          ])),
+                        NoIdentify(),  // 无身份 认证信息
+                      ])
+                    )
+                  );
+                }else if(userInfo?.roleName == 2 || userInfo?.roleName == 3){   // 模特经纪
+                  return  Container(
+                    child: EasyRefresh(
+                      header: BallPulseHeader(color: Color(0xFFFF5658)),
+                      onRefresh: () async {
+                        _refresh(context);
+                      },
+                      child: ListView(children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),  // 模特、商户
+                          child: Stack(
+                            fit: StackFit.expand,
+                            alignment: AlignmentDirectional.center,
+                            children: <Widget>[
+                              Container(color: Color(0xFFF5F5F5)),
+                              Positioned(
+                                top: 0,
+                                child:UserInfo(),     // 用户信息
+                              ),
+                              AnnounceManage(),  // 通告管理
+                          ])),
+                        MyMoneyMerchant(),  // 商户 -- 我的钱包、收藏、专业服务、通告统计、付费作品
+                      ])
+                    )
+                  );
+                }else if(userInfo?.roleName == 4){   // 商户
+                  return  Container(
+                    child: EasyRefresh(
+                      header: BallPulseHeader(color: Color(0xFFFF5658)),
+                      onRefresh: () async {
+                        _refresh(context);
+                      },
+                      child: ListView(children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)),  // 模特、商户
+                          child: Stack(
+                            fit: StackFit.expand,
+                            alignment: AlignmentDirectional.center,
+                            children: <Widget>[
+                              Container(color: Color(0xFFF5F5F5),),
+                              Positioned(
+                                top: 0,
+                                child:UserInfo(),     // 用户信息
+                              ),
+                              AnnounceManageMerchant(),  // 通告管理
+                          ])),
+                        MyMoney(),  //  我的钱包、收藏、主页、佣金管理
+                        MyWork(),  // 我的作品、经纪公司（模特）
+                      ])
+                    )
+                  );
+                }else if(userInfo?.roleName == 5){   // 其他职业  // 待完善
+                  return  Container(
+                    child: EasyRefresh(
+                      header: BallPulseHeader(color: Color(0xFFFF5658)),
+                      onRefresh: () async {
+                        _refresh(context);
+                      },
+                      child: ListView(children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: ScreenUtil().setHeight(825)), 
+                          child: Stack(
+                            fit: StackFit.expand,
+                            alignment: AlignmentDirectional.center,
+                            children: <Widget>[
+                              Container(color: Color(0xFFF5F5F5)),
+                              Positioned(
+                                top: 0,
+                                child:UserInfo(),     // 用户信息
+                              ),
+                              AnnounceManage(),  // 通告管理
+                          ])),
+                        MyMoneyMerchant(),
+                      ])
+                    )
+                  );
+                }else{
+                  return Container();
+                }
+              });
             }else{
               return Container();
             }
@@ -160,25 +167,16 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
     );
   }
 
-  Future<String> get() async {
-    var token;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString(token);
-    return token;
-  }
-
   Future _getMemberInfo(BuildContext context) async {
     return _memoizer.runOnce(() async {
-      // Future<String> token = get();
-      // await Provide.value<LoginProvide>(context).getUserInfo(token); //获取摄影师、化妆师
+      // var token = Provide.value<LoginProvide>(context).token;
+      // await Provide.value<LoginProvide>(context).getUserInfo(token); // 获取用户信息
       return '完成加载';
     });
   }
 
   void _refresh(BuildContext context) async {
-    // var isShoot = Provide.value<HomeProvide>(context).isShoot ? 0 : 1;
-    // Provide.value<HomeProvide>(context).pageNum = 1;
     // var token = Provide.value<LoginProvide>(context).token;
-    // await Provide.value<LoginProvide>(context).getUserInfo(token); //获取用户信息
+    // await Provide.value<LoginProvide>(context).getUserInfo(token); // 获取地区列表
   }
 }

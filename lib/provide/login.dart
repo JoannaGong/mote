@@ -2,14 +2,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../service/service_method.dart';
 import '../model_data/login/login_in.dart';
 import '../model_data/login/user_info.dart';
 import '../pages/common/toast.dart';
 import '../model_data/setting/area_list.dart';
-
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData;
@@ -55,6 +53,7 @@ class LoginProvide with ChangeNotifier {
   // 获取用户信息
   getUserInfo(String token) async {
     await requestPost('getUserInfo', token: token).then((val){
+      print(val);
       userData = GetUserInfo.fromJson(val);
       userInfo = userData.data.userInfo;
       areaInfo = userData.data.userInfo.area;
@@ -64,8 +63,8 @@ class LoginProvide with ChangeNotifier {
   }
 
   // 获取地区列表（不分页）
-  getAreaList() async {
-    await requestGet('areaList').then((val){
+  getAreaList(String token) async {
+    await requestGet('areaList', token: token).then((val){
       // print(val);
       areaData = GetAreaList.fromJson(val);
       list = areaData.data.areaList;

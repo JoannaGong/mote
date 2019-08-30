@@ -18,15 +18,15 @@ class UserInfoNoIdentify extends StatelessWidget {
   Widget build(BuildContext context) {
     if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
       userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-      if(userInfo.roleName == 0){
+      if(userInfo.roleName == 1){
         identity = '未认证用户';
-      }else if(userInfo.roleName == 1){
-        identity = '模特';
       }else if(userInfo.roleName == 2){
-        identity = '经纪公司';
+        identity = '模特';
       }else if(userInfo.roleName == 3){
-        identity = '商户';
+        identity = '经纪公司';
       }else if(userInfo.roleName == 4){
+        identity = '商户';
+      }else if(userInfo.roleName == 5){
         identity = '其他职业(摄影师化妆师等)';
       }
     }

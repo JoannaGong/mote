@@ -13,7 +13,6 @@ import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
 import '../provide/login.dart';
-import '../provide/main.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 
@@ -94,12 +93,15 @@ class IndexPage extends StatelessWidget {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
-          // if (token != '') {
-          //   Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
-          // } else 
-          if(token == ''){
+          print('index_page: $token');
+          if(token == null ){
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage()));
+              context, MaterialPageRoute(builder: (context) => LoginPage())
+            );
+          }else{
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MemberPage())
+            );
           }
         }
       },

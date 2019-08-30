@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/member/setup/set_name.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../provide/login.dart';
+import '../../../provide/main.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 var areaList;
+var areaInfo;
 
 class SetArea extends StatefulWidget {
   SetArea({Key key}) : super(key: key);
@@ -36,7 +38,7 @@ class _SetAreaState extends State<SetArea> {
         actions: <Widget>[
           RaisedButton(
             onPressed: (){
-              print('area');
+              
             },
             child: Text('保存', style: TextStyle(color: Color(0xFFFF5658), fontSize: ScreenUtil().setSp(32)),),
             color: Colors.transparent,
@@ -49,6 +51,7 @@ class _SetAreaState extends State<SetArea> {
         builder: (context, snapshot){
           if(snapshot.hasData){
             return Provide<LoginProvide>(builder: (context, child, val){
+              areaInfo = Provide.value<LoginProvide>(context).areaInfo;
               areaList = Provide.value<LoginProvide>(context).list;
               return Container(
                   margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),   
@@ -64,17 +67,22 @@ class _SetAreaState extends State<SetArea> {
                     child: Container(
                       color: Color(0xFFFFFFFF),
                       child: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: 2,
-                      itemBuilder: (context, index){
-                        return ListTile(title: Text("$areaList", style: TextStyle(fontSize: ScreenUtil().setSp(28))));
-                      },
-                      separatorBuilder: (context, index){
-                        return Container(
-                          color: Color(0xFFF5F5F5),
-                          height: ScreenUtil().setHeight(2),
-                        );
-                      }
+                        shrinkWrap: true,
+                        itemCount: areaList.length,
+                        itemBuilder: (context, index){
+                          return ListTile(
+                            title: Text("${areaList[index].name}", style: TextStyle(fontSize: ScreenUtil().setSp(28))),
+                            onTap: (){
+                              areaInfo.name = areaList[index].name;
+                            },
+                          );
+                        },
+                        separatorBuilder: (context, index){
+                          return Container(
+                            color: Color(0xFFF5F5F5),
+                            height: ScreenUtil().setHeight(2),
+                          );
+                        }
                     ),
                   )
               ));
@@ -87,23 +95,17 @@ class _SetAreaState extends State<SetArea> {
     );
   }
 
-  Future<String> get(key) async {
-    var value;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    value = prefs.getString(key);
-    return value;
-  }
-
   Future _getArea(BuildContext context) async {    
     return _memoizer.runOnce(() async {
-      
-      await Provide.value<LoginProvide>(context).getAreaList(); //获取地区列表
+      var token = Provide.value<MainProvide>(context).token;
+      await Provide.value<LoginProvide>(context).getAreaList(token); // 获取地区列表
       return '完成加载';
     });
   }
 
   Future _getAreaList(BuildContext context) async {
-    await Provide.value<LoginProvide>(context).getAreaList(); //获取地区列表
+    var token = Provide.value<MainProvide>(context).token;
+    await Provide.value<LoginProvide>(context).getAreaList(token); // 获取地区列表
     return '完成加载';
   }
 
