@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       }
                     }).then((val){
-                      Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+                      Provide.value<LoginProvide>(context).getUserInfo(); // 请求用户数据
                     });
                   }
                 },

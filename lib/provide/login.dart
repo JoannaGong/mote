@@ -51,7 +51,7 @@ class LoginProvide with ChangeNotifier {
   }
 
   // 获取用户信息
-  getUserInfo(String token) async {
+  getUserInfo() async {
     await requestPost('getUserInfo').then((val){
       userData = GetUserInfo.fromJson(val);
       userInfo = userData.data.userInfo;

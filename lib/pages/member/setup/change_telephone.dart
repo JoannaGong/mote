@@ -130,7 +130,7 @@ class _ChangeTelephoneState extends State<ChangeTelephone> {
               if(token != null){
                 save();
                 print('token2---$token');
-                Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+                Provide.value<LoginProvide>(context).getUserInfo(); // 请求用户数据
               }
             }).whenComplete(() => 
               Application.router.navigateTo(context, "/changeFinish", transition: TransitionType.inFromRight)

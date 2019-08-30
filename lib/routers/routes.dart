@@ -24,6 +24,7 @@ class Routes {
   static String changeFinish = '/changeFinish';  // 设置 - 更换成功
   static String setName = '/setName';  // 设置 - 设置名字
   static String setArea = '/setArea';  // 设置 - 设置地区
+  static String memberPage = '/memberPage';  // 我的
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -50,5 +51,6 @@ class Routes {
     router.define(setName,handler: setNameHandler);
     router.define(setArea,handler: setAreaHandler);
     router.define(shootSiteDetail,handler: shootSiteDetailHandler);
+    router.define(memberPage, handler: memberPageHandler);
   }
 }
