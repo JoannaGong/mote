@@ -51,10 +51,7 @@ class _SetAreaState extends State<SetArea> {
             return Provide<LoginProvide>(builder: (context, child, val){
               areaList = Provide.value<LoginProvide>(context).list;
               return Container(
-                color: Color(0xFFFFFFFF),
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
-                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
-                child: Container(
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),   
                   child: EasyRefresh(
                     header: BallPulseHeader(color: Color(0xFFFF5658)),
                     footer: BallPulseFooter(color: Color(0xFFFF5658)),
@@ -64,7 +61,9 @@ class _SetAreaState extends State<SetArea> {
                     onLoad: () async {
                       _getAreaList(context);
                     },
-                    child: ListView.separated(
+                    child: Container(
+                      color: Color(0xFFFFFFFF),
+                      child: ListView.separated(
                       shrinkWrap: true,
                       itemCount: 2,
                       itemBuilder: (context, index){
@@ -104,7 +103,6 @@ class _SetAreaState extends State<SetArea> {
   }
 
   Future _getAreaList(BuildContext context) async {
-    Future<String> token = get('token');
     await Provide.value<LoginProvide>(context).getAreaList(); //获取地区列表
     return '完成加载';
   }
