@@ -53,31 +53,29 @@ class ActivityProvide with ChangeNotifier {
   }
 
   //报名
-  activityGuest(BuildContext context, String token) async {
-    Application.router.navigateTo(context, '/activityPay?id=$id',
-        transition: TransitionType.inFromRight);
-    // var formData = {
-    //   'activityId': id,
-    //   'name': name,
-    //   'contact': contact,
-    //   'companyName': companyName,
-    //   'note': note
-    // };
-    // if (name == '') {
-    //   showToast('姓名不能为空');
-    //   return;
-    // }
-    // var phoneReg = RegExp(
-    //     r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
-    // if (!phoneReg.hasMatch(contact)) {
-    //   showToast('请输入正确手机号码');
-    //   return;
-    // }
-    // await requestPost('activityGuest', formData: formData, token: token)
-    //     .then((response) {
-    //   // activityDetaildata = ActivityDetailModel.fromJson(val);
-    //   if(response['code']){}
-
-    // });
+  activityGuest(BuildContext context) async {
+    var formData = {
+      'activityId': id,
+      'name': name,
+      'contact': contact,
+      'companyName': companyName,
+      'note': note
+    };
+    if (name == '') {
+      showToast('姓名不能为空');
+      return;
+    }
+    var phoneReg = RegExp(
+        r"(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[3-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-7]{1}))+\d{8})");
+    if (!phoneReg.hasMatch(contact)) {
+      showToast('请输入正确手机号码');
+      return;
+    }
+    await requestPost('activityGuest', formData: formData,context: context)
+        .then((response) {
+      // if(response['code']){}
+      //     Application.router.navigateTo(context, '/activityPay?id=$id',
+      //   transition: TransitionType.inFromRight);
+    });
   }
 }

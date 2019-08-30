@@ -52,12 +52,10 @@ class LoginProvide with ChangeNotifier {
 
   // 获取用户信息
   getUserInfo(String token) async {
-    await requestPost('getUserInfo', token: token).then((val){
-      print(val);
+    await requestPost('getUserInfo').then((val){
       userData = GetUserInfo.fromJson(val);
       userInfo = userData.data.userInfo;
       areaInfo = userData.data.userInfo.area;
-      // print(val);
       notifyListeners();
     });
   }

@@ -85,9 +85,8 @@ class _ActivityFormState extends State<ActivityForm> {
                       if (formState.validate()) {
                         formState.save();
                         Provide.value<ActivityProvide>(context).id = widget.id;
-                        Provide.value<ActivityProvide>(context).activityGuest(
-                            context,
-                            Provide.value<LoginProvide>(context).token);
+                        Provide.value<ActivityProvide>(context)
+                            .activityGuest(context);
                       }
                     },
                     child: Container(
