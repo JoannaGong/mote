@@ -3,15 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
+import 'package:async/src/async_memoizer.dart';
+
 import '../provide/current_index.dart';
 import '../provide/main.dart';
-
 import './home/home_page.dart';
 import './model/model_page.dart';
 import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
 import '../provide/login.dart';
+import '../provide/main.dart';
+
+final AsyncMemoizer _memoizer = AsyncMemoizer();
 
 class IndexPage extends StatelessWidget {
   final List<Widget> tabBodies = [
@@ -27,10 +31,12 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _getToken(context);
     ScreenUtil.instance = ScreenUtil(width: 750, height: 1624)..init(context);
     return Provide<CurrentIndexProvide>(
       builder: (context, child, val) {
-        var currentIndex = Provide.value<CurrentIndexProvide>(context).currentIndex;
+        var currentIndex =
+            Provide.value<CurrentIndexProvide>(context).currentIndex;
         return Scaffold(
             backgroundColor: Colors.white,
             floatingActionButton: Builder(builder: (BuildContext context) {
@@ -63,9 +69,17 @@ class IndexPage extends StatelessWidget {
     );
   }
 
-  BottomNavigationBar _bottomNavigationBar(
-    BuildContext context, List<String> titles, List<String> icons) {
+  _getToken(BuildContext context) {
+    Future<String> token = Provide.value<MainProvide>(context).get('token');
+    token.then((String token) {
+      if (token != null) {
+        Provide.value<MainProvide>(context).changeToken(token); // 保存token
+      }
+    });
+  }
 
+  BottomNavigationBar _bottomNavigationBar(
+      BuildContext context, List<String> titles, List<String> icons) {
     return BottomNavigationBar(
       items: [
         _bottomBarItem(context, titles[0], icons[0]),
@@ -79,17 +93,13 @@ class IndexPage extends StatelessWidget {
       onTap: (index) {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
-          Future<String> token =  Provide.value<MainProvide>(context).get('token');
-          token.then((String token){
-            if(token == null){
-              Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LoginPage())
-              );
-            }else{
-              Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
-              Provide.value<MainProvide>(context).changeToken(token); // 保存token
-            }
-          });
+          var token = Provide.value<MainProvide>(context).token;
+          if (token != '') {
+            Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
+          } else {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          }
         }
       },
       selectedFontSize: 12,
@@ -97,7 +107,8 @@ class IndexPage extends StatelessWidget {
   }
 
   // 创建item
-  BottomNavigationBarItem _bottomBarItem(BuildContext context,
+  BottomNavigationBarItem _bottomBarItem(
+    BuildContext context,
     String title,
     String iconName,
   ) {

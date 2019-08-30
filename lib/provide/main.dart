@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MainProvide with ChangeNotifier {
   String token = '';
 
-  changeToken(String token) {
-    token = token;
+  changeToken(String tok) {
+    token = tok;
     notifyListeners();
   }
 
