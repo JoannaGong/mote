@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:async/src/async_memoizer.dart';
+import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
+import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../provide/login.dart';
 
-var userInfo;
+final AsyncMemoizer _memoizer = AsyncMemoizer();
+var areaList;
 
 class SetArea extends StatefulWidget {
-  @override
+  SetArea({Key key}) : super(key: key);
+
   _SetAreaState createState() => _SetAreaState();
 }
 
 class _SetAreaState extends State<SetArea> {
-  var area;
-  List<int> items = List.generate(10, (i) => i);
-
-  @override
-  void initState(){
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
-      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-    }
-    area = '${userInfo.areaId}';
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
@@ -41,7 +36,7 @@ class _SetAreaState extends State<SetArea> {
         actions: <Widget>[
           RaisedButton(
             onPressed: (){
-              print('$area');
+              print('area');
             },
             child: Text('保存', style: TextStyle(color: Color(0xFFFF5658), fontSize: ScreenUtil().setSp(32)),),
             color: Colors.transparent,
@@ -49,17 +44,69 @@ class _SetAreaState extends State<SetArea> {
           )
         ],
       ),
-      body: Container(
-        color: Color(0xFFFFFFFF),
-        margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
-        padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
-        child: ListView.builder(
-          // itemBuilder: items.length,
-          // itemBuilder: (context, index){
-          //   return ListTile(title: Text("Number $index"));
-          // },
-        )
-      ),
+      body: Container(child: FutureBuilder(
+        future: _getArea(context),
+        builder: (context, snapshot){
+          if(snapshot.hasData){
+            return Provide<LoginProvide>(builder: (context, child, val){
+              areaList = Provide.value<LoginProvide>(context).list;
+              return Container(
+                color: Color(0xFFFFFFFF),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
+                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
+                child: Container(
+                  child: EasyRefresh(
+                    header: BallPulseHeader(color: Color(0xFFFF5658)),
+                    footer: BallPulseFooter(color: Color(0xFFFF5658)),
+                    onRefresh: () async {
+                      _getArea(context);
+                    },
+                    onLoad: () async {
+                      _getAreaList(context);
+                    },
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: 2,
+                      itemBuilder: (context, index){
+                        return ListTile(title: Text("$areaList", style: TextStyle(fontSize: ScreenUtil().setSp(28))));
+                      },
+                      separatorBuilder: (context, index){
+                        return Container(
+                          color: Color(0xFFF5F5F5),
+                          height: ScreenUtil().setHeight(2),
+                        );
+                      }
+                    ),
+                  )
+              ));
+            });
+          }else{
+            return Container();
+          }
+        },
+      ))
     );
   }
+
+  Future<String> get(key) async {
+    var value;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    value = prefs.getString(key);
+    return value;
+  }
+
+  Future _getArea(BuildContext context) async {    
+    return _memoizer.runOnce(() async {
+      
+      await Provide.value<LoginProvide>(context).getAreaList(); //获取地区列表
+      return '完成加载';
+    });
+  }
+
+  Future _getAreaList(BuildContext context) async {
+    Future<String> token = get('token');
+    await Provide.value<LoginProvide>(context).getAreaList(); //获取地区列表
+    return '完成加载';
+  }
+
 }

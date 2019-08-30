@@ -8,11 +8,16 @@ import '../service/service_method.dart';
 import '../model_data/login/login_in.dart';
 import '../model_data/login/user_info.dart';
 import '../pages/common/toast.dart';
+import '../model_data/setting/area_list.dart';
 
 
 class LoginProvide with ChangeNotifier {
-  LoginByPhone loginData = null;
-  GetUserInfo userData = null;
+  LoginByPhone loginData;
+  GetUserInfo userData;
+  GetAreaList areaData;
+  List<AreaList> list;
+  Area areaInfo;
+  UserInfo userInfo;
   var token;
 
   // 获取手机验证码
@@ -51,7 +56,18 @@ class LoginProvide with ChangeNotifier {
   getUserInfo(String token) async {
     await requestPost('getUserInfo', token: token).then((val){
       userData = GetUserInfo.fromJson(val);
-      print(val);
+      userInfo = userData.data.userInfo;
+      areaInfo = userData.data.userInfo.area;
+      // print(val);
+      notifyListeners();
+    });
+  }
+
+  // 获取地区列表（不分页）
+  getAreaList() async {
+    await requestGet('areaList').then((val){
+      areaData = GetAreaList.fromJson(val);
+      list = areaData.data.areaList;
       notifyListeners();
     });
   }

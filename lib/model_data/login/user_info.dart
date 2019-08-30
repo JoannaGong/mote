@@ -1,3 +1,4 @@
+
 class GetUserInfo {
   int code;
   String msg;
@@ -117,6 +118,7 @@ class UserInfo {
   String phoneCode;
   List<UserLableList> userLableList;
   List<PermissionRoleList> permissionRoleList;
+  Area area;
   String workExperience;
   String serviceOffers;
   String certificationText;
@@ -196,6 +198,7 @@ class UserInfo {
       this.phoneCode,
       this.userLableList,
       this.permissionRoleList,
+      this.area,
       this.workExperience,
       this.serviceOffers,
       this.certificationText});
@@ -286,6 +289,7 @@ class UserInfo {
         permissionRoleList.add(new PermissionRoleList.fromJson(v));
       });
     }
+    area = json['area'] != null ? new Area.fromJson(json['area']) : null;
     workExperience = json['workExperience'];
     serviceOffers = json['serviceOffers'];
     certificationText = json['certificationText'];
@@ -373,6 +377,9 @@ class UserInfo {
     if (this.permissionRoleList != null) {
       data['permissionRoleList'] =
           this.permissionRoleList.map((v) => v.toJson()).toList();
+    }
+    if (this.area != null) {
+      data['area'] = this.area.toJson();
     }
     data['workExperience'] = this.workExperience;
     data['serviceOffers'] = this.serviceOffers;
@@ -771,6 +778,103 @@ class RoleDetails {
     data['bak8'] = this.bak8;
     data['bak9'] = this.bak9;
     data['bak10'] = this.bak10;
+    return data;
+  }
+}
+
+class Area {
+  String id;
+  String name;
+  int hotFlag;
+  String fatherId;
+  String createdUser;
+  String createdTime;
+  String updatedUser;
+  String updatedTime;
+  int deleteStatus;
+  String deleteTime;
+  String bak1;
+  String bak2;
+  String bak3;
+  String bak4;
+  String bak5;
+  String bak6;
+  String bak7;
+  String bak8;
+  String bak9;
+  String bak10;
+  String queryString;
+
+  Area(
+      {this.id,
+      this.name,
+      this.hotFlag,
+      this.fatherId,
+      this.createdUser,
+      this.createdTime,
+      this.updatedUser,
+      this.updatedTime,
+      this.deleteStatus,
+      this.deleteTime,
+      this.bak1,
+      this.bak2,
+      this.bak3,
+      this.bak4,
+      this.bak5,
+      this.bak6,
+      this.bak7,
+      this.bak8,
+      this.bak9,
+      this.bak10,
+      this.queryString});
+
+  Area.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    hotFlag = json['hotFlag'];
+    fatherId = json['fatherId'];
+    createdUser = json['createdUser'];
+    createdTime = json['createdTime'];
+    updatedUser = json['updatedUser'];
+    updatedTime = json['updatedTime'];
+    deleteStatus = json['deleteStatus'];
+    deleteTime = json['deleteTime'];
+    bak1 = json['bak1'];
+    bak2 = json['bak2'];
+    bak3 = json['bak3'];
+    bak4 = json['bak4'];
+    bak5 = json['bak5'];
+    bak6 = json['bak6'];
+    bak7 = json['bak7'];
+    bak8 = json['bak8'];
+    bak9 = json['bak9'];
+    bak10 = json['bak10'];
+    queryString = json['queryString'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['hotFlag'] = this.hotFlag;
+    data['fatherId'] = this.fatherId;
+    data['createdUser'] = this.createdUser;
+    data['createdTime'] = this.createdTime;
+    data['updatedUser'] = this.updatedUser;
+    data['updatedTime'] = this.updatedTime;
+    data['deleteStatus'] = this.deleteStatus;
+    data['deleteTime'] = this.deleteTime;
+    data['bak1'] = this.bak1;
+    data['bak2'] = this.bak2;
+    data['bak3'] = this.bak3;
+    data['bak4'] = this.bak4;
+    data['bak5'] = this.bak5;
+    data['bak6'] = this.bak6;
+    data['bak7'] = this.bak7;
+    data['bak8'] = this.bak8;
+    data['bak9'] = this.bak9;
+    data['bak10'] = this.bak10;
+    data['queryString'] = this.queryString;
     return data;
   }
 }

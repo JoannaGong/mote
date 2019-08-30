@@ -67,11 +67,11 @@ class IndexPage extends StatelessWidget {
 
   BottomNavigationBar _bottomNavigationBar(
     BuildContext context, List<String> titles, List<String> icons) {
-    Future<String> get() async {
-      var token;
+    Future<String> get(key) async {
+      var value;
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      token = prefs.getString(token);
-      return token;
+      value = prefs.getString(key);
+      return value;
     }
     return BottomNavigationBar(
       items: [
@@ -86,7 +86,7 @@ class IndexPage extends StatelessWidget {
       onTap: (index) {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
-          Future<String> token = get();
+          Future<String> token = get('token');
           token.then((String token){
             if(token == null){
               Navigator.push(

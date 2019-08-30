@@ -23,9 +23,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    save() async {
+    save(keyValue) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString(token, Provide.value<LoginProvide>(context).token);
+      prefs.setString('token', keyValue);
     }
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
@@ -109,16 +109,17 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    save();
+                    
                     // 链式请求
                     Future(() =>
                       Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
                     ).then((val){
                       token = Provide.value<LoginProvide>(context).token;
+                      save(token);
                       print('token1---$token');
                     }).then((val){
                       if(token != null){
-                        save();
+                        save(token);
                         print('token2---$token');
                         // Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
                         Navigator.pop(

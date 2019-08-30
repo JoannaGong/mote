@@ -11,8 +11,7 @@ import '../../../routers/application.dart';
 import '../../../provide/login.dart';
 
 var userInfo;
-var areaList;
-var area;
+var areaInfo;
 
 class SetUserInfo extends StatefulWidget {
   @override
@@ -32,17 +31,6 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
   }
   @override
   Widget build(BuildContext context) {
-    if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
-      userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-      if(userInfo.certificationSex == 0){
-        sex = '男';
-      }else if(userInfo.certificationSex == 1){
-        sex = '女';
-      }else if(userInfo.certificationSex == 2 || userInfo.certificationSex == null){
-        sex = '未知';
-      }
-    }
-
     return Scaffold(
       backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(title: Text('个人信息', style: TextStyle(color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34), fontWeight: FontWeight.bold)), centerTitle: true, backgroundColor: Color(0xFFFFFFFF), elevation: 0, iconTheme: IconThemeData(color: Colors.black)),
@@ -51,7 +39,17 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
           future: _setupInfo(context),
           builder: (context, snapshot){
             if(snapshot.hasData){
-              return  Container(
+              return Provide<LoginProvide>(builder: (context, child, val) {
+                areaInfo = Provide.value<LoginProvide>(context).areaInfo;
+                userInfo = Provide.value<LoginProvide>(context).userInfo;
+                if(userInfo.certificationSex == 0){
+                  sex = '男';
+                }else if(userInfo.certificationSex == 1){
+                  sex = '女';
+                }else if(userInfo.certificationSex == 2 || userInfo.certificationSex == null){
+                  sex = '未知';
+                }
+                return  Container(
                 child: EasyRefresh(
                   header: BallPulseHeader(color: Color(0xFFFF5658)),
                   onRefresh: () async {
@@ -63,7 +61,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
                     setUserInfo(),  // 昵称、性别、地区
                   ])
                 )
-              );
+              );});
             }else{
               return Container();
             }
@@ -194,7 +192,7 @@ class _SetUserInfoState extends State<SetUserInfo> with AutomaticKeepAliveClient
               Text('地区', style: TextStyle(fontSize: ScreenUtil().setSp(32)),),
               Expanded(child: Align(
                 alignment: Alignment.centerRight,
-                child: Text('${userInfo.areaId}', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
+                child: Text('${areaInfo.name}', style: TextStyle(color: Color(0xFF999999), fontSize: ScreenUtil().setSp(32)),)    
               )),
               Icon(
                 Icons.keyboard_arrow_right,
