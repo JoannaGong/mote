@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dio/dio.dart';
-import 'package:mote/pages/common/toast.dart';
-import '../../provide/login.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import '../member/member_page.dart';
-import '../../pages/home/home_page.dart';
 import '../common/toast.dart';
+
+import '../../provide/main.dart';
+import '../../provide/login.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,10 +23,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    save(keyValue) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', keyValue);
-    }
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
@@ -115,11 +111,12 @@ class _LoginPageState extends State<LoginPage> {
                       Provide.value<LoginProvide>(context).loginByPhone(phone, validate)  // 用手机登录app
                     ).then((val){
                       token = Provide.value<LoginProvide>(context).token;
-                      save(token);
+                      Provide.value<MainProvide>(context).saveToken(token);
+                      Provide.value<MainProvide>(context).changeToken(token);
                       print('token1---$token');
                     }).then((val){
                       if(token != null){
-                        save(token);
+                        Provide.value<MainProvide>(context).saveToken(token);
                         print('token2---$token');
                         // Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
                         Navigator.pop(

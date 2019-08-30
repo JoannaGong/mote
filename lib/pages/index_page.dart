@@ -1,10 +1,8 @@
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../provide/current_index.dart';
 import '../provide/main.dart';
 
@@ -67,12 +65,7 @@ class IndexPage extends StatelessWidget {
 
   BottomNavigationBar _bottomNavigationBar(
     BuildContext context, List<String> titles, List<String> icons) {
-    Future<String> get(key) async {
-      var value;
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      value = prefs.getString(key);
-      return value;
-    }
+
     return BottomNavigationBar(
       items: [
         _bottomBarItem(context, titles[0], icons[0]),
@@ -86,7 +79,7 @@ class IndexPage extends StatelessWidget {
       onTap: (index) {
         Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
-          Future<String> token = get('token');
+          Future<String> token =  Provide.value<MainProvide>(context).get('token');
           token.then((String token){
             if(token == null){
               Navigator.push(
@@ -94,7 +87,7 @@ class IndexPage extends StatelessWidget {
               );
             }else{
               Provide.value<LoginProvide>(context).getUserInfo(token); // 请求用户数据
-              Provide.value<MainProvide>(context).token = token; // 保存token
+              Provide.value<MainProvide>(context).changeToken(token); // 保存token
             }
           });
         }
