@@ -14,11 +14,11 @@ import './issue/issue_page.dart';
 import './message/message_page.dart';
 import './member/member_page.dart';
 import '../provide/login.dart';
-import '../routers/application.dart';
+import '../main.route.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
-@RoutePage(isInitialRoute: true)
 
+@RoutePage(isInitialRoute: true)
 class IndexPage extends StatelessWidget {
   final List<Widget> tabBodies = [
     HomePage(),
@@ -97,9 +97,9 @@ class IndexPage extends StatelessWidget {
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
           print('index_page: $token');
-          if(token == '' ){
-            Application.router.navigateTo(context, "/login", transition: TransitionType.inFromRight);
-          }else{
+          if (token == '') {
+            Navigator.of(context).pushNamed(ROUTE_LOGIN_PAGE);
+          } else {
             // Application.router.navigateTo(context, "/member"); //, transition: TransitionType.inFromRight
             // Navigator.push(
             //   context, MaterialPageRoute(builder: (context) => MemberPage())
