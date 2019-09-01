@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+// import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
@@ -6,7 +6,9 @@ import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:async/src/async_memoizer.dart';
-import '../../routers/application.dart';
+import 'package:route_annotation/route_annotation.dart';
+
+import '../../main.route.dart';
 
 import '../../provide/activity.dart';
 
@@ -26,6 +28,7 @@ final statusColor = {
   '4': Color(0xFF999999)
 };
 
+@RoutePage()
 class ActivityPage extends StatelessWidget {
   const ActivityPage({Key key}) : super(key: key);
 
@@ -116,8 +119,10 @@ class ActivityList extends StatelessWidget {
   Widget _item(BuildContext context, data) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, 'activityDetail?id=${data.id}',
-            transition: TransitionType.inFromRight);
+        Navigator.of(context).pushNamed(
+          ROUTE_ACTIVITY_DETAIL_PAGE,
+          arguments: "${data.id}",
+        );
       },
       child: Container(
         decoration: BoxDecoration(

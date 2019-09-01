@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
-import '../routers/application.dart';
 import 'dart:convert';
 import '../service/service_method.dart';
 import '../model_data/activity/activity_data.dart';
 import '../model_data/activity/activityDetail_data.dart';
 import '../pages/common/toast.dart';
+import '../main.route.dart';
 
 class ActivityProvide with ChangeNotifier {
   ActivityModel activitydata;
@@ -71,11 +70,10 @@ class ActivityProvide with ChangeNotifier {
       showToast('请输入正确手机号码');
       return;
     }
-    await requestPost('activityGuest', formData: formData,context: context)
+    await requestPost('activityGuest', formData: formData, context: context)
         .then((response) {
       // if(response['code']){}
-      //     Application.router.navigateTo(context, '/activityPay?id=$id',
-      //   transition: TransitionType.inFromRight);
+      Navigator.of(context).pushNamed(ROUTE_ACTIVITY_PAY_PAGE, arguments: "$id");
     });
   }
 }

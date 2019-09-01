@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+// import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
@@ -6,9 +6,9 @@ import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:async/src/async_memoizer.dart';
+import 'package:route_annotation/route_annotation.dart';
 import 'dart:math';
-import '../../routers/application.dart';
-
+import '../../main.route.dart';
 import '../../provide/shoot_site.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
@@ -21,6 +21,7 @@ final lableColor = {
   '4': Color(0xFFFFAF3B)
 };
 
+@RoutePage()
 class ShootSitePage extends StatefulWidget {
   ShootSitePage({Key key}) : super(key: key);
 
@@ -113,7 +114,7 @@ class FiltratePanel extends StatelessWidget {
 
 class ShootList extends StatelessWidget {
   const ShootList({Key key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -189,8 +190,10 @@ class ShootList extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: GestureDetector(
           onTap: () {
-             Application.router.navigateTo(context, 'shootSiteDetail?id=${data.id}',
-            transition: TransitionType.inFromRight);
+            Navigator.of(context).pushNamed(
+              ROUTE_SHOOT_SITE_DETAIL_PAGE,
+              arguments: "${data.id}",
+            );
           },
           child: Container(
             child: Column(
@@ -225,8 +228,9 @@ class ShootList extends StatelessWidget {
         children: <Widget>[
           _title(data),
           Row(
-            children: (data.shootingPlaceLableList as List).asMap().keys.map((index) {
-              return _tip(data.shootingPlaceLableList[index],index);
+            children:
+                (data.shootingPlaceLableList as List).asMap().keys.map((index) {
+              return _tip(data.shootingPlaceLableList[index], index);
             }).toList(),
           )
         ],
@@ -272,7 +276,7 @@ class ShootList extends StatelessWidget {
     );
   }
 
-  Widget _tip(item,index) {
+  Widget _tip(item, index) {
     index = index % lableColor.length;
     return Container(
       margin: EdgeInsets.only(top: 10, right: 10),
@@ -284,11 +288,11 @@ class ShootList extends StatelessWidget {
         child: Text(
           item.lable.name,
           style: TextStyle(
-              color: lableColor[index.toString()], fontSize: ScreenUtil().setSp(20)),
+              color: lableColor[index.toString()],
+              fontSize: ScreenUtil().setSp(20)),
         ),
         alignment: Alignment.center,
       ),
     );
   }
-
 }

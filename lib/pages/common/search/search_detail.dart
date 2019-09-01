@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
 
+@RoutePage()
 class SearchDetail extends StatelessWidget {
   const SearchDetail({Key key}) : super(key: key);
 

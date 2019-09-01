@@ -3,6 +3,7 @@ import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluro/fluro.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../routers/application.dart';
 import '../../provide/shoot_site.dart';
@@ -15,6 +16,7 @@ final lableColor = {
   '4': Color(0xFFFFAF3B)
 };
 
+@RoutePage(params: [RouteParameter('id')])
 class ShootSiteDetailPage extends StatelessWidget {
   final String id;
   const ShootSiteDetailPage({Key key, this.id}) : super(key: key);

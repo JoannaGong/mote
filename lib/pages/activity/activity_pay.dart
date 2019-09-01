@@ -2,8 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../provide/activity.dart';
+
+@RoutePage(params: [RouteParameter("id")])
 
 class ActivityPayPage extends StatelessWidget {
   final String id;

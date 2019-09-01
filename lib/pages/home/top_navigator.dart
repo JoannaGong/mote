@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import '../../routers/application.dart';
+import '../../main.route.dart';
 
 import '../../provide/home.dart';
 import '../../provide/main.dart';
@@ -43,11 +44,20 @@ class TopNavigator extends StatelessWidget {
         // }else{
         //   Application.router.navigateTo(context, "/login");
         // }
-        if (item.routingUrl == 'mote') {
-          Provide.value<CurrentIndexProvide>(context).changeIndex(1);
-        } else {
-          Application.router.navigateTo(context, "/${item.routingUrl}",
-              transition: TransitionType.inFromRight);
+        switch (item.routingUrl) {
+          case 'mote':
+            Provide.value<CurrentIndexProvide>(context).changeIndex(1);
+            break;
+          case 'ROUTE_SHOOT_SITE_PAGE':
+            Navigator.of(context).pushNamed(
+              ROUTE_SHOOT_SITE_PAGE,
+            );
+            break;
+          case 'ROUTE_ACTIVITY_PAGE':
+            Navigator.of(context).pushNamed(
+              ROUTE_ACTIVITY_PAGE,
+            );
+            break;
         }
       },
       child: Column(

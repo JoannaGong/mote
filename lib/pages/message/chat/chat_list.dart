@@ -18,7 +18,7 @@ class _ChatListState extends State<ChatList> {
 
   void initState(){
     super.initState();
-    getChatList();
+    // getChatList();
   }
 
   @override

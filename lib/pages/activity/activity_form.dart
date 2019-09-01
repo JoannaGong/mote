@@ -3,10 +3,12 @@ import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading/loading.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../provide/activity.dart';
-import '../../provide/login.dart';
 
+
+@RoutePage(params: [RouteParameter("id")])
 class ActivityForm extends StatefulWidget {
   final String id;
   ActivityForm({Key key, this.id}) : super(key: key);

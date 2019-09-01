@@ -1,7 +1,7 @@
-import 'package:fluro/fluro.dart';
+// import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../routers/application.dart';
+import '../../../main.route.dart';
 
 class Search extends StatefulWidget {
   final String text;
@@ -27,7 +27,9 @@ class _SearchState extends State<Search> {
               child: Text(
                 widget.text,
                 style: TextStyle(
-                    fontSize: ScreenUtil().setSp(28), color: Color(0xFF999999),fontWeight: FontWeight.w400),
+                    fontSize: ScreenUtil().setSp(28),
+                    color: Color(0xFF999999),
+                    fontWeight: FontWeight.w400),
               ),
             )
           ],
@@ -40,7 +42,10 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, widget.router,transition: TransitionType.inFromRight);
+        // Application.router.navigateTo(context, widget.router,transition: TransitionType.inFromRight);
+        Navigator.of(context).pushNamed(
+          ROUTE_SEARCH_DETAIL,
+        );
       },
       child: Container(
           //修饰黑色背景与圆角

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
 import 'dart:async';
 
 import '../member/member_page.dart';
@@ -9,7 +10,7 @@ import '../common/toast.dart';
 import '../../provide/main.dart';
 import '../../provide/login.dart';
 
-
+@RoutePage()
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();

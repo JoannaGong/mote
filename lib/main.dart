@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import './pages/index_page.dart';
-import 'package:fluro/fluro.dart';
-import './routers/routes.dart';
-import './routers/application.dart';
+// import 'package:fluro/fluro.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
+
 import './provide/current_index.dart';
 import './provide/main.dart';
 import './provide/home.dart';
@@ -11,6 +10,11 @@ import './provide/model.dart';
 import './provide/login.dart';
 import './provide/activity.dart';
 import './provide/shoot_site.dart';
+
+import './pages/index_page.dart';
+import './main.route.dart';
+// import './routers/routes.dart';
+// import './routers/application.dart';
 
 void main() {
   var providers = Providers();
@@ -33,21 +37,23 @@ void main() {
   runApp(ProviderNode(child: MyApp(), providers: providers));
 }
 
+@Router()
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final router = Router();
-    Routes.configureRoutes(router);
-    Application.router = router;
+    // final router = Router();
+    // Routes.configureRoutes(router);
+    // Application.router = router;
 
     return Container(
       child: MaterialApp(
-        title: 'model',
-        onGenerateRoute: Application.router.generator,
+        // onGenerateRoute: Application.router.generator,
+        initialRoute: '/',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.pink,
         ),
+        onGenerateRoute: onGenerateRoute,
         home: IndexPage(),
       ),
     );

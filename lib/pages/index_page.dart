@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/login/login_page.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../provide/current_index.dart';
 import '../provide/main.dart';
@@ -16,6 +17,7 @@ import '../provide/login.dart';
 import '../routers/application.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
+@RoutePage(isInitialRoute: true)
 
 class IndexPage extends StatelessWidget {
   final List<Widget> tabBodies = [

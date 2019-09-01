@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mote/pages/model/detail_intro.dart';
+import 'package:route_annotation/route_annotation.dart';
 
+@RoutePage(params: [RouteParameter('id')])
 class ModelDetail extends StatelessWidget {
   final String id;
   ModelDetail({this.id});

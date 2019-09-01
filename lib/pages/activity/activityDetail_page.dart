@@ -3,9 +3,12 @@ import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:fluro/fluro.dart';
-
+import 'package:route_annotation/route_annotation.dart';
+import '../../main.route.dart';
 import '../../routers/application.dart';
 import '../../provide/activity.dart';
+
+@RoutePage(params: [RouteParameter("id")])
 
 class ActivityDetailPage extends StatelessWidget {
   final String id;
@@ -52,8 +55,11 @@ class ActivityDetailPage extends StatelessWidget {
                         Positioned(
                           bottom: 20,
                           child: GestureDetector(
-                            onTap: (){
-                              Application.router.navigateTo(context, '/activityForm?id=$id',transition: TransitionType.inFromRight);
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                ROUTE_ACTIVITY_FORM,
+                                arguments: "$id",
+                              );
                             },
                             child: Container(
                               width: ScreenUtil().setWidth(686),

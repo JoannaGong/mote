@@ -1,15 +1,14 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:mote/model_data/model/modeListModel.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
-import 'package:mote/routers/application.dart';
 import 'package:provide/provide.dart';
 import '../../provide/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:async/src/async_memoizer.dart';
+import '../../main.route.dart';
 
 class StaggeredGrid extends StatefulWidget {
   @override
@@ -135,8 +134,10 @@ class TileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Application.router.navigateTo(context, "/modelDetail?id=$id",
-            transition: TransitionType.inFromRight);
+        Navigator.of(context).pushNamed(
+          ROUTE_MODEL_DETAIL,
+          arguments: "$id",
+        );
       },
       child: Card(
         shape: const RoundedRectangleBorder(
