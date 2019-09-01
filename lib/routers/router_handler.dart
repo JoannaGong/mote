@@ -20,6 +20,14 @@ import '../pages/member/setup/set_name.dart';
 import '../pages/member/setup/set_area.dart';
 import '../pages/shootSite/shoot_site_detail.dart';
 import '../pages/member/member_page.dart';
+import '../pages/member/certification/certification_merchant.dart';
+import '../pages/member/certification/certification_merchant_no_identify.dart';
+import '../pages/member/certification/certification_model.dart';
+import '../pages/member/certification/certification_company.dart';
+import '../pages/member/certification/merchant_person.dart';
+import '../pages/member/certification/certification_ok.dart';
+import '../pages/member/certification/merchant_company.dart';
+import '../pages/member/certification/model.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -123,7 +131,47 @@ Handler shootSiteDetailHandler =
   );
 });
 
-Handler memberPageHandler =
+Handler memberHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return MemberPage();
+});
+
+Handler certificationMerchantHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return CertificationMerchant();
+});
+
+Handler certificationNoIdentifyHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return CertificationNoIdentify();
+});
+
+Handler certificationModelHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return CertificationModel();
+});
+
+Handler certificationCompanyHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return CertificationCompany();
+});
+
+Handler merchantCompanyHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return MerchantCompany();
+});
+
+Handler merchantPersonHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return MerchantPerson();
+});
+
+Handler certificationOkHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return CertificationOk();
+});
+
+Handler modelHandler =
+    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  return Model();
 });

@@ -97,12 +97,10 @@ class IndexPage extends StatelessWidget {
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
           print('index_page: $token');
-          if(token == null ){
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage())
-            );
+          if(token == '' ){
+            Application.router.navigateTo(context, "/login", transition: TransitionType.inFromRight);
           }else{
-            // Application.router.navigateTo(context, "/memberPage"); //, transition: TransitionType.inFromRight
+            // Application.router.navigateTo(context, "/member"); //, transition: TransitionType.inFromRight
             // Navigator.push(
             //   context, MaterialPageRoute(builder: (context) => MemberPage())
             // );

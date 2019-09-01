@@ -35,7 +35,6 @@ dependencies:
   flutter_html: ^0.10.4 #转HTML
   loading: ^1.0.1
   dropdown_menu: ^1.1.0
-  route_annotation: ^0.1.0
 
 dev_dependencies:
   flutter_test:

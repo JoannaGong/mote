@@ -38,9 +38,6 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
   }
 
   Widget build(BuildContext context) {
-    // if(Provide?.value<LoginProvide>(context)?.userData?.data != null){
-    //   userInfo = Provide.value<LoginProvide>(context).userData.data.userInfo;
-    // }
     return Scaffold(
       body: Container(
         color: Color(0xFFF5F5F5),
@@ -166,13 +163,13 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
   Future _getMemberInfo(BuildContext context) async {
     return _memoizer.runOnce(() async {
       // var token = Provide.value<LoginProvide>(context).token;
-      // await Provide.value<LoginProvide>(context).getUserInfo(token); // 获取用户信息
+      await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息
       return '完成加载';
     });
   }
 
   void _refresh(BuildContext context) async {
     // var token = Provide.value<LoginProvide>(context).token;
-    // await Provide.value<LoginProvide>(context).getUserInfo(token); // 获取地区列表
+    await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息
   }
 }
