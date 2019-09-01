@@ -11,5 +11,6 @@ const servicePath = {
   'activityGuest': '${serviceUrl}activityGuestController/activityGuest',  // 活动报名成员
   'areaList': '${serviceUrl}areaController/areaForAjax',   // 地区列表
   'shootingPlace': '${serviceUrl}shootingPlaceController/shootingPlace',  // 拍摄圣地
-  'changePhone': '${serviceUrl}loginController/updatePhone'  // 更换手机号
+  'changePhone': '${serviceUrl}loginController/updatePhone',  // 更换手机号
+  'photoForAjax': '${serviceUrl}userPhotoAlbumController/userPhotoAlbumForAjax',  // 用户相册列表
 };

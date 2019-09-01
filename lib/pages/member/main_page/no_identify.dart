@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
 
-import '../certification/certification_select.dart';
+
 import '../../../routers/application.dart';
 
 class NoIdentify extends StatelessWidget {
@@ -15,7 +15,7 @@ class NoIdentify extends StatelessWidget {
         Container(alignment: Alignment.centerLeft, child: Text('认证之后才可开通附加功能', style: TextStyle(fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)))),
         GestureDetector(
           onTap: (){
-            Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
+            Application.router.navigateTo(context, "/certificationMerchant", transition: TransitionType.inFromRight);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -28,7 +28,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            print('hhh');
+            Application.router.navigateTo(context, "/certificationModel", transition: TransitionType.inFromRight);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -41,7 +41,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            print('hhh');
+            Application.router.navigateTo(context, "/certificationCompany", transition: TransitionType.inFromRight);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -54,7 +54,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            print('hhh');
+            Application.router.navigateTo(context, "/certificationNoIdentify", transition: TransitionType.inFromRight);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),

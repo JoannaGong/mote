@@ -17,6 +17,8 @@ class LoginProvide with ChangeNotifier {
   List<AreaList> list;
   Area areaInfo;
   UserInfo userInfo;
+  // List<Null> photos;
+  // GetPhotoData photoData;
   // ChangePhoneData phoneData;
   var token;
 
@@ -76,12 +78,24 @@ class LoginProvide with ChangeNotifier {
   // 更换手机号
   changedPhone(String id, String phone, String phoneCode) async {
     var formData = {
-      id: id,
-      phone: phone,
-      phoneCode: phoneCode
+      'id': id,
+      'phone': phone,
+      'phoneCode': phoneCode
     };
     await requestPost('changePhone', formData: formData).then((val) {
       // phoneData = ChangePhoneData.fromJson(val);
+      notifyListeners();
+    });
+  }
+
+  // 用户相册列表
+  photoList(String id) async {
+    var formData = {
+      'userId': id
+    };
+    await requestPost('photoForAjax', formData: formData).then((val){
+      // photoData = GetPhotoData.fromJson(val);
+      // photos = photoData.data.userPhotoAlbumList;
       notifyListeners();
     });
   }

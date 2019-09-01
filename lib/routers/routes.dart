@@ -25,6 +25,14 @@ class Routes {
   static String setName = '/setName';  // 设置 - 设置名字
   static String setArea = '/setArea';  // 设置 - 设置地区
   static String member = '/member';  // 我的
+  static String certificationMerchant = '/certificationMerchant';  // 认证商家
+  static String certificationNoIdentify = '/certificationNoIdentify';  // 认证其他
+  static String certificationModel = '/certificationModel';  // 认证艺人
+  static String certificationCompany = '/certificationCompany';  // 认证经纪
+  static String merchantCompany = '/merchantCompany';  // 认证商家 - 企业
+  static String merchantPerson = '/merchantPerson';  // 认证商家 - 个人
+  static String certificationOk = '/certificationOk';  // 认证信息提交成功
+  static String model = '/model';  // 艺人认证 - 模特信息
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -52,5 +60,13 @@ class Routes {
     router.define(setArea,handler: setAreaHandler);
     router.define(shootSiteDetail,handler: shootSiteDetailHandler);
     router.define(member, handler: memberHandler);
+    router.define(certificationMerchant, handler: certificationMerchantHandler);
+    router.define(certificationNoIdentify, handler: certificationNoIdentifyHandler);
+    router.define(certificationModel, handler: certificationModelHandler);
+    router.define(certificationCompany, handler: certificationCompanyHandler);
+    router.define(merchantCompany, handler: merchantCompanyHandler);
+    router.define(merchantPerson, handler: merchantPersonHandler);
+    router.define(certificationOk, handler: certificationOkHandler);
+    router.define(model, handler: modelHandler);
   }
 }

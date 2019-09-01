@@ -36,6 +36,7 @@ dependencies:
   flutter_html: ^0.10.4 #转HTML
   loading: ^1.0.1
   dropdown_menu: ^1.1.0
+  image_picker: ^0.6.1+4 # 上传图片（相机 本地）
 
 dev_dependencies:
   flutter_test:
