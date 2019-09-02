@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 const String kNavigationExamplePage = '''
 <!DOCTYPE html><html>
@@ -22,6 +23,7 @@ The navigation delegate is set to block navigation to the youtube website.
 </html>
 ''';
 
+@RoutePage(params: [RouteParameter('url')])
 class WebViewPage extends StatefulWidget {
   final String url;
 
