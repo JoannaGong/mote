@@ -93,13 +93,14 @@ class IndexPage extends StatelessWidget {
       currentIndex: Provide.value<CurrentIndexProvide>(context).currentIndex,
       type: BottomNavigationBarType.fixed, // 当items大于3时需要设置此类型
       onTap: (index) {
-        Provide.value<CurrentIndexProvide>(context).changeIndex(index);
+        // Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         if (index == 4) {
           var token = Provide.value<MainProvide>(context).token;
           print('index_page: $token');
           if (token == '') {
             Navigator.of(context).pushNamed(ROUTE_LOGIN_PAGE);
           } else {
+            Provide.value<CurrentIndexProvide>(context).changeIndex(index);
             // Application.router.navigateTo(context, "/member"); //, transition: TransitionType.inFromRight
             // Navigator.push(
             //   context, MaterialPageRoute(builder: (context) => MemberPage())
