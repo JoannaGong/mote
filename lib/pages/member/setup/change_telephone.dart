@@ -5,10 +5,13 @@ import 'package:mote/pages/common/appbar.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:route_annotation/route_annotation.dart';
+
 import '../../../provide/login.dart';
 import '../../../routers/application.dart';
 import '../../common/toast.dart';
 
+@RoutePage()
 class ChangeTelephone extends StatefulWidget {
   @override
   _ChangeTelephoneState createState() => _ChangeTelephoneState();

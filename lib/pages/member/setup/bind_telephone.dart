@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 import '../../../provide/login.dart';
 import '../../../provide/main.dart';
 
+@RoutePage()
 class BindTelephone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

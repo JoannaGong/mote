@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:fluro/fluro.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 import '../../../provide/login.dart';
@@ -14,6 +15,7 @@ import '../../../provide/login.dart';
 var userInfo;
 var areaInfo;
 
+@RoutePage()
 class SetUserInfo extends StatefulWidget {
   @override
   _SetUserInfoState createState() => _SetUserInfoState();

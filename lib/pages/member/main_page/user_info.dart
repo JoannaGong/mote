@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:fluro/fluro.dart';
-import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 import '../../../provide/login.dart';
@@ -12,7 +11,6 @@ import '../setup/set_up.dart';
 var userInfo;
 var identity;
 
-@RoutePage()
 class UserInfo extends StatelessWidget {
 
   const UserInfo({Key key}) : super(key: key);

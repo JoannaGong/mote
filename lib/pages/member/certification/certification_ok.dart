@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 
+@RoutePage()
 class CertificationOk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../provide/login.dart';
 import '../../../provide/main.dart';
@@ -16,6 +17,7 @@ var areaList;
 var areaInfo;
 var temp;
 
+@RoutePage()
 class SetArea extends StatefulWidget {
   SetArea({Key key}) : super(key: key);
 

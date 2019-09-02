@@ -7,6 +7,7 @@ import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../provide/login.dart';
 import '../../../provide/main.dart';
@@ -15,13 +16,14 @@ final AsyncMemoizer _memoizer = AsyncMemoizer();
 var userInfo;
 var photoData;
 
-class Model extends StatefulWidget {
-  Model({Key key}) : super(key: key);
+@RoutePage()
+class ModelInfo extends StatefulWidget {
+  ModelInfo({Key key}) : super(key: key);
 
-  _ModelState createState() => _ModelState();
+  _ModelInfoState createState() => _ModelInfoState();
 }
 
-class _ModelState extends State<Model> {
+class _ModelInfoState extends State<ModelInfo> {
   @override
   void initState() {
     super.initState();

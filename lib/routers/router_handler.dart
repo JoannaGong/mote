@@ -27,7 +27,7 @@ import '../pages/member/certification/certification_company.dart';
 import '../pages/member/certification/merchant_person.dart';
 import '../pages/member/certification/certification_ok.dart';
 import '../pages/member/certification/merchant_company.dart';
-import '../pages/member/certification/model.dart';
+import '../pages/member/certification/model_info.dart';
 
 Handler searchHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
@@ -171,7 +171,7 @@ Handler certificationOkHandler =
   return CertificationOk();
 });
 
-Handler modelHandler =
+Handler modelInfoHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  return Model();
+  return ModelInfo();
 });

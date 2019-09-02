@@ -32,7 +32,7 @@ class Routes {
   static String merchantCompany = '/merchantCompany';  // 认证商家 - 企业
   static String merchantPerson = '/merchantPerson';  // 认证商家 - 个人
   static String certificationOk = '/certificationOk';  // 认证信息提交成功
-  static String model = '/model';  // 艺人认证 - 模特信息
+  static String modelInfo = '/modelInfo';  // 艺人认证 - 模特信息
 
   static void configureRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -67,6 +67,6 @@ class Routes {
     router.define(merchantCompany, handler: merchantCompanyHandler);
     router.define(merchantPerson, handler: merchantPersonHandler);
     router.define(certificationOk, handler: certificationOkHandler);
-    router.define(model, handler: modelHandler);
+    router.define(modelInfo, handler: modelInfoHandler);
   }
 }

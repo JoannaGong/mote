@@ -9,6 +9,7 @@ import '../model_data/login/user_info.dart';
 import '../pages/common/toast.dart';
 import '../model_data/setting/area_list.dart';
 import '../model_data/setting/change_phone.dart';
+import '../model_data/setting/photo_list.dart';
 
 class LoginProvide with ChangeNotifier {
   LoginByPhone loginData;
@@ -18,7 +19,7 @@ class LoginProvide with ChangeNotifier {
   Area areaInfo;
   UserInfo userInfo;
   // List<Null> photos;
-  // GetPhotoData photoData;
+  GetPhotoData photoData;
   // ChangePhoneData phoneData;
   var token;
 
@@ -94,7 +95,7 @@ class LoginProvide with ChangeNotifier {
       'userId': id
     };
     await requestPost('photoForAjax', formData: formData).then((val){
-      // photoData = GetPhotoData.fromJson(val);
+      photoData = GetPhotoData.fromJson(val);
       // photos = photoData.data.userPhotoAlbumList;
       notifyListeners();
     });

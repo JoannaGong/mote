@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../provide/login.dart';
 
 var userInfo;
 var changedName;
 
+@RoutePage()
 class SetName extends StatefulWidget {
   @override
   _SetNameState createState() => _SetNameState();

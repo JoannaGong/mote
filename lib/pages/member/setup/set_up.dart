@@ -8,10 +8,11 @@ import 'package:fluro/fluro.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
-
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 
+@RoutePage()
 class SetUp extends StatefulWidget {
   @override
   _SetUpState createState() => _SetUpState();

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../member_page.dart';
 
+@RoutePage()
 class ChangeFinish extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:async/src/async_memoizer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
 import '../../../provide/login.dart';
@@ -14,6 +15,7 @@ import '../../../provide/main.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 
+@RoutePage()
 class AccountSafe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
