@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -9,7 +10,6 @@ import '../../routers/application.dart';
 import '../../provide/activity.dart';
 
 @RoutePage(params: [RouteParameter("id")])
-
 class ActivityDetailPage extends StatelessWidget {
   final String id;
   const ActivityDetailPage({Key key, this.id}) : super(key: key);
@@ -29,44 +29,28 @@ class ActivityDetailPage extends StatelessWidget {
                           .activityDetaildata
                           .data
                           .activity;
-                  return NestedScrollView(
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[_appbar(context, activityDetaildata)];
-                    },
-                    body: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.white,
-                          alignment: Alignment.topLeft,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                DetailTitle(
-                                  detail: activityDetaildata,
-                                ),
-                                Line(),
-                                DetailContent(contentData: activityDetaildata)
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 20,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                ROUTE_ACTIVITY_FORM,
-                                arguments: "$id",
-                              );
-                            },
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                        child: _appbar(context, activityDetaildata),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              ROUTE_ACTIVITY_FORM,
+                              arguments: "$id",
+                            );
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: ScreenUtil().setWidth(750),
                             child: Container(
                               width: ScreenUtil().setWidth(686),
                               height: ScreenUtil().setHeight(88),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(40),
                                 gradient: const LinearGradient(colors: [
                                   Color(0xFFFF9E9F),
@@ -88,14 +72,14 @@ class ActivityDetailPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   );
                 },
               );
             } else {
-              return Container();
+              return Container(child: LoadingPage(),);
             }
           },
         ));
@@ -108,45 +92,57 @@ class ActivityDetailPage extends StatelessWidget {
   }
 
   Widget _appbar(BuildContext context, data) {
-    return SliverAppBar(
-      title: Text(
-        '活动详情',
-        style: TextStyle(
-            color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34)),
-      ),
-      leading: IconButton(
-          icon: Icon(
-            Icons.keyboard_arrow_left,
-            color: Color(0xFF333333),
-            size: 30,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          }),
-      actions: <Widget>[
-        IconButton(
-            icon: Icon(
-              Icons.share,
-              color: Color(0xFF333333),
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            leading: GestureDetector(
+              child: Icon(
+                Icons.keyboard_arrow_left,
+                size: 30,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
-            onPressed: () {}),
-      ],
-      brightness: Brightness.light,
-      backgroundColor: Color(0xFFF5F5F5),
-      elevation: 0,
-      primary: true, //是否预留高度
-      forceElevated: false,
-      automaticallyImplyLeading: true,
-      titleSpacing: NavigationToolbar.kMiddleSpacing,
-      snap: true, //与floating结合使用
-      expandedHeight: ScreenUtil().setHeight(536), //展开高度
-      floating: true, //是否随着滑动隐藏标题
-      pinned: true, //是否固定在顶部
-      flexibleSpace: FlexibleSpaceBar(
-          centerTitle: true,
-          background: Image.network(
-            data.coverPicUrl,
-            fit: BoxFit.fill,
+            actions: <Widget>[
+              IconButton(
+                icon: Image.asset(
+                  'assets/images/launch.png',
+                  width: ScreenUtil().setWidth(37),
+                ),
+                onPressed: () {},
+              )
+            ],
+            brightness: Brightness.light,
+            backgroundColor: Color(0xFFFF5658),
+            elevation: 0,
+            primary: true, //是否预留高度
+            forceElevated: false,
+            titleSpacing: NavigationToolbar.kMiddleSpacing,
+            expandedHeight: ScreenUtil().setWidth(536), //展开高度
+            pinned: true, //是否固定在顶部
+            flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                background: Image.network(
+                  data.coverPicUrl,
+                  fit: BoxFit.fill,
+                )),
+          )
+        ];
+      },
+      body: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                DetailTitle(
+                  detail: data,
+                ),
+                Line(),
+                DetailContent(contentData: data)
+              ],
+            ),
           )),
     );
   }

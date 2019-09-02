@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:mote/pages/member/setup/set_name.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
@@ -96,7 +97,7 @@ class _SetAreaState extends State<SetArea> {
               ));
             });
           }else{
-            return Container();
+            return Container(child: LoadingPage(),);
           }
         },
       ))

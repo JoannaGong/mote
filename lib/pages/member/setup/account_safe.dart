@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
@@ -72,7 +73,7 @@ class AccountSafe extends StatelessWidget {
                 )
               ])));
           });}else{
-            return Container();
+            return Container(child: LoadingPage(),);
           }
         }
       ))

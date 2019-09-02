@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:mote/pages/member/main_page/announce_manage_merchant.dart';
 import 'package:mote/pages/member/main_page/no_identify.dart';
 import 'package:provide/provide.dart';
@@ -152,7 +153,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                 }
               });
             }else{
-              return Container();
+              return Container(child: LoadingPage(),);
             }
           }
         ) 

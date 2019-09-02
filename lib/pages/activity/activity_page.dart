@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -65,7 +66,9 @@ class ActivityPage extends StatelessWidget {
               child: ActivityList(),
             );
           } else {
-            return Container();
+            return Container(
+              child: LoadingPage(),
+            );
           }
         },
       ),

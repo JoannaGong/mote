@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:async/src/async_memoizer.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'dart:async';
 import 'package:fluro/fluro.dart';
@@ -49,7 +50,7 @@ class _SetUpState extends State<SetUp> with AutomaticKeepAliveClientMixin {
                 )
               );
             }else{
-              return Container();
+              return Container(child: LoadingPage(),);
             }
           }
         )

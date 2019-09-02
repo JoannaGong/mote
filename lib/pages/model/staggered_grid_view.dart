@@ -4,6 +4,7 @@ import 'package:mote/model_data/model/modeListModel.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
 import 'package:flutter_easyrefresh/ball_pulse_footer.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import '../../provide/model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +74,7 @@ class _StaggeredGridState extends State<StaggeredGrid>
                 ),
               );
             } else {
-              return Container();
+              return Container(child: LoadingPage(),);
             }
           }),
     ));

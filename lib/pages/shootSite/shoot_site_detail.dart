@@ -16,7 +16,7 @@ final lableColor = {
   '4': Color(0xFFFFAF3B)
 };
 
-@RoutePage(params: [RouteParameter('id')])
+@RoutePage(params: [RouteParameter("id")])
 class ShootSiteDetailPage extends StatelessWidget {
   final String id;
   const ShootSiteDetailPage({Key key, this.id}) : super(key: key);
@@ -36,43 +36,23 @@ class ShootSiteDetailPage extends StatelessWidget {
                           .shootSiteDetaildata
                           .data
                           .shootingPlace;
-                  return NestedScrollView(
-                    headerSliverBuilder:
-                        (BuildContext context, bool innerBoxIsScrolled) {
-                      return <Widget>[_appbar(context, shootSiteDetaildata)];
-                    },
-                    body: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.white,
-                          alignment: Alignment.topLeft,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                DetailTitle(
-                                  detail: shootSiteDetaildata,
-                                ),
-                                Line(),
-                                DetailContent(contentData: shootSiteDetaildata)
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 30,
-                          child: GestureDetector(
-                            onTap: () {
-                              Application.router.navigateTo(
-                                  context, '/activityForm?id=$id',
-                                  transition: TransitionType.inFromRight);
-                            },
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                        child: _appbar(context, shootSiteDetaildata),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: ScreenUtil().setWidth(750),
                             child: Container(
                               width: ScreenUtil().setWidth(686),
                               height: ScreenUtil().setHeight(88),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(40),
                                 gradient: const LinearGradient(colors: [
                                   Color(0xFFFF9E9F),
@@ -94,9 +74,9 @@ class ShootSiteDetailPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   );
                 },
               );
@@ -114,37 +94,48 @@ class ShootSiteDetailPage extends StatelessWidget {
   }
 
   Widget _appbar(BuildContext context, data) {
-    return SliverAppBar(
-      title: Text(
-        '拍摄圣地详情',
-        style: TextStyle(
-            color: Color(0xFF333333), fontSize: ScreenUtil().setSp(34)),
-      ),
-      leading: IconButton(
-          icon: Icon(
-            Icons.keyboard_arrow_left,
-            color: Color(0xFF333333),
-            size: 30,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          }),
-      brightness: Brightness.light,
-      backgroundColor: Color(0xFFF5F5F5),
-      elevation: 0,
-      primary: true, //是否预留高度
-      forceElevated: false,
-      automaticallyImplyLeading: true,
-      titleSpacing: NavigationToolbar.kMiddleSpacing,
-      snap: true, //与floating结合使用
-      expandedHeight: ScreenUtil().setHeight(536), //展开高度
-      floating: true, //是否随着滑动隐藏标题
-      pinned: true, //是否固定在顶部
-      flexibleSpace: FlexibleSpaceBar(
-          centerTitle: true,
-          background: Image.network(
-            data.coverPicUrl,
-            fit: BoxFit.fill,
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            leading: GestureDetector(
+              child: Icon(
+                Icons.keyboard_arrow_left,
+                size: 30,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            brightness: Brightness.light,
+            backgroundColor: Color(0xFFFF5658),
+            elevation: 0,
+            primary: true, //是否预留高度
+            forceElevated: false,
+            titleSpacing: NavigationToolbar.kMiddleSpacing,
+            expandedHeight: ScreenUtil().setWidth(536), //展开高度
+            pinned: true, //是否固定在顶部
+            flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                background: Image.network(
+                  data.coverPicUrl,
+                  fit: BoxFit.fill,
+                )),
+          )
+        ];
+      },
+      body: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                DetailTitle(
+                  detail: data,
+                ),
+                Line(),
+                DetailContent(contentData: data)
+              ],
+            ),
           )),
     );
   }
@@ -244,7 +235,10 @@ class DetailTitle extends StatelessWidget {
     index = index % lableColor.length;
     return Container(
       margin: EdgeInsets.only(right: 10),
-      child: Text(data.lable.name,style: TextStyle(color: lableColor[index.toString()]),),
+      child: Text(
+        data.lable.name,
+        style: TextStyle(color: lableColor[index.toString()]),
+      ),
     );
   }
 }

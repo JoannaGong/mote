@@ -42,7 +42,8 @@ RouteFactory onGenerateRoute = (settings) => Map.fromEntries([
 
 Map<String, RouteFactory> _shootSiteDetailPage = <String, RouteFactory>{
   'shoot_site_detail_page': (RouteSettings settings) => MaterialPageRoute(
-        builder: (BuildContext context) => ShootSiteDetailPage(),
+        builder: (BuildContext context) =>
+            ShootSiteDetailPage(id: settings.arguments),
       ),
 };
 Map<String, RouteFactory> _shootSitePage = <String, RouteFactory>{

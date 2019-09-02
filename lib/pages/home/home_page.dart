@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'package:async/src/async_memoizer.dart';
 
@@ -81,7 +82,9 @@ class _HomePageState extends State<HomePage>
                   ),
                 );
               } else {
-                return Container();
+                return Container(
+                  child: LoadingPage(),
+                );
               }
             },
           ),

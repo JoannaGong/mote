@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mote/pages/common/loading.dart';
 import 'package:provide/provide.dart';
 import 'package:route_annotation/route_annotation.dart';
 
@@ -88,7 +89,7 @@ class ActivityPayPage extends StatelessWidget {
               },
             );
           } else {
-            return Container();
+            return Container(child: LoadingPage(),);
           }
         },
       ),

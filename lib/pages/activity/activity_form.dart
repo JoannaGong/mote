@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:provide/provide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loading/loading.dart';
 import 'package:route_annotation/route_annotation.dart';
 
 import '../../provide/activity.dart';
@@ -57,7 +55,6 @@ class _ActivityFormState extends State<ActivityForm> {
           color: Color(0xFFF5F5F5),
           child: Stack(
             children: <Widget>[
-              Loading(indicator: BallPulseIndicator(), size: 100.0),
               Form(
                 key: _formKey,
                 autovalidate: false,
