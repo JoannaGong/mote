@@ -118,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                       if(token != null){
                         Provide.value<MainProvide>(context).saveToken(token);
                         Navigator.of(context).pushNamed(ROUTE_MEMBER_PAGE);
+                        // ROUTE_HOME
                         // Navigator.pop(
                         //   context, MaterialPageRoute(builder: (context) => MemberPage())
                         // );

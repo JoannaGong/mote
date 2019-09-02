@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
+import '../../../main.route.dart';
 
 @RoutePage()
 class MerchantCompany extends StatelessWidget {

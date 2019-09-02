@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 import 'package:route_annotation/route_annotation.dart';
 
 import '../../../routers/application.dart';
+import '../../../main.route.dart';
 
 @RoutePage()
 class CertificationNoIdentify extends StatelessWidget {
@@ -18,7 +19,7 @@ class CertificationNoIdentify extends StatelessWidget {
         child: Column(children: <Widget>[
           GestureDetector(
             onTap: (){
-              Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
+              Navigator.of(context).pushNamed(ROUTE_CHANGE_TELEPHONE);
             },
             child: Container(
               // margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -31,7 +32,7 @@ class CertificationNoIdentify extends StatelessWidget {
           ),
           GestureDetector(
             onTap: (){
-              Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
+              Navigator.of(context).pushNamed(ROUTE_CHANGE_TELEPHONE);
             },
             child: Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),

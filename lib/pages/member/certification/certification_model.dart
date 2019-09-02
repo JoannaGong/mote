@@ -33,6 +33,7 @@ class CertificationModel extends StatelessWidget {
           GestureDetector(
             onTap: (){
               // Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
+              Navigator.of(context).pushNamed(ROUTE_CHANGE_TELEPHONE);
             },
             child: Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -46,6 +47,7 @@ class CertificationModel extends StatelessWidget {
           GestureDetector(
             onTap: (){
               // Application.router.navigateTo(context, "/changeTelephone", transition: TransitionType.inFromRight);
+              Navigator.of(context).pushNamed(ROUTE_CHANGE_TELEPHONE);
             },
             child: Container(
               margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),

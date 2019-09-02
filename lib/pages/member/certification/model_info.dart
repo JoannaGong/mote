@@ -11,6 +11,7 @@ import 'package:route_annotation/route_annotation.dart';
 
 import '../../../provide/login.dart';
 import '../../../provide/main.dart';
+import '../../../main.route.dart';
 
 final AsyncMemoizer _memoizer = AsyncMemoizer();
 var userInfo;

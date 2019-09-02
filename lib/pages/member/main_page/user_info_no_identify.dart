@@ -42,13 +42,12 @@ class UserInfoNoIdentify extends StatelessWidget {
             child: IconButton(
               icon: Image.asset('assets/images/setting_black.png'),
               onPressed: (){
-                // Application.router.navigateTo(context, "/setup", transition: TransitionType.inFromRight);
-                Navigator.of(context).pushNamed(ROUTE_MODEL_INFO);
+                Navigator.of(context).pushNamed(ROUTE_SET_UP);
               },
           )),
           GestureDetector(
             onTap: (){
-              Application.router.navigateTo(context, "/setUserInfo", transition: TransitionType.inFromRight);
+              Navigator.of(context).pushNamed(ROUTE_SET_USER_INFO);
             },
             child:Row(children: <Widget>[
               Container(

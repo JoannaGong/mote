@@ -15,7 +15,7 @@ class NoIdentify extends StatelessWidget {
         Container(alignment: Alignment.centerLeft, child: Text('认证之后才可开通附加功能', style: TextStyle(fontSize: ScreenUtil().setSp(24), color: Color(0xFF333333)))),
         GestureDetector(
           onTap: (){
-            Application.router.navigateTo(context, "/certificationMerchant", transition: TransitionType.inFromRight);
+            Navigator.of(context).pushNamed(ROUTE_CERTIFICATION_MERCHANT);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -28,8 +28,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            // Application.router.navigateTo(context, "/certificationModel", transition: TransitionType.inFromRight);
-            Navigator.of(context).pushNamed(ROUTE_MODEL_INFO);
+            Navigator.of(context).pushNamed(ROUTE_CERTIFICATION_MODEL);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -42,7 +41,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            Application.router.navigateTo(context, "/certificationCompany", transition: TransitionType.inFromRight);
+            Navigator.of(context).pushNamed(ROUTE_CERTIFICATION_COMPANY);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
@@ -55,7 +54,7 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            Application.router.navigateTo(context, "/certificationNoIdentify", transition: TransitionType.inFromRight);
+            Navigator.of(context).pushNamed(ROUTE_CERTIFICATION_NO_IDENTIFY);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
