@@ -100,12 +100,13 @@ class IndexPage extends StatelessWidget {
           if (token == '') {
             Navigator.of(context).pushNamed(ROUTE_LOGIN_PAGE);
           } else {
-            Provide.value<CurrentIndexProvide>(context).changeIndex(index);
             // Application.router.navigateTo(context, "/member"); //, transition: TransitionType.inFromRight
             // Navigator.push(
             //   context, MaterialPageRoute(builder: (context) => MemberPage())
             // );
           }
+        } else {
+          Provide.value<CurrentIndexProvide>(context).changeIndex(index);
         }
       },
       selectedFontSize: 12,
