@@ -49,7 +49,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
             if(snapshot.hasData){
               return Provide<LoginProvide>(builder: (context, child, val){
                 userInfo = Provide.value<LoginProvide>(context).userInfo;
-                if(userInfo?.roleName == 1){   // 未认证用户
+                if(userInfo.roleName == 1){   // 未认证用户
                   return  Container(
                     child: EasyRefresh(
                       header: BallPulseHeader(color: Color(0xFFFF5658)),
@@ -73,7 +73,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                       ])
                     )
                   );
-                }else if(userInfo?.roleName == 2 || userInfo?.roleName == 3){   // 模特经纪
+                }else if(userInfo.roleName == 2 || userInfo.roleName == 3){   // 模特经纪
                   return  Container(
                     child: EasyRefresh(
                       header: BallPulseHeader(color: Color(0xFFFF5658)),
@@ -98,7 +98,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                       ])
                     )
                   );
-                }else if(userInfo?.roleName == 4){   // 商户
+                }else if(userInfo.roleName == 4){   // 商户
                   return  Container(
                     child: EasyRefresh(
                       header: BallPulseHeader(color: Color(0xFFFF5658)),
@@ -124,7 +124,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                       ])
                     )
                   );
-                }else if(userInfo?.roleName == 5){   // 其他职业  // 待完善
+                }else if(userInfo.roleName == 5){   // 其他职业  // 待完善
                   return  Container(
                     child: EasyRefresh(
                       header: BallPulseHeader(color: Color(0xFFFF5658)),
