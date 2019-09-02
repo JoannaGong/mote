@@ -4,11 +4,9 @@ import 'package:provide/provide.dart';
 import 'package:route_annotation/route_annotation.dart';
 import 'dart:async';
 
-import '../member/member_page.dart';
-import '../common/toast.dart';
-import '../../main.route.dart';
 import '../../provide/main.dart';
 import '../../provide/login.dart';
+import '../../provide/current_index.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -117,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     }).then((val){
                       if(token != null){
                         Provide.value<MainProvide>(context).saveToken(token);
-                        Navigator.of(context).pushNamed(ROUTE_MEMBER_PAGE);
+                        Provide.value<CurrentIndexProvide>(context).changeIndex(4);
                         // ROUTE_HOME
                         // Navigator.pop(
                         //   context, MaterialPageRoute(builder: (context) => MemberPage())
