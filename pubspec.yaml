@@ -37,6 +37,7 @@ dependencies:
   route_annotation: ^0.1.0 #注解 路由管理
   image_picker: ^0.6.1+4 # 上传图片（相机 本地）
   flutter_spinkit: ^4.0.0 #加载中
+  webview_flutter: ^0.3.13 #webview
 
 dev_dependencies:
   flutter_test:

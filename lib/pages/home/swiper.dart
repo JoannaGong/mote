@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provide/provide.dart';
 import '../../provide/home.dart';
+import '../../main.route.dart';
 
 //轮播
 class SwiperDiy extends StatelessWidget {
@@ -24,9 +25,17 @@ class SwiperDiy extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             child: Swiper(
               itemBuilder: (BuildContext context, int index) {
-                return Image.network(
-                  '${banner[index].iconUrl}',
-                  fit: BoxFit.fill,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      ROUTE_WEB_VIEW_PAGE,
+                      arguments: "${banner[index].pageUrl}",
+                    );
+                  },
+                  child: Image.network(
+                    '${banner[index].iconUrl}',
+                    fit: BoxFit.fill,
+                  ),
                 );
               },
               itemCount: banner.length,

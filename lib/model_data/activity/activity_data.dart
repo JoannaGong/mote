@@ -8,7 +8,8 @@ class ActivityModel {
   ActivityModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new ActivityData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new ActivityData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -214,6 +215,7 @@ class ActivityList {
     organizersName = json['organizersName'];
     applicationPrice = json['applicationPrice'];
     coverPicUrl = json['coverPicUrl'];
+    if (coverPicUrl == null) {coverPicUrl = '';}
     status = json['status'];
     createdUser = json['createdUser'];
     createdTime = json['createdTime'];
@@ -270,4 +272,3 @@ class ActivityList {
     return data;
   }
 }
-

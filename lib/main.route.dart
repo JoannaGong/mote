@@ -5,6 +5,7 @@
 // **************************************************************************
 
 import 'package:flutter/material.dart';
+import 'package:mote/pages/home/webView_page.dart';
 import 'package:mote/pages/shootSite/shoot_site_detail.dart';
 import 'package:mote/pages/shootSite/shoot_site.dart';
 import 'package:mote/pages/activity/activity_page.dart';
@@ -16,6 +17,7 @@ import 'package:mote/pages/common/search/search_detail.dart';
 import 'package:mote/pages/model/model_detail.dart';
 import 'package:mote/pages/login/login_page.dart';
 
+const ROUTE_WEB_VIEW_PAGE = 'web_view_page';
 const ROUTE_SHOOT_SITE_DETAIL_PAGE = 'shoot_site_detail_page';
 const ROUTE_SHOOT_SITE_PAGE = 'shoot_site_page';
 const ROUTE_ACTIVITY_PAGE = 'activity_page';
@@ -28,6 +30,7 @@ const ROUTE_MODEL_DETAIL = 'model_detail';
 const ROUTE_LOGIN_PAGE = 'login_page';
 
 RouteFactory onGenerateRoute = (settings) => Map.fromEntries([
+      ..._webViewPage.entries,
       ..._shootSiteDetailPage.entries,
       ..._shootSitePage.entries,
       ..._activityPage.entries,
@@ -40,6 +43,11 @@ RouteFactory onGenerateRoute = (settings) => Map.fromEntries([
       ..._loginPage.entries,
     ])[settings.name](settings);
 
+Map<String, RouteFactory> _webViewPage = <String, RouteFactory>{
+  'web_view_page': (RouteSettings settings) => MaterialPageRoute(
+        builder: (BuildContext context) => WebViewPage(url: settings.arguments),
+      ),
+};
 Map<String, RouteFactory> _shootSiteDetailPage = <String, RouteFactory>{
   'shoot_site_detail_page': (RouteSettings settings) => MaterialPageRoute(
         builder: (BuildContext context) =>
