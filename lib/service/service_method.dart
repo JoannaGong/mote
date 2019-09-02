@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../routers/application.dart';
 import 'dart:async';
 import 'dart:io';
+import '../main.route.dart';
 
 import '../config/service_url.dart';
 
@@ -29,8 +28,7 @@ Future requestPost(url, {formData, BuildContext context, token}) async {
     }
     if (response.statusCode == 200) {
       if (response.data['code'] == 8888) {
-        Application.router.navigateTo(context, '/login',
-            transition: TransitionType.inFromRight);
+        Navigator.of(context).pushNamed(ROUTE_LOGIN_PAGE);
       } else {
         return response.data;
       }
@@ -52,7 +50,7 @@ Future requestGet(url, {formData}) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dio.options.headers['token'] = prefs.getString('token');
-    
+
     if (formData == null) {
       response = await dio.get(servicePath[url]);
     } else {
