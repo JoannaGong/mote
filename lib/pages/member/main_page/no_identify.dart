@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluro/fluro.dart';
 
 import '../../../routers/application.dart';
+import '../../../main.route.dart';
 
 class NoIdentify extends StatelessWidget {
   @override
@@ -27,7 +28,8 @@ class NoIdentify extends StatelessWidget {
         ),
         GestureDetector(
           onTap: (){
-            Application.router.navigateTo(context, "/certificationModel", transition: TransitionType.inFromRight);
+            // Application.router.navigateTo(context, "/certificationModel", transition: TransitionType.inFromRight);
+            Navigator.of(context).pushNamed(ROUTE_MODEL_INFO);
           },
           child: Container(
             margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),

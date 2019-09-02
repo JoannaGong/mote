@@ -6,7 +6,7 @@ import 'dart:async';
 
 import '../member/member_page.dart';
 import '../common/toast.dart';
-
+import '../../main.route.dart';
 import '../../provide/main.dart';
 import '../../provide/login.dart';
 
@@ -117,9 +117,10 @@ class _LoginPageState extends State<LoginPage> {
                     }).then((val){
                       if(token != null){
                         Provide.value<MainProvide>(context).saveToken(token);
-                        Navigator.pop(
-                          context, MaterialPageRoute(builder: (context) => MemberPage())
-                        );
+                        Navigator.of(context).pushNamed(ROUTE_MEMBER_PAGE);
+                        // Navigator.pop(
+                        //   context, MaterialPageRoute(builder: (context) => MemberPage())
+                        // );
                       }
                     }).then((val){
                       Provide.value<LoginProvide>(context).getUserInfo(); // 请求用户数据

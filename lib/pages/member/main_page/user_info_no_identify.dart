@@ -7,6 +7,7 @@ import 'package:fluro/fluro.dart';
 import '../../../routers/application.dart';
 import '../../../provide/login.dart';
 import '../setup/set_up.dart';
+import '../../../main.route.dart';
 
 var userInfo;
 var identity;
@@ -41,7 +42,8 @@ class UserInfoNoIdentify extends StatelessWidget {
             child: IconButton(
               icon: Image.asset('assets/images/setting_black.png'),
               onPressed: (){
-                Application.router.navigateTo(context, "/setup", transition: TransitionType.inFromRight);
+                // Application.router.navigateTo(context, "/setup", transition: TransitionType.inFromRight);
+                Navigator.of(context).pushNamed(ROUTE_MODEL_INFO);
               },
           )),
           GestureDetector(

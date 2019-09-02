@@ -163,15 +163,21 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
   }
 
   Future _getMemberInfo(BuildContext context) async {
-    return _memoizer.runOnce(() async {
-      // var token = Provide.value<LoginProvide>(context).token;
-      await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息
-      return '完成加载';
-    });
+    var token = Provide.value<LoginProvide>(context).token;
+    if(token != ''){
+      return _memoizer.runOnce(() async {
+        await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息
+        return '完成加载';
+      });
+    }else {
+      return '加载中';
+    }
   }
 
   void _refresh(BuildContext context) async {
-    // var token = Provide.value<LoginProvide>(context).token;
-    await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息
+    var token = Provide.value<LoginProvide>(context).token;
+    if(token != ''){
+      await Provide.value<LoginProvide>(context).getUserInfo(); // 获取用户信息 
+    }
   }
 }
