@@ -51,7 +51,7 @@ class _ModelState extends State<Model> {
                   child: ListView(children: <Widget>[
                     _modelAvatar(),     // 头像
                     _photoList(photoData),     // 相册
-                    _modelInfo(modelData),   // 模特信息
+                    // _modelInfo(modelData),   // 模特信息
                   ])
               ));
             });
