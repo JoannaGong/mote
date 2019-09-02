@@ -8,6 +8,7 @@ import 'package:async/src/async_memoizer.dart';
 import 'dart:async';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_easyrefresh/ball_pulse_header.dart';
+import 'package:route_annotation/route_annotation.dart';
 
 import '../../provide/login.dart';
 import './main_page/user_info.dart';
@@ -21,7 +22,7 @@ import './main_page/user_info_no_identify.dart';
 
 var userInfo;
 var token;
-
+@RoutePage()
 class MemberPage extends StatefulWidget {
   const MemberPage({Key key}) : super(key: key);
   @override
