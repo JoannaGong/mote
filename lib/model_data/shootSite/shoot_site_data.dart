@@ -8,7 +8,8 @@ class ShootSiteModel {
   ShootSiteModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new ShootSiteData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new ShootSiteData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -206,6 +207,9 @@ class ShootSiteList {
     address = json['address'];
     score = json['score'];
     coverPicUrl = json['coverPicUrl'];
+    if (coverPicUrl == null) {
+      coverPicUrl = '';
+    }
     createdUser = json['createdUser'];
     createdTime = json['createdTime'];
     updatedUser = json['updatedUser'];
@@ -334,7 +338,9 @@ class ShootingPlaceLableList {
     bak8 = json['bak8'];
     bak9 = json['bak9'];
     bak10 = json['bak10'];
-    lable = json['lable'] != null ? new ShootSiteLable.fromJson(json['lable']) : null;
+    lable = json['lable'] != null
+        ? new ShootSiteLable.fromJson(json['lable'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -462,4 +468,3 @@ class ShootSiteLable {
     return data;
   }
 }
-
